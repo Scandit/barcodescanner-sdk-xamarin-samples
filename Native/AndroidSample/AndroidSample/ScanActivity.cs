@@ -19,22 +19,98 @@ namespace XamarinScanditSDKSampleAndroid
 	[Activity (Label = "ScanActivity")]			
 	public class ScanActivity : Activity, IOnScanListener, IDialogInterfaceOnCancelListener
 	{
-		private BarcodePicker picker;
 		public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
-		private const int CameraRequestPermission = 0; // this int will be returned when we are granted permission
-		private bool mDeniedCameraAccess = false;
-		private bool mPaused = true;
+
+		private const int CameraPermissionRequest = 0;
+
+		private BarcodePicker barcodePicker;
+		private bool deniedCameraAccess = false;
+		private bool paused = true;
 
 
-		protected override void OnCreate (Bundle bundle)
+		protected override void OnCreate(Bundle bundle)
 		{
-			base.OnCreate (bundle);
-			RequestWindowFeature (WindowFeatures.NoTitle);
-			Window.SetFlags (WindowManagerFlags.Fullscreen, WindowManagerFlags.Fullscreen);
+			base.OnCreate(bundle);
+			RequestWindowFeature(WindowFeatures.NoTitle);
+			Window.SetFlags(WindowManagerFlags.Fullscreen, WindowManagerFlags.Fullscreen);
 
 			// Set the app key before instantiating the picker.
 			ScanditLicense.AppKey = appKey;
-			
+
+			InitializeAndStartBarcodeScanning();
+		}
+
+		protected override void OnPause()
+		{
+			base.OnPause();
+
+			// Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not 
+			// collect objects without references asap but waits for a long time until finally collecting them.
+			GC.Collect();
+			barcodePicker.StopScanning();
+			paused = true;
+		}
+
+		void GrantCameraPermissionsThenStartScanning()
+		{
+			if (CheckSelfPermission(Manifest.Permission.Camera) != (int)Permission.Granted)
+			{
+				if (deniedCameraAccess == false)
+				{
+					// It's pretty clear for why the camera is required. We don't need to give a
+					// detailed reason.
+					RequestPermissions(new String[] { Manifest.Permission.Camera }, CameraPermissionRequest);
+				}
+
+			}
+			else
+			{
+				Console.WriteLine("starting scanning");
+				// We already have the permission.
+				barcodePicker.StartScanning();
+			}
+		}
+
+		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+		{
+			if (requestCode == CameraPermissionRequest)
+			{
+				if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
+				{
+					deniedCameraAccess = false;
+					if (!paused)
+					{
+						barcodePicker.StartScanning();
+					}
+				}
+				else
+				{
+					deniedCameraAccess = true;
+				}
+				return;
+			}
+			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+		}
+
+		protected override void OnResume()
+		{
+			base.OnResume();
+
+			paused = false;
+			// Handle permissions for Marshmallow and onwards.
+			if ((int)Build.VERSION.SdkInt >= 23)
+			{
+				GrantCameraPermissionsThenStartScanning();
+			}
+			else
+			{
+				// Once the activity is in the foreground again, restart scanning.
+				barcodePicker.StartScanning();
+			}
+		}
+
+		void InitializeAndStartBarcodeScanning()
+		{
 			// The scanning behavior of the barcode picker is configured through scan
 			// settings. We start with empty scan settings and enable a very generous
 			// set of symbologies. In your own apps, only enable the symbologies you
@@ -70,13 +146,13 @@ namespace XamarinScanditSDKSampleAndroid
 			// For details on defaults and how to calculate the symbol counts for each symbology, take
 			// a look at http://docs.scandit.com/stable/c_api/symbologies.html.
 
-			picker = new BarcodePicker (this, settings);
+			barcodePicker = new BarcodePicker (this, settings);
 
 			// Set listener for the scan event.
-			picker.SetOnScanListener (this);
+			barcodePicker.SetOnScanListener (this);
 			
 			// Show the scan user interface
-			SetContentView (picker);
+			SetContentView (barcodePicker);
 		}
 
 		public void DidScan(IScanSession session) 
@@ -98,7 +174,7 @@ namespace XamarinScanditSDKSampleAndroid
 						.SetTitle (code.SymbologyName + " Barcode Detected")
 						.SetMessage (code.Data)
 						.SetPositiveButton("OK", delegate {
-							picker.StartScanning ();
+							barcodePicker.StartScanning ();
 						})
 						.SetOnCancelListener(this)
 						.Create ();
@@ -108,84 +184,8 @@ namespace XamarinScanditSDKSampleAndroid
 			}
 		}
 
-		private void grantCameraPermissionsThenStartScanning()
-		{
-			Console.WriteLine("get permission");
-			if (CheckSelfPermission(Manifest.Permission.Camera)
-				!= Permission.Granted)
-			{
-				Console.WriteLine("get permission1");
-
-				if (mDeniedCameraAccess == false)
-				{
-					Console.WriteLine("get permission2");
-
-					// it's pretty clear for why the camera is required. We don't need to give a
-					// detailed reason.
-					RequestPermissions(new String[] { Manifest.Permission.Camera },
-									   CameraRequestPermission);
-				}
-
-			}
-			else {
-				Console.WriteLine("get permission3 " + CheckSelfPermission(Manifest.Permission.Camera));
-
-				// we already have the permission
-				picker.StartScanning();
-			}
-		}
-
-		override public void OnRequestPermissionsResult(int requestCode,
-									   string[] permissions, Permission[] grantResults)
-		{
-			Console.WriteLine("got permission");
-			if (requestCode == CameraRequestPermission)
-			{
-				if (grantResults.Length > 0
-				    && grantResults[0] == Permission.Granted)
-				{
-					mDeniedCameraAccess = false;
-					if (!mPaused)
-					{
-						picker.StartScanning();
-					}
-				}
-				else {
-					mDeniedCameraAccess = true;
-				}
-				return;
-			}
-			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-		}
-
 		public void OnCancel(IDialogInterface dialog) {
-			picker.StartScanning ();
-		}
-
-		protected override void OnResume () 
-		{
-			Console.WriteLine("resume");
-			mPaused = false;
-			// handle permissions for Marshmallow and onwards...
-			if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
-			{
-				grantCameraPermissionsThenStartScanning();
-			}
-			else {
-				// Once the activity is in the foreground again, restart scanning.
-				picker.StartScanning();
-			}
-			base.OnResume ();
-		}
-
-		protected override void OnPause () 
-		{
-			// Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not 
-			// collect objects without references asap but waits for a long time until finally collecting them.
-			GC.Collect ();
-			picker.StopScanning ();
-			base.OnPause();
-			mPaused = true;
+			barcodePicker.StartScanning ();
 		}
 
 		public override void OnBackPressed () 
