@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using Android;
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
-using Scandit;
 using ScanditBarcodePicker.Android;
 using ScanditBarcodePicker.Android.Recognition;
 
-namespace XamarinScanditSDKSampleAndroid
+namespace AndroidMatrixScanSample
 {
-    [Activity (Label = "ScanActivity")]
-    public class ScanActivity : Activity, IOnScanListener, IDialogInterfaceOnCancelListener
+    [Activity(Label = "ScanActivity")]
+    public class ScanActivity : Activity, IOnScanListener, IProcessFrameListener
     {
         public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
 
@@ -28,9 +21,10 @@ namespace XamarinScanditSDKSampleAndroid
         private bool paused = true;
 
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
+
             RequestWindowFeature(WindowFeatures.NoTitle);
             Window.SetFlags(WindowManagerFlags.Fullscreen, WindowManagerFlags.Fullscreen);
 
@@ -44,7 +38,7 @@ namespace XamarinScanditSDKSampleAndroid
         {
             base.OnPause();
 
-            // Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not
+            // Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not 
             // collect objects without references asap but waits for a long time until finally collecting them.
             GC.Collect();
             barcodePicker.StopScanning();
@@ -112,87 +106,85 @@ namespace XamarinScanditSDKSampleAndroid
         void InitializeAndStartBarcodeScanning()
         {
             // The scanning behavior of the barcode picker is configured through scan
-            // settings. We start with empty scan settings and enable a very generous
-            // set of symbologies. In your own apps, only enable the symbologies you
-            // actually need.
-            ScanSettings settings = ScanSettings.Create ();
+            // settings. We start with empty scan settings and enable a generous set
+            // of 1D symbologies. MatrixScan is currently only supported for 1D
+            // symbologies, enabling 2D symbologies will result in unexpected results.
+            // In your own apps, only enable the symbologies you actually need.
+            ScanSettings settings = ScanSettings.Create();
             int[] symbologiesToEnable = new int[] {
                 Barcode.SymbologyEan13,
                 Barcode.SymbologyEan8,
                 Barcode.SymbologyUpca,
-                Barcode.SymbologyDataMatrix,
-                Barcode.SymbologyQr,
                 Barcode.SymbologyCode39,
                 Barcode.SymbologyCode128,
                 Barcode.SymbologyInterleaved2Of5,
                 Barcode.SymbologyUpce
             };
 
-            foreach (int symbology in symbologiesToEnable)
+            foreach (int symbology in symbologiesToEnable) 
             {
                 settings.SetSymbologyEnabled (symbology, true);
             }
 
-            // Some 1d barcode symbologies allow you to encode variable-length data. By default, the
-            // Scandit BarcodeScanner SDK only scans barcodes in a certain length range. If your
-            // application requires scanning of one of these symbologies, and the length is falling
-            // outside the default range, you may need to adjust the "active symbol counts" for this
-            // symbology. This is shown in the following few lines of code.
+            // Enable MatrixScan and set the max number of barcodes that can be recognized per frame
+            // to some reasonable number for your use case. The max number of codes per frame does not
+            // limit the number of codes that can be tracked at the same time, it only limits the
+            // number of codes that can be newly recognized per frame.
+            settings.MatrixScanEnabled = true;
+            settings.MaxNumberOfCodesPerFrame = 10;
 
-            SymbologySettings symSettings = settings.GetSymbologySettings(Barcode.SymbologyCode128);
-            short[] activeSymbolCounts = new short[] {
-                7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
-            };
-            symSettings.SetActiveSymbolCounts(activeSymbolCounts);
-            // For details on defaults and how to calculate the symbol counts for each symbology, take
-            // a look at http://docs.scandit.com/stable/c_api/symbologies.html.
+            // Prefer the back-facing camera, if there is any.
+            settings.CameraFacingPreference = ScanSettings.CameraFacingBack;
 
-            barcodePicker = new BarcodePicker (this, settings);
+            barcodePicker = new BarcodePicker(this, settings);
+            barcodePicker.OverlayView.SetGuiStyle(ScanOverlay.GuiStyleMatrixScan);
+
+            // Set the GUI style to MatrixScan to see a visualization of the tracked barcodes. If you
+            // would like to visualize it yourself, set it to ScanOverlay.GuiStyleNone and update your
+            // visualization in the didProcess() callback.
+            barcodePicker.OverlayView.SetGuiStyle(ScanOverlay.GuiStyleMatrixScan);
+
+            // When using MatrixScan vibrating is often not desired.
+            barcodePicker.OverlayView.SetVibrateEnabled(false);
+
+            // Register listener, in order to be notified about relevant events 
+            // (e.g. a successfully scanned bar code).
+            barcodePicker.SetOnScanListener(this);
+
+            // Register a process frame listener to be able to reject tracked codes.
+            barcodePicker.SetProcessFrameListener(this);
 
             // Set listener for the scan event.
-            barcodePicker.SetOnScanListener (this);
+            barcodePicker.SetOnScanListener(this);
 
             // Show the scan user interface
-            SetContentView (barcodePicker);
+            SetContentView(barcodePicker);
         }
 
         public void DidScan(IScanSession session)
         {
-            if (session.NewlyRecognizedCodes.Count > 0) {
-                Barcode code = session.NewlyRecognizedCodes [0];
-                Console.WriteLine ("barcode scanned: {0}, '{1}'", code.SymbologyName, code.Data);
-
-                // Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not
-                // collect objects without references asap but waits for a long time until finally collecting them.
-                GC.Collect ();
-
-                // Stop the scanner directly on the session.
-                session.StopScanning ();
-
-                // If you want to edit something in the view hierarchy make sure to run it on the UI thread.
-                RunOnUiThread (() => {
-                    AlertDialog alert = new AlertDialog.Builder (this)
-                        .SetTitle (code.SymbologyName + " Barcode Detected")
-                        .SetMessage (code.Data)
-                        .SetPositiveButton("OK", delegate {
-                            barcodePicker.StartScanning ();
-                        })
-                        .SetOnCancelListener(this)
-                        .Create ();
-
-                    alert.Show ();
-                });
-            }
+            // This callback acts the same as when not tracking and can be used for the events such as
+            // when a code is newly recognized. Rejecting tracked codes has to be done in didProcess().
         }
 
-        public void OnCancel(IDialogInterface dialog) {
-            barcodePicker.StartScanning ();
-        }
-
-        public override void OnBackPressed ()
+        public void DidProcess(byte[] imageBuffer, int width, int height, IScanSession session)
         {
-            base.OnBackPressed ();
-            Finish ();
+            foreach (TrackedBarcode code in session.TrackedCodes.Values)
+            {
+                if (code.Symbology == Barcode.SymbologyEan8)
+                {
+                    session.RejectTrackedCode(code);
+                }
+            }
+
+            // If you want to implement your own visualization of the code tracking, you should update
+            // it in this callback.
         }
+
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+            Finish();
+        }    
     }
 }
