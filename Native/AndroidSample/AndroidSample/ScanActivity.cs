@@ -16,7 +16,7 @@ using ScanditBarcodePicker.Android.Recognition;
 
 namespace XamarinScanditSDKSampleAndroid
 {
-	[Activity (Label = "ScanActivity")]			
+	[Activity (Label = "ScanActivity")]
 	public class ScanActivity : Activity, IOnScanListener, IDialogInterfaceOnCancelListener
 	{
 		public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
@@ -44,7 +44,7 @@ namespace XamarinScanditSDKSampleAndroid
 		{
 			base.OnPause();
 
-			// Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not 
+			// Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not
 			// collect objects without references asap but waits for a long time until finally collecting them.
 			GC.Collect();
 			barcodePicker.StopScanning();
@@ -127,11 +127,12 @@ namespace XamarinScanditSDKSampleAndroid
 				Barcode.SymbologyInterleaved2Of5,
 				Barcode.SymbologyUpce
 			};
-			
-			for (int sym = 0; sym < symbologiesToEnable.Length; sym++) {
-				settings.SetSymbologyEnabled (symbologiesToEnable[sym], true);
-			}	
-			
+
+			foreach (int symbology in symbologiesToEnable)
+            {
+				settings.SetSymbologyEnabled (symbology, true);
+			}
+
 			// Some 1d barcode symbologies allow you to encode variable-length data. By default, the
 			// Scandit BarcodeScanner SDK only scans barcodes in a certain length range. If your
 			// application requires scanning of one of these symbologies, and the length is falling
@@ -150,18 +151,18 @@ namespace XamarinScanditSDKSampleAndroid
 
 			// Set listener for the scan event.
 			barcodePicker.SetOnScanListener (this);
-			
+
 			// Show the scan user interface
 			SetContentView (barcodePicker);
 		}
 
-		public void DidScan(IScanSession session) 
+		public void DidScan(IScanSession session)
 		{
 			if (session.NewlyRecognizedCodes.Count > 0) {
 				Barcode code = session.NewlyRecognizedCodes [0];
 				Console.WriteLine ("barcode scanned: {0}, '{1}'", code.SymbologyName, code.Data);
 
-				// Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not 
+				// Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not
 				// collect objects without references asap but waits for a long time until finally collecting them.
 				GC.Collect ();
 
@@ -188,11 +189,10 @@ namespace XamarinScanditSDKSampleAndroid
 			barcodePicker.StartScanning ();
 		}
 
-		public override void OnBackPressed () 
+		public override void OnBackPressed ()
 		{
 			base.OnBackPressed ();
 			Finish ();
 		}
 	}
 }
-

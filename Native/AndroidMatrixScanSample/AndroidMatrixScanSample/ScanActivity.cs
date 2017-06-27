@@ -12,7 +12,7 @@ namespace AndroidMatrixScanSample
 	[Activity(Label = "ScanActivity")]
 	public class ScanActivity : Activity, IOnScanListener, IProcessFrameListener
 	{
-		public static string appKey = "---- ENTER YOUR !MATRIX SCANNING ENABLED! APP KEY HERE - SIGN UP AT WWW.SCANDIT.COM ----";	
+		public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
 
 		private const int CameraPermissionRequest = 0;
 
@@ -121,9 +121,9 @@ namespace AndroidMatrixScanSample
 											Barcode.SymbologyUpce
 										};
 
-			for (int sym = 0; sym < symbologiesToEnable.Length; sym++)
+			foreach (int symbology in symbologiesToEnable) 
 			{
-				settings.SetSymbologyEnabled(symbologiesToEnable[sym], true);
+				settings.SetSymbologyEnabled (symbology, true);
 			}
 
 			// Enable MatrixScan and set the max number of barcodes that can be recognized per frame
@@ -178,7 +178,7 @@ namespace AndroidMatrixScanSample
 			}
 
 			// If you want to implement your own visualization of the code tracking, you should update
-			// it in this callb
+			// it in this callback.
 		}
 
 		public override void OnBackPressed()
