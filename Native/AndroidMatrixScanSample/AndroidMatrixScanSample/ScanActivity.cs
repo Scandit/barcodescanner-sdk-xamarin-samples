@@ -112,14 +112,14 @@ namespace AndroidMatrixScanSample
             // In your own apps, only enable the symbologies you actually need.
             ScanSettings settings = ScanSettings.Create();
             int[] symbologiesToEnable = new int[] {
-                                            Barcode.SymbologyEan13,
-                                            Barcode.SymbologyEan8,
-                                            Barcode.SymbologyUpca,
-                                            Barcode.SymbologyCode39,
-                                            Barcode.SymbologyCode128,
-                                            Barcode.SymbologyInterleaved2Of5,
-                                            Barcode.SymbologyUpce
-                                        };
+                Barcode.SymbologyEan13,
+                Barcode.SymbologyEan8,
+                Barcode.SymbologyUpca,
+                Barcode.SymbologyCode39,
+                Barcode.SymbologyCode128,
+                Barcode.SymbologyInterleaved2Of5,
+                Barcode.SymbologyUpce
+            };
 
             foreach (int symbology in symbologiesToEnable) 
             {
