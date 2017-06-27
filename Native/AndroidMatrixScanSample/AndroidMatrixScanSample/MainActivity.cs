@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace AndroidMatrixScanSample
 {
-    [Activity(Label = "AndroidMatrixScanSample", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "AndroidMatrixScanSample", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
