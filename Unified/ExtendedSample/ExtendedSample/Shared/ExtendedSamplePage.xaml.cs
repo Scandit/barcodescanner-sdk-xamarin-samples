@@ -54,7 +54,7 @@ namespace ExtendedSample
 
 		SettingsPage _settingsPage;
 
-		public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
+		public static string appKey = "--- ENTER YOUR SCANDIT LICENSE KEY HERE ---";
 
 		public ExtendedSamplePage()
 		{
