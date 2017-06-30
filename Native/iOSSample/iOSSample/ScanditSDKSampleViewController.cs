@@ -9,7 +9,7 @@ namespace iOSSample
 {
 	public partial class ScanditSDKSampleViewController : UIViewController
 	{
-		public static string appKey = "--- ENTER YOUR SCANDIT LICENSE KEY HERE ---";
+		public static string appKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
 
 		PickerScanDelegate scanDelegate;
 		OverlayCancelDelegate cancelDelegate;
