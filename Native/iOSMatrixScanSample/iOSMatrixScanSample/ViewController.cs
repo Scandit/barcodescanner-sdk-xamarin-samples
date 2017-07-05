@@ -8,7 +8,7 @@ namespace iOSMatrixScanSample
 {
     public partial class ViewController : UIViewController
     {
-		public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
+		public static string appKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
 
 		PickerScanDelegate scanDelegate;
         PickerProcessFrameDelegate processFrameDelegate;

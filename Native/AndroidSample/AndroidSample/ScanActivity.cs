@@ -19,7 +19,7 @@ namespace XamarinScanditSDKSampleAndroid
     [Activity (Label = "ScanActivity")]
     public class ScanActivity : Activity, IOnScanListener, IDialogInterfaceOnCancelListener
     {
-        public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
+        public static string appKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
 
         private const int CameraPermissionRequest = 0;
 
