@@ -85,12 +85,17 @@ namespace iOSMatrixScanSample
         {
             public override void DidCaptureImage(BarcodePicker picker, CMSampleBuffer frame, IScanSession session)
             {
-                // For each tracked codes in the last processed frame.
+                if (session.TrackedCodes == null) 
+                {
+                    return;
+                }
 
-                foreach (TrackedBarcode code in session.TrackedCodes.Values)
+				// For each tracked codes in the last processed frame.
+				foreach (TrackedBarcode code in session.TrackedCodes.Values)
                 {
                     // As an example, let's visually reject all EAN8 codes.
-                    if (code.Symbology == Symbology.EAN8) {
+                    if (code.Symbology == Symbology.EAN8) 
+                    {
                         session.RejectTrackedCode(code);
                     }
                 }
