@@ -95,6 +95,9 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PickerViewRenderer.cs" />
+    <Compile Include="Archiver.cs" />
+    <Compile Include="UrlOpener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

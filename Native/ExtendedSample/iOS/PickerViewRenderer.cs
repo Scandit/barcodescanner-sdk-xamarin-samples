@@ -97,8 +97,7 @@ namespace ExtendedSample.iOS
                 scanSettings.MaxNumberOfCodesPerFrame = 1;
             }
 
-            // Enable with 5.4
-            // scanSettings.MatrixScanEnabled = (settings.GuiStyle == GuiStyle.MatrixScan); 
+            scanSettings.MatrixScanEnabled = (settings.GuiStyle == GuiStyle.MatrixScan); 
 
             return scanSettings;
         }
