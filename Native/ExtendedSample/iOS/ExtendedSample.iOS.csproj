@@ -96,7 +96,7 @@
       <HintPath>..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="ScanditSDK">
-      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.3.2.10\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
+      <HintPath>..\..\..\..\barcodescanner-xamarin\ScanditSDKComponent\iOS\obj\Debug\ScanditSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
