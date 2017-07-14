@@ -16,7 +16,7 @@
     <TableView Intent="Settings" HasUnevenRows="true">
         <TableRoot>
             <TableSection Title="General Configuration">
-                <SwitchCell Text="Rotation with Device" />
+                <SwitchCell x:Name="RotationWithDevice" Text="Rotation with Device" />
             </TableSection>
             <TableSection Title="Barcode Decoder Configuration">
                 <SwitchCell x:Name="Ean13Upc12Cell" Text="EAN-13 and UPC-12" />
@@ -157,9 +157,9 @@
                         <Label Text="Visible" />
                         <Picker x:Name="CameraButtonPicker" Title="Visible" WidthRequest="200" HorizontalOptions="EndAndExpand">
                             <Picker.Items>
-                                <x:String>Always</x:String>
                                 <x:String>Never</x:String>
                                 <x:String>Only on tablet</x:String>
+                                <x:String>Always</x:String>
                             </Picker.Items>
                         </Picker>
                     </StackLayout>

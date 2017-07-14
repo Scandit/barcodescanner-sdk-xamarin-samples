@@ -2,8 +2,21 @@
 
 namespace ExtendedSample
 {
+    public enum GuiStyle
+    {
+        Frame, Laser, None, MatrixScan, LocationsOnly
+    };
+
+	public enum CameraButton
+	{
+		Never, OnTablet, Always
+	};
+
     public class Settings
     {
+        // General
+        public bool RotationWithDevice { get; set; }
+
 		// Symbologies
 		public bool Ean13Upc12 { get; set; }
 		public bool Ean8 { get; set; }
@@ -20,7 +33,7 @@ namespace ExtendedSample
 		public bool Gs1Databar { get; set; }
 		public bool Gs1DatabarExpanded { get; set; }
 		public bool Gs1DatabarLimited { get; set; }
-		public bool Codebar { get; set; }
+		public bool Codabar { get; set; }
 		public bool Qr { get; set; }
 		public bool QrInverted { get; set; }
 		public bool DataMatrix { get; set; }
@@ -39,7 +52,7 @@ namespace ExtendedSample
 		public double HotSpotY { get; set; }
 
 		// View Finder
-		public string GuiStyle { get; set; }
+		public GuiStyle GuiStyle { get; set; }
 		public double ViewFinderPortraitWidth { get; set; }
 		public double ViewFinderPortraitHeight { get; set; }
 		public double ViewFinderLandscapeWidth { get; set; }
@@ -53,10 +66,11 @@ namespace ExtendedSample
 		public bool TorchButtonVisible { get; set; }
 		public double TorchLeftMargin { get; set; }
 		public double TorchTopMargin { get; set; }
-		public string CameraButton { get; set; }
+        public CameraButton CameraButton { get; set; }
 
 		public Settings()
 		{
+            RotationWithDevice = true;
 			Ean13Upc12 = true;
 			Ean8 = true;
 			Upce = true;
@@ -72,7 +86,7 @@ namespace ExtendedSample
 			Gs1Databar = false;
 			Gs1DatabarExpanded = false;
 			Gs1DatabarLimited = false;
-			Codebar = false;
+			Codabar = false;
 			Qr = true;
 			QrInverted = false;
 			DataMatrix = false;
@@ -87,7 +101,7 @@ namespace ExtendedSample
 			HotSpotHeight = 0.25F;
 			HotSpotWidth = 1.0F;
 			HotSpotY = 0.45F;
-			GuiStyle = "Frame";
+            GuiStyle = GuiStyle.Frame;
 			ViewFinderPortraitWidth = 0.9F;
 			ViewFinderPortraitHeight = 0.6F;
 			ViewFinderLandscapeWidth = 0.4F;
@@ -97,7 +111,7 @@ namespace ExtendedSample
 			TorchButtonVisible = true;
 			TorchLeftMargin = 50;
 			TorchTopMargin = 15;
-			CameraButton = "Always";
+			CameraButton = CameraButton.Always;
 		}
     }
 }

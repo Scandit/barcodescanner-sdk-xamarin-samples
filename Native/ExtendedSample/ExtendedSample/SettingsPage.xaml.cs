@@ -11,6 +11,7 @@ namespace ExtendedSample
 
             InitializeComponent();
 
+            RotationWithDevice.On = settings.RotationWithDevice;
             Ean13Upc12Cell.On = settings.Ean13Upc12;
             Ean8Cell.On = settings.Ean8;
             UpceCell.On = settings.Upce;
@@ -26,7 +27,7 @@ namespace ExtendedSample
             Gs1DatabarCell.On = settings.Gs1Databar;
             Gs1DatabarExpandedCell.On = settings.Gs1DatabarExpanded;
             Gs1DatabarLimitedCell.On = settings.Gs1DatabarLimited;
-            CodebarCell.On = settings.Codebar;
+            CodebarCell.On = settings.Codabar;
             QrCell.On = settings.Qr;
             QrInvertedCell.On = settings.QrInverted;
             DataMatrixCell.On = settings.DataMatrix;
@@ -58,6 +59,7 @@ namespace ExtendedSample
         {
             base.OnDisappearing();
 
+            _settings.RotationWithDevice = RotationWithDevice.On;
 			_settings.Ean13Upc12 = Ean13Upc12Cell.On;
 			_settings.Ean8 = Ean8Cell.On;
 			_settings.Upce = UpceCell.On;
@@ -73,7 +75,7 @@ namespace ExtendedSample
 			_settings.Gs1Databar = Gs1DatabarCell.On;
 			_settings.Gs1DatabarExpanded = Gs1DatabarExpandedCell.On;
 			_settings.Gs1DatabarLimited = Gs1DatabarLimitedCell.On;
-			_settings.Codebar = CodebarCell.On;
+			_settings.Codabar = CodebarCell.On;
 			_settings.Qr = QrCell.On;
 			_settings.QrInverted = QrInvertedCell.On;
 			_settings.DataMatrix = DataMatrixCell.On;
@@ -88,7 +90,7 @@ namespace ExtendedSample
 			_settings.HotSpotHeight = HotSpotHeightSlider.Value;
 			_settings.HotSpotWidth = HotSpotWidthSlider.Value;
 			_settings.HotSpotY = HotSpotYSlider.Value;
-            _settings.GuiStyle = GuiStylePicker.SelectedItem.ToString();
+            _settings.GuiStyle = (GuiStyle)GuiStylePicker.SelectedIndex;
 			_settings.ViewFinderPortraitWidth = ViewFinderPortraitWidth.Value;
 			_settings.ViewFinderPortraitHeight = ViewFinderPortraitHeight.Value;
 			_settings.ViewFinderLandscapeWidth = ViewFinderLandscapeWidth.Value;
@@ -98,9 +100,7 @@ namespace ExtendedSample
 			_settings.TorchButtonVisible = TorchButtonCell.On;
 			_settings.TorchLeftMargin = TorchLeftMargin.Value;
 			_settings.TorchTopMargin = TorchTopMargin.Value;
-			_settings.CameraButton = CameraButtonPicker.SelectedItem.ToString();
-
-			SettingsArchiver.ArchiveSettings(_settings);
-		}
+            _settings.CameraButton = (CameraButton)CameraButtonPicker.SelectedIndex;
+   		}
     }
 }

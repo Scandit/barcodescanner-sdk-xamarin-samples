@@ -5,17 +5,23 @@ namespace ExtendedSample
 {
     public class MainPage : TabbedPage
     {
-        private Settings _settings;
+        private Settings settings;
 
         public MainPage()
         {
-            _settings = SettingsArchiver.UnarchiveSettings();
-			var scannerPage = new ScannerPage(_settings);
+            settings = SettingsArchiver.UnarchiveSettings();
+			var scannerPage = new ScannerPage(settings);
 			scannerPage.Title = "Scanner";
-            var settingsPage = new SettingsPage(_settings);
+            var settingsPage = new SettingsPage(settings);
 			settingsPage.Title = "Settings";
             Children.Add(scannerPage);
             Children.Add(settingsPage);
         }
+
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+			SettingsArchiver.ArchiveSettings(settings);
+		}
     }
 }
