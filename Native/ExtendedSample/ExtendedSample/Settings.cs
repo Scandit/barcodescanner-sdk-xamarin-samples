@@ -70,7 +70,12 @@ namespace ExtendedSample
 
 		public Settings()
 		{
-            RotationWithDevice = true;
+            ResetSettings();
+		}
+
+        public void ResetSettings()
+        {
+			RotationWithDevice = true;
 			Ean13Upc12 = true;
 			Ean8 = true;
 			Upce = true;
@@ -101,9 +106,9 @@ namespace ExtendedSample
 			HotSpotHeight = 0.25F;
 			HotSpotWidth = 1.0F;
 			HotSpotY = 0.45F;
-            GuiStyle = GuiStyle.Frame;
+			GuiStyle = GuiStyle.Frame;
 			ViewFinderPortraitWidth = 0.9F;
-			ViewFinderPortraitHeight = 0.6F;
+			ViewFinderPortraitHeight = 0.5F;
 			ViewFinderLandscapeWidth = 0.4F;
 			ViewFinderLandscapeHeight = 0.4F;
 			Beep = true;
@@ -112,6 +117,6 @@ namespace ExtendedSample
 			TorchLeftMargin = 50;
 			TorchTopMargin = 15;
 			CameraButton = CameraButton.Always;
-		}
+        }
     }
 }

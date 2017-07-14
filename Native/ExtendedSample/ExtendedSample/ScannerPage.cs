@@ -5,18 +5,11 @@ namespace ExtendedSample
 {
 	public partial class ScannerPage : ContentPage
 	{
-        public Settings Settings { get; set; }
+        public Settings Settings { get; }
 
 		public ScannerPage(Settings settings)
 		{
-			Settings = settings;
+            this.Settings = settings;
 		}
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            //pickerView.Settings = new Settings();
-
-        }
 	}
 }

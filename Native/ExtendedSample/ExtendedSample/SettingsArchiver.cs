@@ -6,11 +6,6 @@ namespace ExtendedSample
 {
     public class SettingsArchiver
     {
-        public SettingsArchiver()
-        {
-            
-        }
-
         public static void ArchiveSettings(Settings settings) 
         {
 			XmlSerializer serializer = new XmlSerializer(typeof(Settings));

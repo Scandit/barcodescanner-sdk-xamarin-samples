@@ -45,6 +45,7 @@
     <Compile Include="SettingsArchiver.cs" />
     <Compile Include="IArchiver.cs" />
     <Compile Include="ScannerPage.cs" />
+    <Compile Include="IUrlOpener.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

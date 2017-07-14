@@ -4,15 +4,10 @@ using ExtendedSample.iOS;
 using Foundation;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Archiver))]
-
 namespace ExtendedSample.iOS
 {
     public class Archiver : IArchiver
     {
-        public Archiver()
-        {
-        }
-
         public void ArchiveText(string filename, string text) 
         {
             NSKeyedArchiver.ArchiveRootObjectToFile(NSString.FromObject(text), GetFilePath(filename));

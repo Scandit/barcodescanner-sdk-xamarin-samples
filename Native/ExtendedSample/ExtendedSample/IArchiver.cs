@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace ExtendedSample
 {
 	public interface IArchiver

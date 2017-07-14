@@ -166,8 +166,8 @@
                 </ViewCell>
             </TableSection>
             <TableSection Title="">
-                <TextCell Text="Open the Online Documentation" Detail=""/>
-                <TextCell Text="Reset to Default" Detail=""/>
+                <TextCell Tapped="OnOpenOnlineDocumentation" Text="Open the Online Documentation" Detail=""/>
+                <TextCell Tapped="OnResetSettings" Text="Reset to Default" Detail=""/>
             </TableSection>
         </TableRoot>
     </TableView>
