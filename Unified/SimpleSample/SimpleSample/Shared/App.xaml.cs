@@ -20,7 +20,7 @@ namespace SimpleSample
 {
 	public partial class App : Application
     {
-        private static string appKey = "--- ENTER YOUR SCANDIT LICENSE KEY HERE ---";
+        private static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
 
         public App()
         {

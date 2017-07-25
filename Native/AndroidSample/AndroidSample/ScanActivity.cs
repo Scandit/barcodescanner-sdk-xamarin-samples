@@ -20,7 +20,7 @@ namespace XamarinScanditSDKSampleAndroid
 	public class ScanActivity : Activity, IOnScanListener, IDialogInterfaceOnCancelListener
 	{
 		private BarcodePicker picker;
-		public static string appKey = "--- ENTER YOUR SCANDIT LICENSE KEY HERE ---";
+		public static string appKey = "--- ENTER YOUR SCANDIT APP KEY HERE ---";
 		private const int CameraRequestPermission = 0; // this int will be returned when we are granted permission
 		private bool mDeniedCameraAccess = false;
 		private bool mPaused = true;
