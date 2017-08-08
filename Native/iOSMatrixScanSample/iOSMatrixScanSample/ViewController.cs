@@ -44,7 +44,7 @@ namespace iOSMatrixScanSample
             // limit the number of codes that can be tracked at the same time, it only limits the
             // number of codes that can be newly recognized per frame.
             settings.EnableSymbologies(symbologiesToEnable);
-            //settings.MatrixScanEnabled = true;
+            settings.MatrixScanEnabled = true;
             settings.MaxNumberOfCodesPerFrame = 10;
             settings.HighDensityModeEnabled = true;
 
@@ -85,23 +85,23 @@ namespace iOSMatrixScanSample
         {
             public override void DidCaptureImage(BarcodePicker picker, CMSampleBuffer frame, IScanSession session)
             {
-                if (session.TrackedCodes == null) 
+                if (session.TrackedCodes != null) 
                 {
-                    return;
-                }
+					// For each tracked codes in the last processed frame.
+					foreach (TrackedBarcode code in session.TrackedCodes.Values)
+					{
+						// As an example, let's visually reject all EAN8 codes.
+						if (code.Symbology == Symbology.EAN8)
+						{
+							session.RejectTrackedCode(code);
+						}
+					}
 
-				// For each tracked codes in the last processed frame.
-				foreach (TrackedBarcode code in session.TrackedCodes.Values)
-                {
-                    // As an example, let's visually reject all EAN8 codes.
-                    if (code.Symbology == Symbology.EAN8) 
-                    {
-                        session.RejectTrackedCode(code);
-                    }
-                }
+					// If you want to implement your own visualization of the code matrix scan, 
+					// you should update it in this callback.
+				}
 
-                // If you want to implement your own visualization of the code matrix scan, 
-                // you should update it in this callback.
+                frame.Dispose();
             }
         }
     }
