@@ -26,6 +26,7 @@ namespace ExtendedSample.iOS
             scannerPage = e.NewElement as ScannerPage;
             barcodePicker = new BarcodePicker(CreateScanSettings());
             View.AddSubview(barcodePicker.View);
+            barcodePicker.StartScanning();
         }
 
         public override void ViewDidAppear(bool animated)
@@ -34,6 +35,13 @@ namespace ExtendedSample.iOS
 
             barcodePicker.ApplyScanSettings(CreateScanSettings(), null);
             ApplyOverlaySettings();
+            barcodePicker.ResumeScanning();
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            barcodePicker.PauseScanning();
         }
 
         private ScanSettings CreateScanSettings() 

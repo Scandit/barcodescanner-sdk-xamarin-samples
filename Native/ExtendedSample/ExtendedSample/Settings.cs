@@ -114,7 +114,7 @@ namespace ExtendedSample
 			Beep = true;
 			Vibrate = true;
 			TorchButtonVisible = true;
-			TorchLeftMargin = 50;
+			TorchLeftMargin = 15;
 			TorchTopMargin = 15;
 			CameraButton = CameraButton.Always;
         }
