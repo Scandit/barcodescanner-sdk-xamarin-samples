@@ -20,6 +20,9 @@ namespace SimpleSample.UWP
         public MainPage()
         {
             this.InitializeComponent();
+            // required if you are scanning codes with more "exotic" encodings such as Kanji. 
+            // Without this call, the data can't be converted to UTF-8.
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             LoadApplication(new SimpleSample.App());
         }

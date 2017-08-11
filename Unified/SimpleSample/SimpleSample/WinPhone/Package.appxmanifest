@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="93ed9bc5-8c91-4fed-b66a-fb61df91591a" Publisher="CN=Silvio" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="93ed9bc5-8c91-4fed-b66a-fb61df91591a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="com.scandit.simplesample" Publisher="CN=Silvio" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="8283ee98-41f3-4144-8182-06acdfab98e9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>SimpleSample.WinPhone</DisplayName>
     <PublisherDisplayName>Silvio</PublisherDisplayName>
