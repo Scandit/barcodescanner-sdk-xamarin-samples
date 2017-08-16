@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using ScanditBarcodeScanner.iOS;
 using UIKit;
+using CoreFoundation;
 
 [assembly: ExportRenderer(typeof(ScannerPage), typeof(BarcodePickerRenderer))]
 namespace ExtendedSample.iOS
@@ -141,18 +142,18 @@ namespace ExtendedSample.iOS
 				if (session.NewlyRecognizedCodes.Count > 0)
 				{
 					Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
-					Console.WriteLine("barcode scanned: {0}, '{1}'", code.SymbologyString, code.Data);
 
 					// Stop the scanner directly on the session.
                     session.PauseScanning();
 
 					// If you want to edit something in the view hierarchy make sure to run it on the UI thread.
 					UIApplication.SharedApplication.InvokeOnMainThread(() =>
-					{
+                    {
+						/* non continuous mode
 						UIAlertView alert = new UIAlertView()
 						{
 							Title = code.SymbologyString + " Barcode Detected",
-							Message = "" + code.Data
+							Message = code.Data
 						};
 						alert.AddButton("OK");
 
@@ -162,6 +163,24 @@ namespace ExtendedSample.iOS
 						};
 
 						alert.Show();
+						*/
+
+                        // Continuous mode
+						UIAlertView alert = new UIAlertView()
+						{
+							Title = code.SymbologyString + " Barcode Detected",
+							Message = code.Data
+						};
+						alert.Show();
+
+                        const int NSEC_PER_SEC = 1000000000;
+						var time = new DispatchTime(DispatchTime.Now, 1 * NSEC_PER_SEC);
+                        // Dismiss after 1 second
+                        DispatchQueue.MainQueue.DispatchAfter(time, () =>
+                        {
+                            alert.DismissWithClickedButtonIndex(0, true);
+							picker.ResumeScanning();
+						});
 					});
 				}
 			}
