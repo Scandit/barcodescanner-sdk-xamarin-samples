@@ -13,8 +13,9 @@ namespace ExtendedSample.iOS
     public class BarcodePickerRenderer : PageRenderer
     {
         BarcodePicker barcodePicker;
-		PickerScanDelegate scanDelegate;
-		ScannerPage scannerPage;
+        PickerScanDelegate scanDelegate;
+        ScannerPage scannerPage;
+        UILabel label;
 
         public BarcodePickerRenderer()
         {
@@ -28,12 +29,20 @@ namespace ExtendedSample.iOS
             scannerPage = e.NewElement as ScannerPage;
             barcodePicker = new BarcodePicker(CreateScanSettings());
             AddChildViewController(barcodePicker);
+            barcodePicker.View.Frame = new CoreGraphics.CGRect(0, 0, this.View.Bounds.Width, this.View.Bounds.Height - 100);
             View.AddSubview(barcodePicker.View);
             barcodePicker.StartScanning();
             barcodePicker.DidMoveToParentViewController(this);
 
-			scanDelegate = new PickerScanDelegate();
-			barcodePicker.ScanDelegate = scanDelegate;
+            label = new UILabel();
+            label.Frame = new CoreGraphics.CGRect(0, this.View.Bounds.Height - 100, this.View.Bounds.Width, 44);
+            label.TextAlignment = UITextAlignment.Center;
+            label.Lines = 0;
+            View.AddSubview(label);
+
+            scanDelegate = new PickerScanDelegate();
+            scanDelegate.WeakLabel = new WeakReference<UILabel>(label);
+            barcodePicker.ScanDelegate = scanDelegate;
         }
 
         public override void ViewDidAppear(bool animated)
@@ -137,55 +146,25 @@ namespace ExtendedSample.iOS
             OverlayView.SetCameraSwitchVisibility((ScanditBarcodeScanner.iOS.CameraSwitchVisibility)settings.CameraButton);
         }
 
-		public class PickerScanDelegate : ScanDelegate
+        public class PickerScanDelegate : ScanDelegate
         {
-			public override void DidScan(BarcodePicker picker, IScanSession session)
-			{
-				if (session.NewlyRecognizedCodes.Count > 0)
-				{
-					Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
+            public WeakReference<UILabel> WeakLabel { get; set; }
 
-					// Stop the scanner directly on the session.
-                    session.PauseScanning();
+            public override void DidScan(BarcodePicker picker, IScanSession session)
+            {
+                if (session.NewlyRecognizedCodes.Count > 0)
+                {
+                    Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
 
-					// If you want to edit something in the view hierarchy make sure to run it on the UI thread.
-					UIApplication.SharedApplication.InvokeOnMainThread(() =>
+                    // If you want to edit something in the view hierarchy make sure to run it on the UI thread.
+                    UIApplication.SharedApplication.InvokeOnMainThread(() =>
                     {
-						/* non continuous mode
-						UIAlertView alert = new UIAlertView()
-						{
-							Title = code.SymbologyString + " Barcode Detected",
-							Message = code.Data
-						};
-						alert.AddButton("OK");
-
-						alert.Clicked += (object o, UIButtonEventArgs e) =>
-						{
-                            picker.ResumeScanning();
-						};
-
-						alert.Show();
-						*/
-
-                        // Continuous mode
-						UIAlertView alert = new UIAlertView()
-						{
-							Title = code.SymbologyString + " Barcode Detected",
-							Message = code.Data
-						};
-						alert.Show();
-
-                        const int NSEC_PER_SEC = 1000000000;
-						var time = new DispatchTime(DispatchTime.Now, 1 * NSEC_PER_SEC);
-                        // Dismiss after 1 second
-                        DispatchQueue.MainQueue.DispatchAfter(time, () =>
-                        {
-                            alert.DismissWithClickedButtonIndex(0, true);
-							picker.ResumeScanning();
-						});
-					});
-				}
-			}
-		}
+                        if (WeakLabel.TryGetTarget(out var label)) {
+                            label.Text = code.SymbologyString + ": " + code.Data;
+                        }
+                    });
+                }
+            }
+        }
     }
 }
