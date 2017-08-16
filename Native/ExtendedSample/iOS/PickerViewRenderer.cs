@@ -27,8 +27,10 @@ namespace ExtendedSample.iOS
 
             scannerPage = e.NewElement as ScannerPage;
             barcodePicker = new BarcodePicker(CreateScanSettings());
+            AddChildViewController(barcodePicker);
             View.AddSubview(barcodePicker.View);
             barcodePicker.StartScanning();
+            barcodePicker.DidMoveToParentViewController();
 
 			scanDelegate = new PickerScanDelegate();
 			barcodePicker.ScanDelegate = scanDelegate;
