@@ -30,7 +30,7 @@ namespace ExtendedSample.iOS
             AddChildViewController(barcodePicker);
             View.AddSubview(barcodePicker.View);
             barcodePicker.StartScanning();
-            barcodePicker.DidMoveToParentViewController();
+            barcodePicker.DidMoveToParentViewController(this);
 
 			scanDelegate = new PickerScanDelegate();
 			barcodePicker.ScanDelegate = scanDelegate;
