@@ -12,7 +12,8 @@ namespace ExtendedSample.iOS
     public class BarcodePickerRenderer : PageRenderer
     {
         BarcodePicker barcodePicker;
-        ScannerPage scannerPage;
+		PickerScanDelegate scanDelegate;
+		ScannerPage scannerPage;
 
         public BarcodePickerRenderer()
         {
@@ -27,6 +28,9 @@ namespace ExtendedSample.iOS
             barcodePicker = new BarcodePicker(CreateScanSettings());
             View.AddSubview(barcodePicker.View);
             barcodePicker.StartScanning();
+
+			scanDelegate = new PickerScanDelegate();
+			barcodePicker.ScanDelegate = scanDelegate;
         }
 
         public override void ViewDidAppear(bool animated)
@@ -129,5 +133,38 @@ namespace ExtendedSample.iOS
                                                      40);
             OverlayView.SetCameraSwitchVisibility((ScanditBarcodeScanner.iOS.CameraSwitchVisibility)settings.CameraButton);
         }
+
+		public class PickerScanDelegate : ScanDelegate
+        {
+			public override void DidScan(BarcodePicker picker, IScanSession session)
+			{
+				if (session.NewlyRecognizedCodes.Count > 0)
+				{
+					Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
+					Console.WriteLine("barcode scanned: {0}, '{1}'", code.SymbologyString, code.Data);
+
+					// Stop the scanner directly on the session.
+                    session.PauseScanning();
+
+					// If you want to edit something in the view hierarchy make sure to run it on the UI thread.
+					UIApplication.SharedApplication.InvokeOnMainThread(() =>
+					{
+						UIAlertView alert = new UIAlertView()
+						{
+							Title = code.SymbologyString + " Barcode Detected",
+							Message = "" + code.Data
+						};
+						alert.AddButton("OK");
+
+						alert.Clicked += (object o, UIButtonEventArgs e) =>
+						{
+                            picker.ResumeScanning();
+						};
+
+						alert.Show();
+					});
+				}
+			}
+		}
     }
 }
