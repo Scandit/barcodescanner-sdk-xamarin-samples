@@ -135,25 +135,28 @@ namespace ExtendedSample
 
 		// Associates the index in the picker with the storage key (string)
 		public static Dictionary<int, string> indexToGuiStyle = new Dictionary<int, string> {
-			{ 0, Settings.GuiStyleString_Rectangle },
+			{ 0, Settings.GuiStyleString_Frame },
 			{ 1, Settings.GuiStyleString_Laser },
-			{ 2, Settings.GuiStyleString_None }
+			{ 2, Settings.GuiStyleString_None },
+            { 3, Settings.GuiStyleString_LocationsOnly }
 		};
 
 		// Associates the storrage key (string) with the index in the picker
 		public static Dictionary<string, int> guiStyleToIndex = new Dictionary<string, int>
 		{
-			{ Settings.GuiStyleString_Rectangle, 0 },
+			{ Settings.GuiStyleString_Frame, 0 },
 			{ Settings.GuiStyleString_Laser, 1 },
-			{ Settings.GuiStyleString_None, 2 }
+			{ Settings.GuiStyleString_None, 2 },
+            { Settings.GuiStyleString_LocationsOnly, 3 }
 		};
 
 		// Associates the storage key (string) with ScanSettings enum
 		public static Dictionary<string, GuiStyle> guiStyleToScanSetting = new Dictionary<string, GuiStyle>
 		{
-			{ Settings.GuiStyleString_Rectangle, GuiStyle.Rectangle },
+			{ Settings.GuiStyleString_Frame, GuiStyle.Default },
 			{ Settings.GuiStyleString_Laser, GuiStyle.Laser },
-			{ Settings.GuiStyleString_None, GuiStyle.None }
+			{ Settings.GuiStyleString_None, GuiStyle.None },
+			{ Settings.GuiStyleString_LocationsOnly, GuiStyle.LocationsOnly }
 		};
 
 		// list of Settings that are enabled by default

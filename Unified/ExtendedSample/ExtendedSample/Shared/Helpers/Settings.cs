@@ -89,9 +89,10 @@ namespace ExtendedSample.Helpers
 		};
 
 		public const string GuiStyleString = "Overlay_GuiStyle";
-		public const string GuiStyleString_Rectangle = "Overlay_GuiStyle_Frame";
+		public const string GuiStyleString_Frame = "Overlay_GuiStyle_Frame";
 		public const string GuiStyleString_Laser = "Overlay_GuiStyle_Laser";
 		public const string GuiStyleString_None = "Overlay_GuiStyle_None";
+		public const string GuiStyleString_LocationsOnly = "Overlay_GuiStyle_LocationsOnly";
 
 		public static bool hasInvertedSymbology(string symbology)
 		{
@@ -199,7 +200,7 @@ namespace ExtendedSample.Helpers
 				case CameraButtonString:
 					return CameraButtonString_Always;
 				case GuiStyleString:
-					return GuiStyleString_Rectangle;
+					return GuiStyleString_Frame;
 				default:
 					throw new Exception("No default setting for " + setting);
 			}
