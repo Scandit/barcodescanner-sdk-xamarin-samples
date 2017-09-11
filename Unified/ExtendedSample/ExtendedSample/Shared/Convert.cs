@@ -51,6 +51,7 @@ namespace ExtendedSample
 			{ "Sym_MaxiCode", new Symbology[] { Symbology.MaxiCode } },
 			{ "Sym_Rm4scc", new Symbology[] { Symbology.Rm4scc } },
 			{ "Sym_Kix", new Symbology[] { Symbology.Kix } },
+			{ "Sym_DotCode", new Symbology[] { Symbology.DotCode } },
 		};
 
 		// Associates the key (string) for permanent storage with the text displayed in the GUI
@@ -81,6 +82,7 @@ namespace ExtendedSample
 			{ "Sym_MaxiCode", "MaxiCode" },
 			{ "Sym_Rm4scc", "RM4SCC" },
 			{ "Sym_Kix", "KIX" },
+			{ "Sym_DotCode", "DotCode" },
 		};
 
 		// Associates an index with the storage key (string)
