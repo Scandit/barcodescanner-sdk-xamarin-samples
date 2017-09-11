@@ -43,7 +43,8 @@ namespace ExtendedSample
 		public bool Aztec { get; set; }
 		public bool MaxiCode { get; set; }
 		public bool Rm4scc { get; set; }
-		public bool Kix { get; set; }
+        public bool Kix { get; set; }
+		public bool DotCode { get; set; }
 
 		// Scanning Area
 		public bool RestrictScanningArea { get; set; }
@@ -102,6 +103,7 @@ namespace ExtendedSample
 			MaxiCode = false;
 			Rm4scc = false;
 			Kix = false;
+            DotCode = false;
 			RestrictScanningArea = false;
 			HotSpotHeight = 0.25F;
 			HotSpotWidth = 1.0F;

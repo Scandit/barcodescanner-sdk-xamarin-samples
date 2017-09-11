@@ -79,9 +79,10 @@ namespace ExtendedSample.iOS
             scanSettings.SetSymbologyEnabled(Symbology.Aztec, settings.Aztec);
             scanSettings.SetSymbologyEnabled(Symbology.MaxiCode, settings.MaxiCode);
             scanSettings.SetSymbologyEnabled(Symbology.RM4SCC, settings.Rm4scc);
-            scanSettings.SetSymbologyEnabled(Symbology.KIX, settings.Kix);
+			scanSettings.SetSymbologyEnabled(Symbology.KIX, settings.Kix);
+			scanSettings.SetSymbologyEnabled(Symbology.DotCode, settings.Kix);
 
-            if (settings.QrInverted)
+			if (settings.QrInverted)
             {
                 var qrSettings = scanSettings.SettingsForSymbology(Symbology.QR);
                 qrSettings.ColorInvertedEnabled = true;
