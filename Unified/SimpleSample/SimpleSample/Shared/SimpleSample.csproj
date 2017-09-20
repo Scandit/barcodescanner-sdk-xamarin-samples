@@ -11,7 +11,7 @@
     <AssemblyName>SimpleSample</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
-    <ReleaseVersion>5.5.0.1</ReleaseVersion>
+    <ReleaseVersion>5.5.0.2</ReleaseVersion>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -62,12 +62,12 @@
     <Compile Include="ViewModels\ViewModelProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.5.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.5.0.1\lib\Scandit.BarcodePicker.Unified.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.5.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.5.0.2\lib\Scandit.BarcodePicker.Unified.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions, Version=5.5.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.5.0.1\lib\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions, Version=5.5.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.5.0.2\lib\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
