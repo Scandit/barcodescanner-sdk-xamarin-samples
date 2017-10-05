@@ -16,6 +16,7 @@ namespace ExtendedSample
     {
         // General
         public bool RotationWithDevice { get; set; }
+        public bool ContinuousAfterScan { get; set; }
 
 		// Symbologies
 		public bool Ean13Upc12 { get; set; }
@@ -77,6 +78,7 @@ namespace ExtendedSample
         public void ResetSettings()
         {
 			RotationWithDevice = true;
+            ContinuousAfterScan = true;
 			Ean13Upc12 = true;
 			Ean8 = true;
 			Upce = true;

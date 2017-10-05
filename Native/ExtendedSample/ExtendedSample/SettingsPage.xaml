@@ -17,6 +17,7 @@
         <TableRoot>
             <TableSection Title="General Configuration">
                 <SwitchCell x:Name="RotationWithDevice" Text="Rotation with Device" />
+                <SwitchCell x:Name="ContinuousAfterScan" Text="Continuous After Scan" />
             </TableSection>
             <TableSection Title="Barcode Decoder Configuration">
                 <SwitchCell x:Name="Ean13Upc12Cell" Text="EAN-13 and UPC-12" />

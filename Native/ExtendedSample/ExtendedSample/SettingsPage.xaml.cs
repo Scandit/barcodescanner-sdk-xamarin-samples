@@ -16,6 +16,7 @@ namespace ExtendedSample
 
         private void setupTableView()
         {
+            ContinuousAfterScan.On = settings.ContinuousAfterScan;
 			RotationWithDevice.On = settings.RotationWithDevice;
 			Ean13Upc12Cell.On = settings.Ean13Upc12;
 			Ean8Cell.On = settings.Ean8;
@@ -65,6 +66,7 @@ namespace ExtendedSample
             base.OnDisappearing();
 
             settings.RotationWithDevice = RotationWithDevice.On;
+            settings.ContinuousAfterScan = ContinuousAfterScan.On;
 			settings.Ean13Upc12 = Ean13Upc12Cell.On;
 			settings.Ean8 = Ean8Cell.On;
 			settings.Upce = UpceCell.On;

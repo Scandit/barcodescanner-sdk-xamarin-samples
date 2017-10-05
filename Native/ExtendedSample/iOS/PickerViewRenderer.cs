@@ -25,15 +25,15 @@ namespace ExtendedSample.iOS
         {
             base.OnElementChanged(e);
 
-            scannerPage = e.NewElement as ScannerPage;
+			scanDelegate = new PickerScanDelegate();
+
+			scannerPage = e.NewElement as ScannerPage;
             barcodePicker = new BarcodePicker(CreateScanSettings());
             AddChildViewController(barcodePicker);
             View.AddSubview(barcodePicker.View);
             barcodePicker.StartScanning();
             barcodePicker.DidMoveToParentViewController(this);
-
-			scanDelegate = new PickerScanDelegate();
-			barcodePicker.ScanDelegate = scanDelegate;
+            barcodePicker.ScanDelegate = scanDelegate;
         }
 
         public override void ViewDidAppear(bool animated)
@@ -55,9 +55,11 @@ namespace ExtendedSample.iOS
         {
             var settings = scannerPage.Settings;
             var scanSettings = ScanSettings.DefaultSettings();
+			
+            scanDelegate.ContinuousAfterScan = settings.ContinuousAfterScan;
 
-            // Symbologies
-            scanSettings.SetSymbologyEnabled(Symbology.EAN13, settings.Ean13Upc12);
+			// Symbologies
+			scanSettings.SetSymbologyEnabled(Symbology.EAN13, settings.Ean13Upc12);
             scanSettings.SetSymbologyEnabled(Symbology.UPC12, settings.Ean13Upc12);
             scanSettings.SetSymbologyEnabled(Symbology.TwoDigitAddOn, settings.TwoDigitAddOn);
             scanSettings.SetSymbologyEnabled(Symbology.FiveDigitAddOn, settings.FiveDigitAddOn);
@@ -140,6 +142,8 @@ namespace ExtendedSample.iOS
 
 		public class PickerScanDelegate : ScanDelegate
         {
+			public bool ContinuousAfterScan { get; set; }
+
 			public override void DidScan(BarcodePicker picker, IScanSession session)
 			{
 				if (session.NewlyRecognizedCodes.Count > 0)
@@ -152,38 +156,40 @@ namespace ExtendedSample.iOS
 					// If you want to edit something in the view hierarchy make sure to run it on the UI thread.
 					UIApplication.SharedApplication.InvokeOnMainThread(() =>
                     {
-						/* non continuous mode
-						UIAlertView alert = new UIAlertView()
-						{
-							Title = code.SymbologyString + " Barcode Detected",
-							Message = code.Data
-						};
-						alert.AddButton("OK");
-
-						alert.Clicked += (object o, UIButtonEventArgs e) =>
-						{
-                            picker.ResumeScanning();
-						};
-
-						alert.Show();
-						*/
-
-                        // Continuous mode
-						UIAlertView alert = new UIAlertView()
-						{
-							Title = code.SymbologyString + " Barcode Detected",
-							Message = code.Data
-						};
-						alert.Show();
-
-                        const int NSEC_PER_SEC = 1000000000;
-						var time = new DispatchTime(DispatchTime.Now, 1 * NSEC_PER_SEC);
-                        // Dismiss after 1 second
-                        DispatchQueue.MainQueue.DispatchAfter(time, () =>
+                        if (ContinuousAfterScan)
                         {
-                            alert.DismissWithClickedButtonIndex(0, true);
-							picker.ResumeScanning();
-						});
+							UIAlertView alert = new UIAlertView()
+							{
+								Title = code.SymbologyString + " Barcode Detected",
+								Message = code.Data
+							};
+							alert.Show();
+
+							const int NSEC_PER_SEC = 1000000000;
+							var time = new DispatchTime(DispatchTime.Now, 1 * NSEC_PER_SEC);
+							// Dismiss after 1 second
+							DispatchQueue.MainQueue.DispatchAfter(time, () =>
+							{
+								alert.DismissWithClickedButtonIndex(0, true);
+								picker.ResumeScanning();
+							});
+                        }
+                        else 
+                        {
+							UIAlertView alert = new UIAlertView()
+							{
+								Title = code.SymbologyString + " Barcode Detected",
+								Message = code.Data
+							};
+							alert.AddButton("OK");
+
+							alert.Clicked += (object o, UIButtonEventArgs e) =>
+							{
+								picker.ResumeScanning();
+							};
+
+							alert.Show();
+                        }
 					});
 				}
 			}
