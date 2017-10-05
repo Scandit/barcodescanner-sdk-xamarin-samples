@@ -48,7 +48,7 @@ namespace ExtendedSample.iOS
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            barcodePicker.PauseScanning();
+            barcodePicker.StartScanning();
         }
 
         private ScanSettings CreateScanSettings() 
@@ -115,6 +115,11 @@ namespace ExtendedSample.iOS
                 scanSettings.MaxNumberOfCodesPerFrame = 1;
             }
 
+            if (settings.ContinuousAfterScan)
+            {
+                scanSettings.CodeDuplicateFilter = -1;
+            }
+
             scanSettings.MatrixScanEnabled = (settings.GuiStyle == GuiStyle.MatrixScan); 
 
             return scanSettings;
@@ -150,8 +155,11 @@ namespace ExtendedSample.iOS
 				{
 					Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
 
-					// Stop the scanner directly on the session.
-                    session.PauseScanning();
+                    if (!ContinuousAfterScan)
+                    {
+                        // Stop the scanner directly on the session.
+                        session.PauseScanning();
+                    }
 
 					// If you want to edit something in the view hierarchy make sure to run it on the UI thread.
 					UIApplication.SharedApplication.InvokeOnMainThread(() =>
@@ -171,7 +179,6 @@ namespace ExtendedSample.iOS
 							DispatchQueue.MainQueue.DispatchAfter(time, () =>
 							{
 								alert.DismissWithClickedButtonIndex(0, true);
-								picker.ResumeScanning();
 							});
                         }
                         else 
