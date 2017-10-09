@@ -26,12 +26,13 @@ namespace ExtendedSample
 			this.Settings = settings;
 			InitializeComponent();
             PickerView.Delegate = new ScannerDelegate(this);
+            PickerView.Settings = Settings;
         }
 
 		public void Handle_Clicked(object sender, System.EventArgs e)
 		{
 			HideResult();
-            PickerView.ResumeScanning();
+            PickerView.StartScanning();
 		}
 
 		public void HideResult()
@@ -48,7 +49,7 @@ namespace ExtendedSample
 
         public void ResumeScanning() 
         {
-            PickerView.ResumeScanning();
+            PickerView.StartScanning();
         }
 
         public void PauseScanning() 

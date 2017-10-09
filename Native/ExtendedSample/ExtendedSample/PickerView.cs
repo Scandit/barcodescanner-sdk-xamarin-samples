@@ -5,15 +5,16 @@ namespace ExtendedSample
 {
     public class PickerView : View
     {
-		public event EventHandler ResumeScanningRequested;
+		public event EventHandler StartScanningRequested;
 		public event EventHandler PauseScanningRequested;
-        public IScannerDelegate Delegate { get; set; }
+		public IScannerDelegate Delegate { get; set; }
+		public Settings Settings { get; set; }
 
-		public void ResumeScanning()
+		public void StartScanning()
 		{
-			if (ResumeScanningRequested != null)
+			if (StartScanningRequested != null)
 			{
-				ResumeScanningRequested(this, EventArgs.Empty);
+				StartScanningRequested(this, EventArgs.Empty);
 			}
 		}
 

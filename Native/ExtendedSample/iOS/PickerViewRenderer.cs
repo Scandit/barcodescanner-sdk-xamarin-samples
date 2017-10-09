@@ -12,9 +12,9 @@ namespace ExtendedSample.iOS
 {
     public class PickerViewRenderer : ViewRenderer<PickerView, UIView>
     {
-        BarcodePicker barcodePicker;
-		PickerScanDelegate scanDelegate;
-        PickerView pickerView;
+        private BarcodePicker barcodePicker;
+		private PickerScanDelegate scanDelegate;
+        private PickerView pickerView;
 
         public PickerViewRenderer()
         {
@@ -29,7 +29,7 @@ namespace ExtendedSample.iOS
 			{
                 pickerView = e.NewElement;
 
-				e.NewElement.ResumeScanningRequested += OnResumeScanningRequested;
+				e.NewElement.StartScanningRequested += OnStartScanningRequested;
                 e.NewElement.PauseScanningRequested += OnPauseScanningRequested;
 
 				barcodePicker = new BarcodePicker(CreateScanSettings());
@@ -37,6 +37,7 @@ namespace ExtendedSample.iOS
 				barcodePicker.StartScanning();
 				scanDelegate = new PickerScanDelegate();
 				scanDelegate.PickerView = pickerView;
+				scanDelegate.ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan;
 				barcodePicker.ScanDelegate = scanDelegate;
 
 				ApplyOverlaySettings();
@@ -44,15 +45,22 @@ namespace ExtendedSample.iOS
 			}
 			if (e.OldElement != null)
 			{
-				e.OldElement.ResumeScanningRequested -= OnResumeScanningRequested;
+				e.OldElement.StartScanningRequested -= OnStartScanningRequested;
 				e.OldElement.PauseScanningRequested -= OnPauseScanningRequested;
 			}
         }
 
-		private void OnResumeScanningRequested(object sender, EventArgs e)
+		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
+		{
+            return new SizeRequest(new Size(widthConstraint, heightConstraint), 
+                                   new Size(widthConstraint, heightConstraint));
+		}
+
+		private void OnStartScanningRequested(object sender, EventArgs e)
 		{
 			ApplyOverlaySettings();
-            barcodePicker.ApplyScanSettings(CreateScanSettings(), null);
+			scanDelegate.ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan;
+			barcodePicker.ApplyScanSettings(CreateScanSettings(), null);
             barcodePicker.StartScanning();
 		}
 
@@ -63,11 +71,9 @@ namespace ExtendedSample.iOS
 
         private ScanSettings CreateScanSettings() 
         {
-            var settings = new Settings();
+            var settings = pickerView.Settings;
             settings.ResetSettings();
             var scanSettings = ScanSettings.DefaultSettings();
-
-			//scanDelegate.ContinuousAfterScan = settings.ContinuousAfterScan;
 
 			// Symbologies
 			scanSettings.SetSymbologyEnabled(Symbology.EAN13, settings.Ean13Upc12);
