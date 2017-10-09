@@ -6,11 +6,12 @@ namespace ExtendedSample
     public class MainPage : TabbedPage
     {
         private Settings settings;
+        private ScannerPage scannerPage;
 
         public MainPage()
         {
             settings = SettingsArchiver.UnarchiveSettings();
-			var scannerPage = new ScannerPage(settings);
+			scannerPage = new ScannerPage(settings);
 			scannerPage.Title = "Scanner";
             var settingsPage = new SettingsPage(settings);
 			settingsPage.Title = "Settings";
@@ -21,7 +22,15 @@ namespace ExtendedSample
         protected override void OnCurrentPageChanged()
         {
             base.OnCurrentPageChanged();
-			SettingsArchiver.ArchiveSettings(settings);
+            if (CurrentPage is ScannerPage)
+            {
+                scannerPage.ResumeScanning();
+                SettingsArchiver.ArchiveSettings(settings);
+            }
+            else 
+            {
+                scannerPage.PauseScanning();
+            }
 		}
     }
 }

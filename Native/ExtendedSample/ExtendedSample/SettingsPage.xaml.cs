@@ -5,6 +5,12 @@ namespace ExtendedSample
     public partial class SettingsPage : ContentPage
     {
         private Settings settings;
+
+		public SettingsPage()
+		{
+			InitializeComponent();
+		}
+
         public SettingsPage(Settings settings)
         {
             this.settings = settings;
