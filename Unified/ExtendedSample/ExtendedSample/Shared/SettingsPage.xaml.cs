@@ -207,6 +207,7 @@ namespace ExtendedSample
 		// and applies them to the Picker
 		void updateScanSettings()
 		{
+            bool addOnEnabled = false;
 			foreach (string setting in Convert.settingToSymbologies.Keys)
 			{
 				bool enabled = Settings.getBoolSetting(setting);
@@ -218,8 +219,17 @@ namespace ExtendedSample
 						_scanSettings.Symbologies[sym].ColorInvertedEnabled = Settings.getBoolSetting(
 							Settings.getInvertedSymboloby(setting));
 					}
+
+                    if (enabled && (sym == Symbology.TwoDigitAddOn 
+                                    || sym == Symbology.FiveDigitAddOn)) {
+                        addOnEnabled = true;
+                    }
 				}
 			}
+
+            if (addOnEnabled) {
+                _scanSettings.MaxNumberOfCodesPerFrame = 2;
+            }
 
 			_scanSettings.Symbologies[Symbology.MsiPlessey].Checksums = 
 				Convert.msiPlesseyChecksumToScanSetting[Settings.getStringSetting(Settings.MsiPlesseyChecksumString)];

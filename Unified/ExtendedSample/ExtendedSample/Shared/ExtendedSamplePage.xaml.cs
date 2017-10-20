@@ -22,13 +22,23 @@ namespace ExtendedSample
 	public partial class ExtendedSamplePage : ContentPage
 	{
 		void OnDidScan(ScanSession session)
-		{
-			
-			// guaranteed to always have at least one element, so we don't have to 
-			// check the size of the NewlyRecognizedCodes array.
-			var firstCode = session.NewlyRecognizedCodes.First();
-			var message = string.Format("Code Scanned:\n {0}\n({1})", firstCode.Data,
-										firstCode.SymbologyString.ToUpper());
+        {
+            var firstCode = session.NewlyRecognizedCodes.First();
+            var message = "";
+            if (session.NewlyRecognizedCodes.Count() == 1)
+            {
+                message = string.Format("Code Scanned:\n {0}\n({1})", firstCode.Data,
+                                            firstCode.SymbologyString.ToUpper());
+            }
+            else if (session.NewlyRecognizedCodes.Count() > 1)
+            {
+                var secondCode = session.NewlyRecognizedCodes.ElementAt(1);
+                message = string.Format("Codes Scanned:\n {0}\n({1})\n {2}\n({3})", 
+                                        firstCode.Data,
+                                        firstCode.SymbologyString.ToUpper(),
+                                        secondCode.Data,
+                                        secondCode.SymbologyString.ToUpper());
+            }
 			// Because this event handler is called from an scanner-internal thread, 
 			// you must make sure to dispatch to the main thread for any UI work.
 			Device.BeginInvokeOnMainThread(() => this.ResultLabel.Text = message);
