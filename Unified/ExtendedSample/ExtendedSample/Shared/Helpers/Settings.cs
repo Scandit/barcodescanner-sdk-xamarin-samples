@@ -112,12 +112,12 @@ namespace ExtendedSample.Helpers
 
 		public static bool getBoolSetting(string setting)
 		{
-			return AppSettings.GetValueOrDefault<bool>(setting, defaultBool(setting));
+			return AppSettings.GetValueOrDefault(setting, defaultBool(setting));
 		}
 
 		public static void setBoolSetting(string setting, bool value)
 		{
-			AppSettings.AddOrUpdateValue<bool>(setting, value);
+			AppSettings.AddOrUpdateValue(setting, value);
 		}
 
 		private static bool defaultBool(string setting)
@@ -133,12 +133,12 @@ namespace ExtendedSample.Helpers
 
 		public static int getIntSetting(string setting)
 		{
-			return AppSettings.GetValueOrDefault<int>(setting, defaultInt(setting));
+			return AppSettings.GetValueOrDefault(setting, defaultInt(setting));
 		}
 
 		public static void setIntSetting(string setting, int value)
 		{
-			AppSettings.AddOrUpdateValue<int>(setting, value);
+			AppSettings.AddOrUpdateValue(setting, value);
 		}
 
 		private static int defaultInt(string setting)
@@ -148,12 +148,12 @@ namespace ExtendedSample.Helpers
 
 		public static Double getDoubleSetting(string setting)
 		{
-			return AppSettings.GetValueOrDefault<Double>(setting, defaultDouble(setting));
+			return AppSettings.GetValueOrDefault(setting, defaultDouble(setting));
 		}
 
 		public static void setDoubleSetting(string setting, Double value)
 		{
-			AppSettings.AddOrUpdateValue<Double>(setting, value);
+			AppSettings.AddOrUpdateValue(setting, value);
 		}
 
 		private static Double defaultDouble(string setting)
@@ -183,12 +183,12 @@ namespace ExtendedSample.Helpers
 
 		public static string getStringSetting(string setting)
 		{
-			return AppSettings.GetValueOrDefault<string>(setting, defaultString(setting));
+			return AppSettings.GetValueOrDefault(setting, defaultString(setting));
 		}
 
 		public static void setStringSetting(string setting, string value)
 		{
-			AppSettings.AddOrUpdateValue<string>(setting, value);
+			AppSettings.AddOrUpdateValue(setting, value);
 		}
 
 		private static string defaultString(string setting)
