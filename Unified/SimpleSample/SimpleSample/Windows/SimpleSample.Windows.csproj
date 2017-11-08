@@ -18,6 +18,7 @@
     <PackageCertificateKeyFile>SimpleSample.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PackageCertificateThumbprint>EAE36CA99C8113911FD5CD16990D6069C91EC44D</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -118,7 +119,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="packages.config" />
-    <None Include="Windows_TemporaryKey.pfx" />
+    <None Include="SimpleSample.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
