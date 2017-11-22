@@ -15,6 +15,10 @@ Global
 		{7580F6ED-29CF-4C6D-A7A6-E65541BF2C09}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{7580F6ED-29CF-4C6D-A7A6-E65541BF2C09}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{7580F6ED-29CF-4C6D-A7A6-E65541BF2C09}.Debug|iPhone.Build.0 = Debug|iPhone
+		{7580F6ED-29CF-4C6D-A7A6-E65541BF2C09}.Release|iPhone.ActiveCfg = Release|iPhone
+		{7580F6ED-29CF-4C6D-A7A6-E65541BF2C09}.Release|iPhone.Build.0 = Release|iPhone
+		{7580F6ED-29CF-4C6D-A7A6-E65541BF2C09}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{7580F6ED-29CF-4C6D-A7A6-E65541BF2C09}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
