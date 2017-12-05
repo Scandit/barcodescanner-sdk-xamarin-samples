@@ -143,24 +143,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Scandit.BarcodePicker, Version=5.6.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.5.6.0.1\lib\win81\Scandit.BarcodePicker.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker, Version=5.6.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.5.6.0.2\lib\win81\Scandit.BarcodePicker.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.6.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.6.0.1\lib\win81\Scandit.BarcodePicker.Unified.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.6.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.6.0.2\lib\win81\Scandit.BarcodePicker.Unified.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions, Version=5.6.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.6.0.1\lib\win81\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions, Version=5.6.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.6.0.2\lib\win81\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Scandit.Recognition, Version=5.6.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.Recognition.5.6.0.1\lib\win81\Scandit.Recognition.dll</HintPath>
+    <Reference Include="Scandit.Recognition, Version=5.6.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.Recognition.5.6.0.2\lib\win81\Scandit.Recognition.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="VideoInputRT.Interop, Version=5.6.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.5.6.0.1\lib\win81\VideoInputRT.Interop.winmd</HintPath>
+    <Reference Include="VideoInputRT.Interop, Version=5.6.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.5.6.0.2\lib\win81\VideoInputRT.Interop.winmd</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -194,11 +194,11 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Scandit.Recognition.5.6.0.1\build\win81\Scandit.Recognition.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Scandit.Recognition.5.6.0.1\build\win81\Scandit.Recognition.targets'))" />
-    <Error Condition="!Exists('..\..\packages\Scandit.BarcodePicker.5.6.0.1\build\win81\Scandit.BarcodePicker.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Scandit.BarcodePicker.5.6.0.1\build\win81\Scandit.BarcodePicker.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Scandit.Recognition.5.6.0.2\build\win81\Scandit.Recognition.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Scandit.Recognition.5.6.0.2\build\win81\Scandit.Recognition.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Scandit.BarcodePicker.5.6.0.2\build\win81\Scandit.BarcodePicker.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Scandit.BarcodePicker.5.6.0.2\build\win81\Scandit.BarcodePicker.targets'))" />
   </Target>
-  <Import Project="..\..\packages\Scandit.Recognition.5.6.0.1\build\win81\Scandit.Recognition.targets" Condition="Exists('..\..\packages\Scandit.Recognition.5.6.0.1\build\win81\Scandit.Recognition.targets')" />
-  <Import Project="..\..\packages\Scandit.BarcodePicker.5.6.0.1\build\win81\Scandit.BarcodePicker.targets" Condition="Exists('..\..\packages\Scandit.BarcodePicker.5.6.0.1\build\win81\Scandit.BarcodePicker.targets')" />
+  <Import Project="..\..\packages\Scandit.Recognition.5.6.0.2\build\win81\Scandit.Recognition.targets" Condition="Exists('..\..\packages\Scandit.Recognition.5.6.0.2\build\win81\Scandit.Recognition.targets')" />
+  <Import Project="..\..\packages\Scandit.BarcodePicker.5.6.0.2\build\win81\Scandit.BarcodePicker.targets" Condition="Exists('..\..\packages\Scandit.BarcodePicker.5.6.0.2\build\win81\Scandit.BarcodePicker.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
