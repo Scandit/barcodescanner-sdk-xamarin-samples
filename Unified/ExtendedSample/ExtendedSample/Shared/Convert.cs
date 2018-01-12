@@ -143,7 +143,7 @@ namespace ExtendedSample
             { 3, Settings.GuiStyleString_LocationsOnly }
 		};
 
-		// Associates the storrage key (string) with the index in the picker
+		// Associates the storage key (string) with the index in the picker
 		public static Dictionary<string, int> guiStyleToIndex = new Dictionary<string, int>
 		{
 			{ Settings.GuiStyleString_Frame, 0 },
@@ -161,13 +161,32 @@ namespace ExtendedSample
 			{ Settings.GuiStyleString_LocationsOnly, GuiStyle.LocationsOnly }
 		};
 
-		// list of Settings that are enabled by default
+        // Associates the index in the picker with the storage key (string)
+        public static Dictionary<int, string> indexToResolution = new Dictionary<int, string> {
+            { 0, Settings.ResolutionString_HD },
+            { 1, Settings.ResolutionString_FullHD }
+        };
+
+        // Associates the storage key (string) with the index in the picker
+        public static Dictionary<string, int> resolutionToIndex = new Dictionary<string, int>
+        {
+            { Settings.ResolutionString_HD, 0 },
+            { Settings.ResolutionString_FullHD, 1 }
+        };
+
+        // Associates the storage key (string) with ScanSettings enum
+        public static Dictionary<string, VideoResolution> resolutionToScanSetting = new Dictionary<string, VideoResolution>
+        {
+            { Settings.ResolutionString_HD, VideoResolution.Medium},
+            { Settings.ResolutionString_FullHD, VideoResolution.High }
+        };
+
+		// List of Settings that are enabled by default
 		public static readonly string[] EnabledSettings = {
 			"Sym_Ean13Upca", "Sym_Ean13Upca", "Sym_Ean8", "Sym_Upce", "Sym_Code39", "Sym_Code128",
 			"Sym_Interleaved2Of5", "Sym_Qr", "Sym_DataMatrix", Settings.BeepString,
 			Settings.TorchButtonString
 		};
-
 	}
 }
 

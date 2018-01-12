@@ -133,6 +133,19 @@
 					</StackLayout>
 				</ViewCell>
 			</TableSection>
+            <TableSection Title="Camera">
+                <ViewCell>
+                    <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+                        <Label Text="Resolution" />
+                        <Picker x:Name="ResolutionPicker" Title="Resolution" WidthRequest="150" HorizontalOptions="EndAndExpand">
+                            <Picker.Items>
+                                <x:String>HD (720p)</x:String>
+                                <x:String>Full HD (1080p)</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
 		</TableRoot>
 	</TableView>
 </ContentPage>
