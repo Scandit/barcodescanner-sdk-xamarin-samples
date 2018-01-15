@@ -81,6 +81,11 @@ namespace ExtendedSample.Helpers
 		public const string ViewFinderLandscapeWidthString = "Overlay_ViewFinderSizeLandscape_Width";
 		public const string ViewFinderLandscapeHeightString = "Overlay_ViewFinderSizeLandscape_Height";
 
+        // Camera
+        public const string ResolutionString = "ScanSettings_Resolution";
+        public const string ResolutionString_HD = "ScanSettings_Resolution_HD";
+        public const string ResolutionString_FullHD = "ScanSettings_Resolution_FullHD";
+
 		public static readonly string[] SliderStrings = {
 			ViewFinderPortraitWidthString,
 			ViewFinderPortraitHeightString,
@@ -161,7 +166,7 @@ namespace ExtendedSample.Helpers
 			switch (setting)
 			{
 				case HotSpotHeightString:
-				return 0.25;
+				    return 0.25;
 				case HotSpotWidthString:
 					return 1.0;
 				case HotSpotYString:
@@ -201,6 +206,8 @@ namespace ExtendedSample.Helpers
 					return CameraButtonString_Always;
 				case GuiStyleString:
 					return GuiStyleString_Frame;
+                case ResolutionString:
+                    return ResolutionString_HD;
 				default:
 					throw new Exception("No default setting for " + setting);
 			}
