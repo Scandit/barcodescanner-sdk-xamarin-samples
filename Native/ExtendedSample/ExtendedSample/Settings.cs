@@ -12,6 +12,11 @@ namespace ExtendedSample
 		Never, OnTablet, Always
 	};
 
+    public enum Resolution
+    {
+        Standard, HD
+    };
+
     public class Settings
     {
         // General
@@ -70,6 +75,9 @@ namespace ExtendedSample
 		public double TorchTopMargin { get; set; }
         public CameraButton CameraButton { get; set; }
 
+        // Camera
+        public Resolution Resolution { get; set; }
+
 		public Settings()
 		{
             ResetSettings();
@@ -121,6 +129,7 @@ namespace ExtendedSample
 			TorchLeftMargin = 15;
 			TorchTopMargin = 15;
 			CameraButton = CameraButton.Always;
+            Resolution = Resolution.Standard;
         }
     }
 }

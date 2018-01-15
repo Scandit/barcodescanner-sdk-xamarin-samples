@@ -166,6 +166,19 @@
                     </StackLayout>
                 </ViewCell>
             </TableSection>
+            <TableSection Title="Resolution">
+                <ViewCell>
+                    <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+                        <Label Text="Visible" />
+                        <Picker x:Name="ResolutionPicker" Title="Visible" WidthRequest="200" HorizontalOptions="EndAndExpand">
+                            <Picker.Items>
+                                <x:String>Standard</x:String>
+                                <x:String>HD</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
             <TableSection Title="">
                 <TextCell Tapped="OnOpenOnlineDocumentation" Text="Open the Online Documentation" Detail=""/>
                 <TextCell Tapped="OnResetSettings" Text="Reset to Default" Detail=""/>

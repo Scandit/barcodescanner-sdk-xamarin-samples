@@ -137,6 +137,8 @@ namespace ExtendedSample.iOS
                 scanSettings.CodeDuplicateFilter = -1;
             }
 
+            scanSettings.HighDensityModeEnabled = (settings.Resolution == Resolution.HD);
+
             scanSettings.MatrixScanEnabled = (settings.GuiStyle == GuiStyle.MatrixScan); 
 
             return scanSettings;

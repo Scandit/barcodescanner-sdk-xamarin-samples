@@ -65,6 +65,7 @@ namespace ExtendedSample
 			TorchLeftMargin.Value = settings.TorchLeftMargin;
 			TorchTopMargin.Value = settings.TorchTopMargin;
             CameraButtonPicker.SelectedIndex = (int)settings.CameraButton;
+            ResolutionPicker.SelectedIndex = (int)settings.Resolution;
         }
 
         protected override void OnDisappearing()
@@ -114,6 +115,7 @@ namespace ExtendedSample
 			settings.TorchLeftMargin = TorchLeftMargin.Value;
 			settings.TorchTopMargin = TorchTopMargin.Value;
             settings.CameraButton = (CameraButton)CameraButtonPicker.SelectedIndex;
+            settings.Resolution = (Resolution)ResolutionPicker.SelectedIndex;
    		}
 
         protected void OnResetSettings(object sender, System.EventArgs e)
