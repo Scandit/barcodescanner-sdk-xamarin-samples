@@ -159,10 +159,15 @@ namespace TextRecognitionSample.iOS
 
             public override BarcodePickerState DidScan(BarcodePicker picker, RecognizedText text)
             {
-                var textRecognized = text.text;
+                var recognizedText = text.text;
+                if (PickerView.Settings.Mode == Mode.IBAN && !IBANValidator.validate(recognizedText))
+                {
+                    text.rejected = true;
+                    return .BarcodePickerState.Active;
+                }
                 UIApplication.SharedApplication.InvokeOnMainThread(() =>
                 {
-                    PickerView.DidScan(textRecognized);
+                    PickerView.DidScan(recognizedText);
                 });
                 return BarcodePickerState.Paused;
             }
