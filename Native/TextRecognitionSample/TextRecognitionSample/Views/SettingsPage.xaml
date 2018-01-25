@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TextRecognitionSample.SettingsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Picker">
+                <Setter Property="Margin" Value="10, 0, 12, 0" />
+            </Style>
+            <Style TargetType="Slider">
+                <Setter Property="Margin" Value="13" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <TableView Intent="Settings" HasUnevenRows="true">
+        <TableRoot>
+            <TableSection Title="Mode">
+                <ViewCell>
+                    <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+                        <Label Text="Mode" />
+                        <Picker x:Name="ModePicker" Title="Style" WidthRequest="200" HorizontalOptions="EndAndExpand">
+                            <Picker.Items>
+                                <x:String>IBAN</x:String>
+                                <x:String>GS1 AI</x:String>
+                                <x:String>Scan a Price</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+            <TableSection Title="Scan Position">
+                <ViewCell>
+                    <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+                        <Label Text="Scan Position" />
+                        <Picker x:Name="ScanPositionPicker" Title="Style" WidthRequest="200" HorizontalOptions="EndAndExpand">
+                            <Picker.Items>
+                                <x:String>Top</x:String>
+                                <x:String>Center</x:String>
+                                <x:String>Bottom</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>
