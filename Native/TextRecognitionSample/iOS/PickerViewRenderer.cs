@@ -163,7 +163,7 @@ namespace TextRecognitionSample.iOS
                 if (PickerView.Settings.Mode == Mode.IBAN && !IBANValidator.validate(recognizedText))
                 {
                     text.rejected = true;
-                    return .BarcodePickerState.Active;
+                    return BarcodePickerState.Active;
                 }
                 UIApplication.SharedApplication.InvokeOnMainThread(() =>
                 {
