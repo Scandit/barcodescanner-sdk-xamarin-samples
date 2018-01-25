@@ -26,11 +26,11 @@ namespace TextRecognitionSample
             }
         }
 
-        public void DidScan(string symbology, string code)
+        public void DidScan(string value)
         {
             if (Delegate != null)
             {
-                Delegate.DidScan(symbology, code);
+                Delegate.DidScan(value);
             }
         }
     }

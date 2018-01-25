@@ -7,7 +7,7 @@ namespace TextRecognitionSample
 {
     public interface IScannerDelegate
     {
-        Task DidRecognizeText(string recognizedText);
+        void DidScan(string value);
     }
 
     public partial class ScannerPage : ContentPage
@@ -65,9 +65,9 @@ namespace TextRecognitionSample
             this.scannerPage = scannerPage;
         }
 
-        public async Task DidRecognizeText(string recognizedText)
+        public void DidScan(string value)
         {
-            scannerPage.ShowResult(recognizedText);
+            scannerPage.ShowResult(value);
         }
     }
 }
