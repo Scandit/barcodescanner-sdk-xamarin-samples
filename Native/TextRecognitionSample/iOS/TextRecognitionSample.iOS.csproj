@@ -31,7 +31,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType></DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -69,7 +69,7 @@
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchFastDev>false</MtouchFastDev>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <IOSDebuggerPort>29359</IOSDebuggerPort>
@@ -110,7 +110,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ScanditSDK">
-      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.6.0.10\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
+      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.6.1.10\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
