@@ -18,7 +18,8 @@ namespace ExtendedSample.iOS
 
         public PickerViewRenderer()
         {
-            License.SetAppKey("--- ENTER YOUR SCANDIT APP KEY HERE ---");
+            var appKey = PickerView.GetAppKey();
+            License.SetAppKey(appKey);
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<PickerView> e)
