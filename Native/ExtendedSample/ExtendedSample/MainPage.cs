@@ -7,14 +7,15 @@ namespace ExtendedSample
     {
         private Settings settings;
         private ScannerPage scannerPage;
+        private SettingsPage settingsPage;
 
         public MainPage()
         {
             settings = SettingsArchiver.UnarchiveSettings();
-			scannerPage = new ScannerPage(settings);
-			scannerPage.Title = "Scanner";
-            var settingsPage = new SettingsPage(settings);
-			settingsPage.Title = "Settings";
+            scannerPage = new ScannerPage(settings);
+            scannerPage.Title = "Scanner";
+            settingsPage = new SettingsPage(settings);
+            settingsPage.Title = "Settings";
             Children.Add(scannerPage);
             Children.Add(settingsPage);
         }
@@ -24,13 +25,14 @@ namespace ExtendedSample
             base.OnCurrentPageChanged();
             if (CurrentPage is ScannerPage)
             {
+                settingsPage.UpdateSettings();
                 scannerPage.ResumeScanning();
                 SettingsArchiver.ArchiveSettings(settings);
             }
-            else 
+            else
             {
                 scannerPage.PauseScanning();
             }
-		}
+        }
     }
 }

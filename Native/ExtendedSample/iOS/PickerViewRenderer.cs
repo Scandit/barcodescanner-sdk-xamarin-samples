@@ -13,7 +13,7 @@ namespace ExtendedSample.iOS
     public class PickerViewRenderer : ViewRenderer<PickerView, UIView>
     {
         private BarcodePicker barcodePicker;
-		private PickerScanDelegate scanDelegate;
+        private PickerScanDelegate scanDelegate;
         private PickerView pickerView;
 
         public PickerViewRenderer()
@@ -25,58 +25,57 @@ namespace ExtendedSample.iOS
         {
             base.OnElementChanged(e);
 
-			if (e.NewElement != null)
-			{
+            if (e.NewElement != null)
+            {
                 pickerView = e.NewElement;
 
-				e.NewElement.StartScanningRequested += OnStartScanningRequested;
+                e.NewElement.StartScanningRequested += OnStartScanningRequested;
                 e.NewElement.PauseScanningRequested += OnPauseScanningRequested;
 
-				barcodePicker = new BarcodePicker(CreateScanSettings());
-				SetNativeControl(barcodePicker.View);
-				barcodePicker.StartScanning();
-				scanDelegate = new PickerScanDelegate();
-				scanDelegate.PickerView = pickerView;
-				scanDelegate.ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan;
-				barcodePicker.ScanDelegate = scanDelegate;
-
-				ApplyOverlaySettings();
+                barcodePicker = new BarcodePicker(CreateScanSettings());
+                SetNativeControl(barcodePicker.View);
                 barcodePicker.StartScanning();
-			}
-			if (e.OldElement != null)
-			{
-				e.OldElement.StartScanningRequested -= OnStartScanningRequested;
-				e.OldElement.PauseScanningRequested -= OnPauseScanningRequested;
-			}
+                scanDelegate = new PickerScanDelegate();
+                scanDelegate.PickerView = pickerView;
+                scanDelegate.ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan;
+                barcodePicker.ScanDelegate = scanDelegate;
+
+                ApplyOverlaySettings();
+                barcodePicker.StartScanning();
+            }
+            if (e.OldElement != null)
+            {
+                e.OldElement.StartScanningRequested -= OnStartScanningRequested;
+                e.OldElement.PauseScanningRequested -= OnPauseScanningRequested;
+            }
         }
 
-		public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
-		{
-            return new SizeRequest(new Size(widthConstraint, heightConstraint), 
+        public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
+        {
+            return new SizeRequest(new Size(widthConstraint, heightConstraint),
                                    new Size(widthConstraint, heightConstraint));
-		}
+        }
 
-		private void OnStartScanningRequested(object sender, EventArgs e)
-		{
-			ApplyOverlaySettings();
-			scanDelegate.ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan;
-			barcodePicker.ApplyScanSettings(CreateScanSettings(), null);
+        private void OnStartScanningRequested(object sender, EventArgs e)
+        {
+            ApplyOverlaySettings();
+            scanDelegate.ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan;
+            barcodePicker.ApplyScanSettings(CreateScanSettings(), null);
             barcodePicker.StartScanning();
-		}
+        }
 
-		private void OnPauseScanningRequested(object sender, EventArgs e)
-		{
+        private void OnPauseScanningRequested(object sender, EventArgs e)
+        {
             barcodePicker.PauseScanning();
-		}
+        }
 
-        private ScanSettings CreateScanSettings() 
+        private ScanSettings CreateScanSettings()
         {
             var settings = pickerView.Settings;
-            settings.ResetSettings();
             var scanSettings = ScanSettings.DefaultSettings();
 
-			// Symbologies
-			scanSettings.SetSymbologyEnabled(Symbology.EAN13, settings.Ean13Upc12);
+            // Symbologies
+            scanSettings.SetSymbologyEnabled(Symbology.EAN13, settings.Ean13Upc12);
             scanSettings.SetSymbologyEnabled(Symbology.UPC12, settings.Ean13Upc12);
             scanSettings.SetSymbologyEnabled(Symbology.TwoDigitAddOn, settings.TwoDigitAddOn);
             scanSettings.SetSymbologyEnabled(Symbology.FiveDigitAddOn, settings.FiveDigitAddOn);
@@ -98,10 +97,10 @@ namespace ExtendedSample.iOS
             scanSettings.SetSymbologyEnabled(Symbology.Aztec, settings.Aztec);
             scanSettings.SetSymbologyEnabled(Symbology.MaxiCode, settings.MaxiCode);
             scanSettings.SetSymbologyEnabled(Symbology.RM4SCC, settings.Rm4scc);
-			scanSettings.SetSymbologyEnabled(Symbology.KIX, settings.Kix);
-			scanSettings.SetSymbologyEnabled(Symbology.DotCode, settings.Kix);
+            scanSettings.SetSymbologyEnabled(Symbology.KIX, settings.Kix);
+            scanSettings.SetSymbologyEnabled(Symbology.DotCode, settings.Kix);
 
-			if (settings.QrInverted)
+            if (settings.QrInverted)
             {
                 var qrSettings = scanSettings.SettingsForSymbology(Symbology.QR);
                 qrSettings.ColorInvertedEnabled = true;
@@ -127,7 +126,7 @@ namespace ExtendedSample.iOS
             {
                 scanSettings.MaxNumberOfCodesPerFrame = 2;
             }
-            else 
+            else
             {
                 scanSettings.MaxNumberOfCodesPerFrame = 1;
             }
@@ -139,43 +138,42 @@ namespace ExtendedSample.iOS
 
             scanSettings.HighDensityModeEnabled = (settings.Resolution == Resolution.HD);
 
-            scanSettings.MatrixScanEnabled = (settings.GuiStyle == GuiStyle.MatrixScan); 
+            scanSettings.MatrixScanEnabled = (settings.GuiStyle == GuiStyle.MatrixScan);
 
             return scanSettings;
         }
 
         private void ApplyOverlaySettings()
         {
-            var settings = new Settings();
-			settings.ResetSettings();
+            var settings = pickerView.Settings;
 
-			barcodePicker.allowedInterfaceOrientations = settings.RotationWithDevice ? UIInterfaceOrientationMask.All : UIInterfaceOrientationMask.Portrait;
+            barcodePicker.allowedInterfaceOrientations = settings.RotationWithDevice ? UIInterfaceOrientationMask.All : UIInterfaceOrientationMask.Portrait;
             var OverlayView = barcodePicker.OverlayView;
             OverlayView.GuiStyle = (ScanditBarcodeScanner.iOS.GuiStyle)settings.GuiStyle;
-            OverlayView.SetViewfinderPortraitDimension((float)settings.ViewFinderPortraitWidth, 
+            OverlayView.SetViewfinderPortraitDimension((float)settings.ViewFinderPortraitWidth,
                                                        (float)settings.ViewFinderPortraitHeight);
-            OverlayView.SetViewfinderLandscapeDimension((float)settings.ViewFinderLandscapeWidth, 
+            OverlayView.SetViewfinderLandscapeDimension((float)settings.ViewFinderLandscapeWidth,
                                                         (float)settings.ViewFinderLandscapeHeight);
             OverlayView.SetBeepEnabled(settings.Beep);
             OverlayView.SetVibrateEnabled(settings.Vibrate);
             OverlayView.SetTorchEnabled(settings.TorchButtonVisible);
-            OverlayView.SetTorchButtonMarginsAndSize((float)settings.TorchLeftMargin, 
-                                                     (float)settings.TorchTopMargin, 
-                                                     40, 
+            OverlayView.SetTorchButtonMarginsAndSize((float)settings.TorchLeftMargin,
+                                                     (float)settings.TorchTopMargin,
+                                                     40,
                                                      40);
             OverlayView.SetCameraSwitchVisibility((ScanditBarcodeScanner.iOS.CameraSwitchVisibility)settings.CameraButton);
         }
 
-		public class PickerScanDelegate : ScanDelegate
+        public class PickerScanDelegate : ScanDelegate
         {
-			public bool ContinuousAfterScan { get; set; }
+            public bool ContinuousAfterScan { get; set; }
             public PickerView PickerView { get; set; }
 
-			public override void DidScan(BarcodePicker picker, IScanSession session)
-			{
-				if (session.NewlyRecognizedCodes.Count > 0)
-				{
-					Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
+            public override void DidScan(BarcodePicker picker, IScanSession session)
+            {
+                if (session.NewlyRecognizedCodes.Count > 0)
+                {
+                    Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
 
                     if (!ContinuousAfterScan)
                     {
@@ -183,13 +181,13 @@ namespace ExtendedSample.iOS
                         session.PauseScanning();
                     }
 
-					// If you want to edit something in the view hierarchy make sure to run it on the UI thread.
-					UIApplication.SharedApplication.InvokeOnMainThread(() =>
+                    // If you want to edit something in the view hierarchy make sure to run it on the UI thread.
+                    UIApplication.SharedApplication.InvokeOnMainThread(() =>
                     {
                         PickerView.DidScan(code.SymbologyString, code.Data);
-					});
-				}
-			}
-		}
+                    });
+                }
+            }
+        }
     }
 }
