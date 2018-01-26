@@ -29,10 +29,8 @@ namespace TextRecognitionSample
             ScanPositionPicker.SelectedIndex = (int)settings.ScanPosition;
         }
 
-        protected override void OnDisappearing()
+        public void UpdateSettings()
         {
-            base.OnDisappearing();
-
             settings.Mode = (Mode)ModePicker.SelectedIndex;
             settings.ScanPosition = (ScanPosition)ScanPositionPicker.SelectedIndex;
         }
