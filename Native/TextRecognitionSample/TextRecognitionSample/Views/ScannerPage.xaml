@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="TextRecognitionSample.ScannerPage"
-    xmlns:local="clr-namespace:TextRecognitionSample;assembly=TextRecognitionSample">
+    xmlns:local="clr-namespace:TextRecognitionSample;assembly=TextRecognitionSample.iOS">
 	<ContentPage.Content>
         <AbsoluteLayout>
             <local:PickerView x:Name="PickerView"/>

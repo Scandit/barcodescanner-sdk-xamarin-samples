@@ -10,6 +10,11 @@ namespace TextRecognitionSample
         public IScannerDelegate Delegate { get; set; }
         public Settings Settings { get; set; }
 
+        public static string GetAppKey()
+        {
+            return "--- ENTER YOUR SCANDIT APP KEY HERE ---";
+        }
+
         public void StartScanning()
         {
             if (StartScanningRequested != null)

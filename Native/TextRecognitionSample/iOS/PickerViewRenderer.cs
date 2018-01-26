@@ -21,7 +21,8 @@ namespace TextRecognitionSample.iOS
 
         public PickerViewRenderer()
         {
-            License.SetAppKey("--- ENTER YOUR SCANDIT APP KEY HERE ---");
+            var appKey = new NSString(PickerView.GetAppKey());
+            License.SetAppKey(appKey);
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<PickerView> e)
@@ -130,7 +131,8 @@ namespace TextRecognitionSample.iOS
             OverlayView.SetTorchEnabled(false);
 
             var height = recognitionMode == RecognitionMode.Text ? 0.1f : 0.4f;
-            OverlayView.SetViewfinderDimension(0.9f, height, 0.6f, height);
+            OverlayView.SetViewfinderPortraitDimension(0.9f, height);
+            OverlayView.SetViewfinderLandscapeDimension(0.6f, height);
         }
 
         public class PickerScanDelegate : ScanDelegate
