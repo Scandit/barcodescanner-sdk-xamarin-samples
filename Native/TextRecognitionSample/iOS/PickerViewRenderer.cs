@@ -111,7 +111,17 @@ namespace TextRecognitionSample.iOS
             scanSettings.RecognitionMode = RecognitionMode.Text;
 
             // Enabling some symbologies
-            var symbologies = new Symbology[] { Symbology.EAN8, Symbology.EAN13, Symbology.UPCE, Symbology.UPC12, Symbology.Datamatrix, Symbology.QR, Symbology.Code39, Symbology.Code128, Symbology.ITF };
+            var symbologies = new Symbology[] { 
+                Symbology.EAN8,
+                Symbology.EAN13,
+                Symbology.UPCE,
+                Symbology.UPC12,
+                Symbology.Datamatrix,
+                Symbology.QR,
+                Symbology.Code39,
+                Symbology.Code128,
+                Symbology.ITF
+            };
             foreach (Symbology symbology in symbologies)
             {
                 scanSettings.SetSymbologyEnabled(symbology, true);
