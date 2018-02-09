@@ -16,7 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
-    <ReleaseVersion>5.6.1.10</ReleaseVersion>
+    <ReleaseVersion>5.6.2.10</ReleaseVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -55,12 +55,12 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.3.2.127\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.6.1.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.6.1.10\lib\MonoAndroid10\Scandit.BarcodePicker.Unified.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.6.2.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.6.2.10\lib\MonoAndroid10\Scandit.BarcodePicker.Unified.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ScanditSDK, Version=5.6.1.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.6.1.10\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
+    <Reference Include="ScanditSDK, Version=5.6.2.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.6.2.10\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
