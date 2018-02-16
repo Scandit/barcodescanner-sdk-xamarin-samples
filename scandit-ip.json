@@ -1,0 +1,9 @@
+{
+    "name": "SDK Xamarin Samples",
+    "owner": ["moritz@scandit.com"],
+    "distribution": "SOURCE",
+    "packages": [],
+    "ignored_packages": [],
+    "overrides": [],
+    "whitelist": []
+}
