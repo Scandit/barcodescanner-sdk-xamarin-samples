@@ -9,7 +9,7 @@
     <RootNamespace>SimpleSample.iOS</RootNamespace>
     <AssemblyName>SimpleSample.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>5.7.1.10</ReleaseVersion>
+    <ReleaseVersion>5.7.2.10</ReleaseVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -88,16 +88,16 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.7.1.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.7.1.10\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.7.2.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.7.2.10\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions, Version=5.7.1.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.7.1.10\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
+    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions, Version=5.7.2.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.7.2.10\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ScanditSDK, Version=5.7.1.10, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.7.1.10\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
+    <Reference Include="ScanditSDK, Version=5.7.2.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.7.2.10\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
