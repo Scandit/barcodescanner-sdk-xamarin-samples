@@ -182,8 +182,6 @@ namespace ExtendedSample.iOS
                         var symbologies = "";
                         var data = "";
 
-                        Console.WriteLine(session.NewlyLocalizedCodes.Count);
-
                         foreach (var code in session.NewlyRecognizedCodes)
                         {
                             var separator = symbologies.Length == 0 ? "" : ", ";
