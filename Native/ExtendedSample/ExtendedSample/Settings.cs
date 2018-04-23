@@ -50,7 +50,8 @@ namespace ExtendedSample
 		public bool MaxiCode { get; set; }
 		public bool Rm4scc { get; set; }
         public bool Kix { get; set; }
-		public bool DotCode { get; set; }
+        public bool DotCode { get; set; }
+        public bool MicroQR { get; set; }
 
 		// Scanning Area
 		public bool RestrictScanningArea { get; set; }

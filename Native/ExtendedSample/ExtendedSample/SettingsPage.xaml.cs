@@ -50,6 +50,7 @@ namespace ExtendedSample
             MaxiCodeCell.On = settings.MaxiCode;
             Rm4sccCell.On = settings.Rm4scc;
             KixCell.On = settings.Kix;
+            MicroQR.On = settings.MicroQR;
             RestrictScanningAreaCell.On = settings.RestrictScanningArea;
             HotSpotHeightSlider.Value = settings.HotSpotHeight;
             HotSpotWidthSlider.Value = settings.HotSpotWidth;
@@ -98,6 +99,7 @@ namespace ExtendedSample
             settings.MaxiCode = MaxiCodeCell.On;
             settings.Rm4scc = Rm4sccCell.On;
             settings.Kix = KixCell.On;
+            settings.MicroQR = MicroQR.On;
             settings.RestrictScanningArea = RestrictScanningAreaCell.On;
             settings.HotSpotHeight = HotSpotHeightSlider.Value;
             settings.HotSpotWidth = HotSpotWidthSlider.Value;

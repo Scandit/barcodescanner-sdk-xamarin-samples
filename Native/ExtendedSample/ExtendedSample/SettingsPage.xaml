@@ -46,6 +46,7 @@
                 <SwitchCell x:Name="MaxiCodeCell" Text="MaxiCode" />
                 <SwitchCell x:Name="Rm4sccCell" Text="RM4SCC" />
                 <SwitchCell x:Name="KixCell" Text="KIX" />
+                <SwitchCell x:Name="MicroQR" Text="MicroQR" />
             </TableSection>
             <TableSection Title="Scanning Area">
                 <SwitchCell x:Name="RestrictScanningAreaCell" Text="Restrict Scanning Area" />

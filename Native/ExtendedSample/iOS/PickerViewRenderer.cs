@@ -100,6 +100,7 @@ namespace ExtendedSample.iOS
             scanSettings.SetSymbologyEnabled(Symbology.RM4SCC, settings.Rm4scc);
             scanSettings.SetSymbologyEnabled(Symbology.KIX, settings.Kix);
             scanSettings.SetSymbologyEnabled(Symbology.DotCode, settings.Kix);
+            scanSettings.SetSymbologyEnabled(Symbology.MicroQr, settings.MicroQR);
 
             if (settings.QrInverted)
             {
@@ -130,11 +131,6 @@ namespace ExtendedSample.iOS
             else
             {
                 scanSettings.MaxNumberOfCodesPerFrame = 1;
-            }
-
-            if (settings.ContinuousAfterScan)
-            {
-                scanSettings.CodeDuplicateFilter = -1;
             }
 
             scanSettings.HighDensityModeEnabled = (settings.Resolution == Resolution.HD);
@@ -174,8 +170,6 @@ namespace ExtendedSample.iOS
             {
                 if (session.NewlyRecognizedCodes.Count > 0)
                 {
-                    Barcode code = session.NewlyRecognizedCodes.GetItem<Barcode>(0);
-
                     if (!ContinuousAfterScan)
                     {
                         // Stop the scanner directly on the session.
@@ -185,7 +179,18 @@ namespace ExtendedSample.iOS
                     // If you want to edit something in the view hierarchy make sure to run it on the UI thread.
                     UIApplication.SharedApplication.InvokeOnMainThread(() =>
                     {
-                        PickerView.DidScan(code.SymbologyString, code.Data);
+                        var symbologies = "";
+                        var data = "";
+
+                        Console.WriteLine(session.NewlyLocalizedCodes.Count);
+
+                        foreach (var code in session.NewlyRecognizedCodes)
+                        {
+                            var separator = symbologies.Length == 0 ? "" : ", ";
+                            symbologies += separator + code.SymbologyString;
+                            data += separator + code.Data;
+                        }
+                        PickerView.DidScan(symbologies, data);
                     });
                 }
             }
