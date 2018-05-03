@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-    "Scandit.BarcodePicker.Unified": "5.8.0.1",
+    "Scandit.BarcodePicker.Unified": "5.8.0.2-beta1",
     "Xamarin.Forms": "2.3.2.127"
   },
   "frameworks": {
