@@ -2,6 +2,20 @@
     "name": "SDK Xamarin Samples",
     "owner": ["moritz@scandit.com"],
     "distribution": "SOURCE",
+    "packages": [
+        { "type": "nuget", "path": "Native/AndroidMatrixScanSample/AndroidMatrixScanSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/AndroidSample/AndroidSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/iOSMatrixScanSample/iOSMatrixScanSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/iOSSample/iOSSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/Droid/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/iOS/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/Shared/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/Droid/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/iOS/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/Shared/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/Windows/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/WinPhone/packages.config", "distribution": "NONE" }
+    ],
     "overrides": [
         { "package": { "name": "Scandit.Recognition" }, "license": { "id": "Scandit" }, "reason": "Scandit" },
         { "package": { "name": "Scandit.BarcodePicker" }, "license": { "id": "Scandit" }, "reason": "Scandit" },
