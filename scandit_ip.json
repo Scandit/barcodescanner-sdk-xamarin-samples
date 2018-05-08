@@ -10,11 +10,11 @@
         { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/Droid/packages.config", "distribution": "NONE" },
         { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/iOS/packages.config", "distribution": "NONE" },
         { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/Shared/packages.config", "distribution": "NONE" },
-        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/Droid/packages.config", "distribution": "NONE" },
-        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/iOS/packages.config", "distribution": "NONE" },
-        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/Shared/packages.config", "distribution": "NONE" },
-        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/Windows/packages.config", "distribution": "NONE" },
-        { "type": "nuget", "path": "Native/SimpleSample/SimpleSample/WinPhone/packages.config", "distribution": "NONE" }
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/Droid/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/iOS/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/Shared/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/Windows/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/WinPhone/packages.config", "distribution": "NONE" }
     ],
     "overrides": [
         { "package": { "name": "Scandit.Recognition" }, "license": { "id": "Scandit" }, "reason": "Scandit" },
