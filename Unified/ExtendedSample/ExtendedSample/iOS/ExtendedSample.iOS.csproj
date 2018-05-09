@@ -9,7 +9,7 @@
     <RootNamespace>ExtendedSample.iOS</RootNamespace>
     <AssemblyName>ExtendedSample.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>5.8.0.1</ReleaseVersion>
+    <ReleaseVersion>5.9.0.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -92,13 +92,13 @@
       <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="ScanditSDK">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.8.0.1\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.9.0.1\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
     </Reference>
     <Reference Include="Scandit.BarcodePicker.Unified.Abstractions">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.8.0.1\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.9.0.1\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Scandit.BarcodePicker.Unified">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.8.0.1\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.dll</HintPath>
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.9.0.1\lib\Xamarin.iOS\Scandit.BarcodePicker.Unified.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
