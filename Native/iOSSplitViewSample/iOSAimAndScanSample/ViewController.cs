@@ -2,7 +2,6 @@
 
 using UIKit;
 using Foundation;
-using CoreMedia;
 
 using ScanditBarcodeScanner.iOS;
 
