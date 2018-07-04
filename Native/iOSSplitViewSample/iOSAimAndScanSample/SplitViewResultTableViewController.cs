@@ -9,8 +9,6 @@ namespace iOSSplitViewSample
     public partial class SplitViewResultTableViewController : UIViewController
     {
 
-        public List<SplitViewResult> splitViewResults = new List<SplitViewResult>();
-
         public SplitViewResultTableViewController() : base("SplitViewResultTableViewController", null)
         {
         }
@@ -22,14 +20,13 @@ namespace iOSSplitViewSample
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            splitViewResultsTableView.Source = new SplitViewResultTableSource(splitViewResults);
+            splitViewResultsTableView.Source = new SplitViewResultTableSource(new List<SplitViewResult>());
             splitViewResultsTableView.ReloadData();
         }
 
         public void AddResult(SplitViewResult result)
         {
-            splitViewResults.Insert(0, result);
-            splitViewResultsTableView.Source = new SplitViewResultTableSource(splitViewResults);
+            (splitViewResultsTableView.Source as SplitViewResultTableSource).AddItem(result);
             splitViewResultsTableView.BeginUpdates();
             splitViewResultsTableView.InsertRows(new[] { NSIndexPath.FromItemSection(0, 0) }, UITableViewRowAnimation.Top);
             splitViewResultsTableView.EndUpdates();
@@ -37,8 +34,7 @@ namespace iOSSplitViewSample
 
         public void ClearResults()
         {
-            splitViewResults = new List<SplitViewResult>();
-            splitViewResultsTableView.Source = new SplitViewResultTableSource(splitViewResults);
+            (splitViewResultsTableView.Source as SplitViewResultTableSource).ClearItems();
             splitViewResultsTableView.ReloadData();
         }
     }

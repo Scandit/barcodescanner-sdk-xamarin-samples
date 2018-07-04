@@ -17,6 +17,16 @@ namespace iOSSplitViewSample
             tableItems = items;
         }
 
+        public void AddItem(SplitViewResult splitViewResult)
+        {
+            tableItems.Insert(0, splitViewResult);
+        }
+
+        public void ClearItems() 
+        {
+            tableItems.Clear();
+        }
+
         public override nint RowsInSection(UITableView tableview, nint section)
         {
             return tableItems.Count;
