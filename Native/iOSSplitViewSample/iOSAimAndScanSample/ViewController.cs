@@ -47,7 +47,7 @@ namespace iOSSplitViewSample
         // Scan View Height in percents relative to ViewController's height.
         private double scanViewHeight = 50.0;
         // Determines if the beep sound will be played when the code will be found.
-        private bool beepEnablged = true;
+        private bool beepEnabled = true;
         // Duplicate code filter setting in seconds.
         private int duplicateFilterSeconds = 1;
 
@@ -125,7 +125,7 @@ namespace iOSSplitViewSample
             settings.CodeDuplicateFilter = duplicateFilterSeconds >= 0 ? duplicateFilterSeconds * 1000 : duplicateFilterSeconds;
 
             if (barcodePickerViewController != null) {
-                barcodePickerViewController.OverlayView.SetBeepEnabled(beepEnablged);
+                barcodePickerViewController.OverlayView.SetBeepEnabled(beepEnabled);
                 barcodePickerViewController.OverlayView.GuiStyle = GuiStyle.Laser;
             }
 
