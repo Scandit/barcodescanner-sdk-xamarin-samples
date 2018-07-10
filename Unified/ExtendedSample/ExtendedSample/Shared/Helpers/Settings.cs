@@ -179,7 +179,7 @@ namespace ExtendedSample.Helpers
 				case ViewFinderLandscapeWidthString:
 					return picker.ScanOverlay.ViewFinderSizeLandscape.Width;
 				case ViewFinderLandscapeHeightString:
-					return picker.ScanOverlay.ViewFinderSizePortrait.Height;
+                    return picker.ScanOverlay.ViewFinderSizeLandscape.Height;
 					
 				default:
 					throw (new Exception("No such Double setting: " + setting));
