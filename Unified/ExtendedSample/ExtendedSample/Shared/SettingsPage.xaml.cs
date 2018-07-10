@@ -32,7 +32,6 @@ namespace ExtendedSample
 			InitializeComponent();
 
 			_picker = ScanditService.BarcodePicker;
-
 			_scanSettings = _picker.GetDefaultScanSettings();
 
 			initializeGuiElements();
