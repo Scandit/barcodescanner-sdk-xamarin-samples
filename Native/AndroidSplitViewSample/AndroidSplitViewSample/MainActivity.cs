@@ -168,8 +168,8 @@ namespace AndroidSplitViewSample
                 this.activity = activity;
             }
 
-			public override void HandleMessage(Message msg)
-			{
+            public override void HandleMessage(Message msg)
+            {
                 switch (msg.What)
                 {
                     case TIMER:
@@ -180,8 +180,8 @@ namespace AndroidSplitViewSample
                         activity.adapter.Add(msg.Obj as Barcode);
                         break;
                 }
-			}
-		}
+            }
+        }
 
         class MyAdapter : RecyclerView.Adapter
         {
