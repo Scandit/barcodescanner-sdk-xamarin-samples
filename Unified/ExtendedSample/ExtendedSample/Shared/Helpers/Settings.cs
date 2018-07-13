@@ -14,6 +14,8 @@
 
 // Helpers/Settings.cs
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 using Scandit.BarcodePicker.Unified;
@@ -21,12 +23,12 @@ using Scandit.BarcodePicker.Unified.Abstractions;
 
 namespace ExtendedSample.Helpers
 {
-    /// <summary>
-    /// This is the Settings static class that can be used in your Core solution or in any
-    /// of your client applications. All settings are laid out the same exact way with getters
-    /// and setters.
-    /// </summary>
-    public static class Settings
+	/// <summary>
+	/// This is the Settings static class that can be used in your Core solution or in any
+	/// of your client applications. All settings are laid out the same exact way with getters
+	/// and setters.
+	/// </summary>
+	public static class Settings
 	{
 		private static ISettings AppSettings
 		{
@@ -177,7 +179,7 @@ namespace ExtendedSample.Helpers
 				case ViewFinderLandscapeWidthString:
 					return picker.ScanOverlay.ViewFinderSizeLandscape.Width;
 				case ViewFinderLandscapeHeightString:
-                    return picker.ScanOverlay.ViewFinderSizeLandscape.Height;
+					return picker.ScanOverlay.ViewFinderSizePortrait.Height;
 					
 				default:
 					throw (new Exception("No such Double setting: " + setting));
