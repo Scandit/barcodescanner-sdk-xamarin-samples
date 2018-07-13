@@ -46,3 +46,5 @@ project.lock.json
 #Visual Studio for Mac configs
 Native/*/.vs/
 Native/*/*/.vs/
+Unified/*/.vs/
+Unified/*/*/.vs/
