@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidSplitViewSample</string>
+    <string name="clear">Clear</string>
+    <string name="tap">Tap to Continue</string>
+</resources>
