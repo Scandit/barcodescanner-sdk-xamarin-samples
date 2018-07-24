@@ -15,7 +15,7 @@ namespace iOSSplitViewSample
             scanning, paused, stopped
         }
 
-        public static string appKey = "YOUR-SCANDIT-LICENSE-KEY";
+        public static string appKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
 
         BarcodePicker barcodePickerViewController;
         PickerScanDelegate scanDelegate;
