@@ -107,16 +107,14 @@ namespace iOSSplitViewSample
         private ScanSettings BuildSettings()
         {
             ScanSettings settings = ScanSettings.DefaultSettings();
-            settings.ActiveScanningAreaPortrait = new CoreGraphics.CGRect(0.0, 0.5 - (0.35 / 2), 1.0, 0.35);
-            settings.ActiveScanningAreaLandscape = new CoreGraphics.CGRect(0.0, 0.5 - (0.35 / 2), 1.0, 0.35);
+            settings.SetActiveScanningArea(new CoreGraphics.CGRect(0.0, 0.48, 1.0, 0.04));
+            settings.RestrictedAreaScanningEnabled = true;
 
             NSSet symbologiesToEnable = new NSSet(
                 Symbology.EAN13,
                 Symbology.EAN8,
                 Symbology.UPC12,
                 Symbology.UPCE,
-                Symbology.Datamatrix,
-                Symbology.QR,
                 Symbology.Code39,
                 Symbology.Code128,
                 Symbology.ITF
