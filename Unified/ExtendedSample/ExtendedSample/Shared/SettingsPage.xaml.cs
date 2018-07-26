@@ -81,6 +81,9 @@ namespace ExtendedSample
 			initializeSlider(ViewFinderPortraitHeight, Settings.ViewFinderPortraitHeightString);
 			initializeSlider(ViewFinderLandscapeWidth, Settings.ViewFinderLandscapeWidthString);
 			initializeSlider(ViewFinderLandscapeHeight, Settings.ViewFinderLandscapeHeightString);
+
+            // Initialize Resolution
+            initializeResolutionPicker();
 		}
 
 		// Adds a new switch (two incase the symbology has an inverse) to SymbologySection
@@ -190,8 +193,8 @@ namespace ExtendedSample
 		// and the currently active settings
 		private void initializeGuiStylePicker()
 		{
-			GuiStylePicker.SelectedIndex =
-				Convert.guiStyleToIndex[Settings.getStringSetting(Settings.GuiStyleString)];
+            GuiStylePicker.SelectedIndex = 
+                Convert.guiStyleToIndex[Settings.getStringSetting(Settings.GuiStyleString)];
 
 			GuiStylePicker.SelectedIndexChanged += (object sender, EventArgs e) =>
 				{
@@ -203,10 +206,27 @@ namespace ExtendedSample
 				};
 		}
 
+        // Bind an the Resolution picker to the permanent storage
+        // and the currently active settings
+        private void initializeResolutionPicker()
+        {
+            ResolutionPicker.SelectedIndex = 
+                Convert.resolutionToIndex[Settings.getStringSetting(Settings.ResolutionString)];
+
+            ResolutionPicker.SelectedIndexChanged += (object sender, EventArgs e) =>
+            {
+                Settings.setStringSetting(
+                    Settings.ResolutionString,
+                    Convert.indexToResolution[ResolutionPicker.SelectedIndex]);
+                updateScanSettings();
+            };
+        }
+
 		// reads the values needed for ScanSettings from the Settings class
 		// and applies them to the Picker
 		void updateScanSettings()
 		{
+            bool addOnEnabled = false;
 			foreach (string setting in Convert.settingToSymbologies.Keys)
 			{
 				bool enabled = Settings.getBoolSetting(setting);
@@ -218,8 +238,17 @@ namespace ExtendedSample
 						_scanSettings.Symbologies[sym].ColorInvertedEnabled = Settings.getBoolSetting(
 							Settings.getInvertedSymboloby(setting));
 					}
+
+                    if (enabled && (sym == Symbology.TwoDigitAddOn 
+                                    || sym == Symbology.FiveDigitAddOn)) {
+                        addOnEnabled = true;
+                    }
 				}
 			}
+
+            if (addOnEnabled) {
+                _scanSettings.MaxNumberOfCodesPerFrame = 2;
+            }
 
 			_scanSettings.Symbologies[Symbology.MsiPlessey].Checksums = 
 				Convert.msiPlesseyChecksumToScanSetting[Settings.getStringSetting(Settings.MsiPlesseyChecksumString)];
@@ -239,33 +268,35 @@ namespace ExtendedSample
 				_scanSettings.ActiveScanningAreaPortrait = restricted;
 				_scanSettings.ActiveScanningAreaLandscape = restricted;
 			}
+            _scanSettings.ResolutionPreference = 
+                Convert.resolutionToScanSetting[Settings.getStringSetting(Settings.ResolutionString)];
+            
 			_picker.ApplySettingsAsync(_scanSettings);
 		}
 
-		// reads the values needed for ScanOverlay from the Settings class
-		// and applies them to the Picker
-		void updateScanOverlay()
-		{
-			_picker.ScanOverlay.BeepEnabled = Settings.getBoolSetting(Settings.BeepString);
-			_picker.ScanOverlay.VibrateEnabled = Settings.getBoolSetting(Settings.VibrateString);
-			_picker.ScanOverlay.TorchButtonVisible = Settings.getBoolSetting(Settings.TorchButtonString);
+        // reads the values needed for ScanOverlay from the Settings class
+        // and applies them to the Picker
+        void updateScanOverlay()
+        {
+            _picker.ScanOverlay.BeepEnabled = Settings.getBoolSetting(Settings.BeepString);
+            _picker.ScanOverlay.VibrateEnabled = Settings.getBoolSetting(Settings.VibrateString);
+            _picker.ScanOverlay.TorchButtonVisible = Settings.getBoolSetting(Settings.TorchButtonString);
 
-			_picker.ScanOverlay.ViewFinderSizePortrait = new Scandit.BarcodePicker.Unified.Size(
-				(float)Settings.getDoubleSetting(Settings.ViewFinderPortraitWidthString),
-				(float)Settings.getDoubleSetting(Settings.ViewFinderPortraitHeightString)
-			);
-			_picker.ScanOverlay.ViewFinderSizeLandscape = new Scandit.BarcodePicker.Unified.Size(
-	   			(float)Settings.getDoubleSetting(Settings.ViewFinderLandscapeWidthString),
-	   			(float)Settings.getDoubleSetting(Settings.ViewFinderLandscapeHeightString)
-			);
+            _picker.ScanOverlay.ViewFinderSizePortrait = new Scandit.BarcodePicker.Unified.Size(
+                (float)Settings.getDoubleSetting(Settings.ViewFinderPortraitWidthString),
+                (float)Settings.getDoubleSetting(Settings.ViewFinderPortraitHeightString)
+            );
+            _picker.ScanOverlay.ViewFinderSizeLandscape = new Scandit.BarcodePicker.Unified.Size(
+                   (float)Settings.getDoubleSetting(Settings.ViewFinderLandscapeWidthString),
+                   (float)Settings.getDoubleSetting(Settings.ViewFinderLandscapeHeightString)
+            );
 
-			_picker.ScanOverlay.CameraSwitchVisibility =
-				Convert.cameraToScanSetting[Settings.getStringSetting(Settings.CameraButtonString)];
+            _picker.ScanOverlay.CameraSwitchVisibility =
+                Convert.cameraToScanSetting[Settings.getStringSetting(Settings.CameraButtonString)];
 
-			_picker.ScanOverlay.GuiStyle =
-				Convert.guiStyleToScanSetting[Settings.getStringSetting(Settings.GuiStyleString)];
-		}
-
+            _picker.ScanOverlay.GuiStyle =
+                Convert.guiStyleToScanSetting[Settings.getStringSetting(Settings.GuiStyleString)];
+        }
 	}
 }
 

@@ -65,11 +65,12 @@
 				<ViewCell>
 					<StackLayout Padding="5,0,0,0" Orientation="Horizontal">
 						<Label Text="GUI Style" />
-						<Picker x:Name="GuiStylePicker" Title="Style" WidthRequest="100" HorizontalOptions="EndAndExpand">
+						<Picker x:Name="GuiStylePicker" Title="Style" WidthRequest="150" HorizontalOptions="EndAndExpand">
 							<Picker.Items>
 								<x:String>Frame</x:String>
 								<x:String>Laser</x:String>
-								<x:String>None</x:String>
+                                <x:String>None</x:String>
+                                <x:String>Locations Only</x:String>
 							</Picker.Items>
 						</Picker>
 					</StackLayout>
@@ -132,6 +133,19 @@
 					</StackLayout>
 				</ViewCell>
 			</TableSection>
+            <TableSection Title="Camera">
+                <ViewCell>
+                    <StackLayout Padding="5,0,0,0" Orientation="Horizontal">
+                        <Label Text="Resolution" />
+                        <Picker x:Name="ResolutionPicker" Title="Resolution" WidthRequest="150" HorizontalOptions="EndAndExpand">
+                            <Picker.Items>
+                                <x:String>HD (720p)</x:String>
+                                <x:String>Full HD (1080p)</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
 		</TableRoot>
 	</TableView>
 </ContentPage>

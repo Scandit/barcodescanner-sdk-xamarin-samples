@@ -1,0 +1,43 @@
+{
+    "name": "SDK Xamarin Samples",
+    "owner": ["moritz@scandit.com"],
+    "distribution": "SOURCE",
+    "packages": [
+        { "type": "nuget", "path": "Native/AndroidMatrixScanSample/AndroidMatrixScanSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/AndroidSample/AndroidSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/iOSMatrixScanSample/iOSMatrixScanSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Native/iOSSample/iOSSample/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/Droid/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/iOS/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/ExtendedSample/ExtendedSample/Shared/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/Droid/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/iOS/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/Shared/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/Windows/packages.config", "distribution": "NONE" },
+        { "type": "nuget", "path": "Unified/SimpleSample/SimpleSample/WinPhone/packages.config", "distribution": "NONE" }
+    ],
+    "overrides": [
+        { "package": { "name": "Scandit.Recognition" }, "license": { "id": "Scandit" }, "reason": "Scandit" },
+        { "package": { "name": "Scandit.BarcodePicker" }, "license": { "id": "Scandit" }, "reason": "Scandit" },
+        { "package": { "name": "Scandit.BarcodePicker.Unified" }, "license": { "id": "Scandit" }, "reason": "Scandit" },
+        { "package": { "name": "Scandit.BarcodePicker.Xamarin" }, "license": { "id": "Scandit" }, "reason": "Scandit" },
+        { "package": { "name": "Microsoft.NETCore.UniversalWindowsPlatform", "version": "5.2.2" }, "license": { "name": "MS-.NET-Library License", "url": "https://www.microsoft.com/net/dotnet_library_license.htm" }, "reason": "Link on Nuget, newer versions use MIT" },
+        { "package": { "name": "Xamarin.Android.Support.Animated.Vector.Drawable", "version": "23.3.0" }, "license": { "name": "Xamarin Software License Agreement", "url": "https://components.xamarin.com/license/xamandroidsupportv4-18" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Android.Support.Design", "version": "23.3.0" }, "license": { "id": "MIT", "url": "https://components.xamarin.com/license/xamandroidsupportdesign" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Android.Support.v4", "version": "23.3.0" }, "license": { "name": "Xamarin Software License Agreement", "url": "http://components.xamarin.com/license/xamandroidsupportv4-18" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Android.Support.v7.AppCompat", "version": "23.3.0" }, "license": { "id": "MIT", "url": "http://components.xamarin.com/license/xamandroidsupportv7appcompat" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Android.Support.v7.CardView", "version": "23.3.0" }, "license": { "id": "MIT", "url": "https://components.xamarin.com/license/xamandroidsupportv7cardview" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Android.Support.v7.MediaRouter", "version": "23.3.0" }, "license": { "name": "Xamarin Software License Agreement", "url": "https://components.xamarin.com/license/xamandroidsupportv4-18" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Android.Support.v7.RecyclerView", "version": "23.3.0" }, "license": { "id": "MIT", "url": "https://components.xamarin.com/license/xamandroidsupportv7recyclerview" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Android.Support.Vector.Drawable", "version": "23.3.0" }, "license": { "name": "Xamarin Software License Agreement", "url": "https://components.xamarin.com/license/xamandroidsupportv4-18" }, "reason": "Xamarin" },
+        { "package": { "name": "Xamarin.Forms", "version": "2.3.2.127" }, "license": { "name": "Xamarin Software License Agreement", "url": "http://download.xamarin.com/content/licenses/Xamarin.Forms.rtf" }, "reason": "Xamarin" }
+    ],
+    "whitelist": [
+        { "package": "Microsoft.NETCore.UniversalWindowsPlatform", "license": "MS-.NET-Library License" },
+        { "package": "Xamarin.Android.Support.Animated.Vector.Drawable", "license": "Xamarin Software License Agreement" },
+        { "package": "Xamarin.Android.Support.v4", "license": "Xamarin Software License Agreement" },
+        { "package": "Xamarin.Android.Support.v7.MediaRouter", "license": "Xamarin Software License Agreement" },
+        { "package": "Xamarin.Android.Support.Vector.Drawable", "license": "Xamarin Software License Agreement" },
+        { "package": "Xamarin.Forms", "license": "Xamarin Software License Agreement" }
+    ]
+}

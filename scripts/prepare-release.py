@@ -14,6 +14,8 @@ import re
 # 1.2.3.4.5.6.7
 # 23523423
 VERSION_REGEX = r"\d+(?:\.\d+)*"
+
+NUGET_BETA_SUFFIX_REGEX = r"?:(-beta[1-8])?"
 VALID_VERSION_REGEX = r"^\d+\.\d+\.\d+(?:|BETA[1-8]|SNAPSHOT)$"
 
 def replace_guarded_pattern(file_name, pattern_string, replacement):
@@ -22,7 +24,10 @@ def replace_guarded_pattern(file_name, pattern_string, replacement):
     output = []
     found = False
     def replacement_func(match):
-        return '{}{}{}'.format(match.group(1), replacement, match.group(2))
+        if len(match.groups()) == 4:
+            return '{}{}{}'.format(match.group(1), replacement, match.group(4))
+        else:
+            return '{}{}{}'.format(match.group(1), replacement, match.group(2))
 
     for line in contents:
         line, subs = pattern.subn(replacement_func, line)
@@ -65,22 +70,31 @@ def version_to_fix(version):
         fix = str(int(beta.group(1))+1)
     return fix
 
+def get_nuget_beta_suffix(version):
+    beta = re.search(r"BETA([1-8])$", version)
+    if (beta):
+        return beta.group().replace("BETA", "-beta")
+    else:
+        return ""
+
 version = sys.argv[1]
 version_without_suffix = re.sub(r'(BETA\d|SNAPSHOT)$', '', version)
 major, minor, patch = version_without_suffix.split('.')
 fix = version_to_fix(version)
 version_nuget = "{}.{}.{}.{}".format(major,minor,patch,fix)
+nuget_beta_suffix = get_nuget_beta_suffix(version)
 suffix = version[len(version_without_suffix):]
 
 print("""computed versions
     version={}
     version_without_suffix={}
     version_nuget={}
+    nuget_beta_suffix={}
     major={}
     minor={}
     patch={}
     fix={}
-    suffix={}""".format(version,version_without_suffix,version_nuget,major,minor,patch,fix,suffix))
+    suffix={}""".format(version,version_without_suffix,version_nuget,nuget_beta_suffix,major,minor,patch,fix,suffix))
 
 ### END COMMON
 
@@ -89,22 +103,22 @@ def update_assembly_info(version):
         replace_guarded_pattern(file, r"""(AssemblyVersion\("){}("\))""".format(VERSION_REGEX), version)
         replace_guarded_pattern(file, r"""(AssemblyFileVersion\("){}("\))""".format(VERSION_REGEX), version)
         
-def update_package_config_versions(version):
+def update_package_config_versions(version, nuget_beta_suffix):
     for file in find(".", "\.config$"):
-        replace_guarded_pattern(file, r"""(<package id="Scandit\.[^"]*" version="){}(")""".format(VERSION_REGEX), version)
+        replace_guarded_pattern(file, r"""(<package id="Scandit\.[^"]*" version=")({})({})(")""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
         
-def update_project_json_versions(version):
+def update_project_json_versions(version, nuget_beta_suffix):
     for file in find(".", "\.json$"):
-        replace_guarded_pattern(file, r"""("Scandit\.(?:BarcodePicker(?:\.Unified)?|Recognition)\"\s*:\s*"){}(")""".format(VERSION_REGEX), version)
-        replace_guarded_pattern(file, r"""("Scandit\.(?:BarcodePicker(?:\.Unified)?|Recognition)/){}(")""".format(VERSION_REGEX), version)
+        replace_guarded_pattern(file, r"""("Scandit\.(?:BarcodePicker(?:\.Unified)?|Recognition)\"\s*:\s*")({})({})(")""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
+        replace_guarded_pattern(file, r"""("Scandit\.(?:BarcodePicker(?:\.Unified)?|Recognition)/)({})({})(")""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
 
-def update_nuget_targets(version):
+def update_nuget_targets(version, nuget_beta_suffix):
     for file in find(".", "\.nuget\.targets"):
-        replace_guarded_pattern(file, r"(Scandit\.(?:BarcodePicker|Recognition)\\){}(\\)".format(VERSION_REGEX), version)
+        replace_guarded_pattern(file, r"(Scandit\.(?:BarcodePicker|Recognition)\\)({})({})(\\)".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
 
-def update_windows_csproj_files(version):
+def update_windows_csproj_files(version, nuget_beta_suffix):
     for file in find(".", r"\.csproj$"):
-        replace_guarded_pattern(file, r"(Scandit\.(?:BarcodePicker|Recognition)\.){}()".format(VERSION_REGEX), version)
+        replace_guarded_pattern(file, r"(Scandit\.(?:BarcodePicker|Recognition)\.)({})({})()".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
         refs = "|".join([
             "ScanditSDK",
             "VideoInputRT",
@@ -115,7 +129,7 @@ def update_windows_csproj_files(version):
             "Scandit.BarcodePicker.Unified",
             "Scandit.BarcodePicker.Unified.Abstractions"])
         replace_guarded_pattern(file, r"""(<Reference Include="(?:{}),.*Version=){}()""".format(refs,VERSION_REGEX), version)
-        replace_guarded_pattern(file, r"""(<HintPath>.*Scandit\.BarcodePicker\.(?:Xamarin|Unified)\.){}()""".format(VERSION_REGEX), version)
+        replace_guarded_pattern(file, r"""(<HintPath>.*Scandit\.BarcodePicker\.(?:Xamarin|Unified)\.)({})({})()""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
         replace_guarded_pattern(file, r"""(<ReleaseVersion>){}(<\/ReleaseVersion>)""".format(VERSION_REGEX), version)
 
 def update_sln(version):
@@ -125,10 +139,10 @@ def update_sln(version):
 ### START REPLACING
 
 update_assembly_info(version_nuget)
-update_package_config_versions(version_nuget)
-update_project_json_versions(version_nuget)
-update_nuget_targets(version_nuget)
-update_windows_csproj_files(version_nuget)
+update_package_config_versions(version_nuget, nuget_beta_suffix)
+update_project_json_versions(version_nuget, nuget_beta_suffix)
+update_nuget_targets(version_nuget, nuget_beta_suffix)
+update_windows_csproj_files(version_nuget, nuget_beta_suffix)
 update_sln(version_nuget)
 
 print("""successfully changed version numbers

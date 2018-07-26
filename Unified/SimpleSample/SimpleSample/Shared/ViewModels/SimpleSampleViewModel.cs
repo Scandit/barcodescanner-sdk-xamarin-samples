@@ -26,6 +26,7 @@ namespace SimpleSample.ViewModels
             set
             {
                 _recognizedCode = value;
+                OnPropertyChanged(nameof(RecognizedCode));
             }
         }
 
