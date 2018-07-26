@@ -5,7 +5,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using ScanditBarcodeScanner.iOS;
 using UIKit;
-using CoreFoundation;
 
 [assembly: ExportRenderer(typeof(PickerView), typeof(PickerViewRenderer))]
 namespace ExtendedSample.iOS
