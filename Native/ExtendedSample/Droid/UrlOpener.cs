@@ -8,7 +8,9 @@ namespace ExtendedSample.Droid
     {
         public void OpenUrl(string urlString)
         {
-            // TODO: 
+            var uri = Android.Net.Uri.Parse(urlString);
+            var intent = new Android.Content.Intent(Android.Content.Intent.ActionView, uri);
+            Android.App.Application.Context.StartActivity(intent);
         }
     }
 }

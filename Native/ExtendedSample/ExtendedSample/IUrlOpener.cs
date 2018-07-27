@@ -1,5 +1,4 @@
-﻿using System;
-namespace ExtendedSample
+﻿namespace ExtendedSample
 {
     public interface IUrlOpener
     {
