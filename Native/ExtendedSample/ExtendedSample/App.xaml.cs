@@ -13,8 +13,8 @@ namespace ExtendedSample
 
         protected override void OnStart()
         {
-			base.OnStart();
-		}
+            base.OnStart();
+        }
 
         protected override void OnSleep()
         {
@@ -23,7 +23,7 @@ namespace ExtendedSample
 
         protected override void OnResume()
         {
-			base.OnResume();
-		}
+            base.OnResume();
+        }
     }
 }

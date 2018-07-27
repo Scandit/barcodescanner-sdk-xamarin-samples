@@ -24,7 +24,7 @@ namespace ExtendedSample.iOS
             }
         }
 
-        private string GetFilePath(string filename)
+        string GetFilePath(string filename)
         {
             var fileManger = new NSFileManager();
             var url = fileManger.GetUrls(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomain.User)[0];

@@ -1,23 +1,33 @@
 ﻿using ExtendedSample.Droid;
+using System.IO;
 
 [assembly: Xamarin.Forms.Dependency(typeof(Archiver))]
 namespace ExtendedSample.Droid
 {
     public class Archiver : IArchiver
     {
-        public Archiver()
+        public void ArchiveText(string filename, string text)
         {
+            using (var streamWriter = new StreamWriter(GetFilePath(filename), false))
+            {
+                streamWriter.Write(text);
+            }
         }
 
         public string UnarchiveText(string filename)
         {
-            // TODO
+            var text = "";
+            using (var streamReader = new StreamReader(GetFilePath(filename)))
+            {
+                text = streamReader.ReadToEnd();
+            }
+            return text;
         }
 
-        private string GetFilePath(string filename)
+        string GetFilePath(string filename)
         {
-            // TODO
-            return "";
+            var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            return Path.Combine(path, filename);
         }
     }
 }
