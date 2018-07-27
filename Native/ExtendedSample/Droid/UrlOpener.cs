@@ -1,5 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using Android.Content;
+using Android.Net;
 using ExtendedSample.Droid;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(UrlOpener))]
 namespace ExtendedSample.Droid
@@ -8,8 +10,8 @@ namespace ExtendedSample.Droid
     {
         public void OpenUrl(string urlString)
         {
-            var uri = Android.Net.Uri.Parse(urlString);
-            var intent = new Android.Content.Intent(Android.Content.Intent.ActionView, uri);
+            var uri = Uri.Parse(urlString);
+            var intent = new Intent(Intent.ActionView, uri);
             Android.App.Application.Context.StartActivity(intent);
         }
     }
