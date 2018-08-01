@@ -13,7 +13,7 @@ using Android.Graphics;
 
 namespace AndroidSplitViewSample
 {
-    [Activity(Label = "AndroidSplitViewSample", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "AndroidSplitViewSample", MainLauncher = true, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : Activity, IOnScanListener
     {
         private const string KEY = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
