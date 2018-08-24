@@ -39,8 +39,9 @@ namespace ExtendedSample.Helpers
         private static IBarcodePicker picker = ScanditService.BarcodePicker;
         private static ScanSettings scanSettings = picker.GetDefaultScanSettings();
 
-        public const string SymbologyPrefix = "Sym_";
-        public const string InvSymbologyPrefix = "Inv_Sym_";
+        // DPM Mode
+        public const string DpmModeString = "Sym_DPM_Mode";
+        public const string DataMatrixString = "Sym_DataMatrix";
 
         // Checksum
         public const string MsiPlesseyChecksumString = "MsiPlesseyChecksum";
@@ -97,21 +98,29 @@ namespace ExtendedSample.Helpers
         public const string GuiStyleString_None = "Overlay_GuiStyle_None";
         public const string GuiStyleString_LocationsOnly = "Overlay_GuiStyle_LocationsOnly";
 
+        public static bool isDpmMode(string symbology)
+        {
+            return symbology == DpmModeString;
+        }
+
+        public static bool isDataMatrix(string symbology)
+        {
+            return symbology == DataMatrixString;
+        }
+
         public static bool hasInvertedSymbology(string symbology)
         {
             return (symbology == "Sym_Qr" || symbology == "Sym_DataMatrix");
         }
 
-        public static string getInvertedSymboloby(string symbology)
+        public static string getInvertedSymbology(string symbology)
         {
             if (hasInvertedSymbology(symbology))
             {
                 return ("Inv_" + symbology);
             }
-            else
-            {
-                throw new Exception("has no inversion");
-            }
+
+            throw new Exception("has no inversion");
         }
 
         public static bool getBoolSetting(string setting)

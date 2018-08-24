@@ -18,11 +18,10 @@ using Scandit.BarcodePicker.Unified;
 using Scandit.BarcodePicker.Unified.Abstractions;
 
 using Xamarin.Forms;
-using System.Collections.ObjectModel;
 
 namespace ExtendedSample
 {
-	public partial class SettingsPage : ContentPage
+    public partial class SettingsPage : ContentPage
 	{
 		private IBarcodePicker _picker;
 		private ScanSettings _scanSettings;
@@ -50,7 +49,8 @@ namespace ExtendedSample
 			foreach (string setting in Convert.settingToSymbologies.Keys)
 			{
 				addSymbologySwitches(setting, isMsiPlesseyThrough ? 0 : 1);
-				if (Convert.settingToSymbologies[setting][0] == Symbology.MsiPlessey)
+				if (Convert.settingToSymbologies[setting] != null
+                    && Convert.settingToSymbologies[setting][0] == Symbology.MsiPlessey)
 				{
 					isMsiPlesseyThrough = true;
 				}
@@ -86,17 +86,24 @@ namespace ExtendedSample
             initializeResolutionPicker();
 		}
 
-		// Adds a new switch (two incase the symbology has an inverse) to SymbologySection
+		// Adds a new switch (two in case the symbology has an inverse) to SymbologySection
 		void addSymbologySwitches(String settingString, int offset)
 		{
-			// add switch for regular symbology
-			SwitchCell cell = new SwitchCell { Text = Convert.settingToDisplay[settingString] };
+            // DPM Mode switch will be created alongside with the DataMatrix one,
+            // as DPM Mode availability depends on DataMatrix being enabled
+            if (Settings.isDpmMode(settingString))
+            {
+                return;
+            }
+
+            // add switch for regular symbology
+            SwitchCell cell = new SwitchCell { Text = Convert.settingToDisplay[settingString] };
 			initializeSwitch(cell, settingString);
 			SymbologySection.Insert(SymbologySection.Count - offset, cell);
 
-			if (Helpers.Settings.hasInvertedSymbology(settingString))
+			if (Settings.hasInvertedSymbology(settingString))
 			{
-				string invString = Helpers.Settings.getInvertedSymboloby(settingString);
+				string invString = Settings.getInvertedSymbology(settingString);
 
 				// add switch for inverse symbology
 				SwitchCell invCell = new SwitchCell { Text = Convert.settingToDisplay[invString] };
@@ -110,7 +117,24 @@ namespace ExtendedSample
 					invCell.IsEnabled = e.Value;
 				};
 			}
-		}
+
+            if (Settings.isDataMatrix(settingString))
+            {
+                string dpmString = Settings.DpmModeString;
+
+                // add switch for DPM Mode
+                SwitchCell dpmCell = new SwitchCell { Text = Convert.settingToDisplay[dpmString] };
+                initializeSwitch(dpmCell, dpmString);
+                SymbologySection.Insert(SymbologySection.Count - offset, dpmCell);
+
+                // Gray out the DPM Mode switch if the DataMatrix symbology is disabled
+                dpmCell.IsEnabled = Settings.getBoolSetting(settingString);
+                cell.OnChanged += (object sender, ToggledEventArgs e) =>
+                {
+                    dpmCell.IsEnabled = e.Value;
+                };
+            }
+        }
 
 		// Bind an existing Slider to the permanent storage
 		// and the currently active settings
@@ -227,16 +251,34 @@ namespace ExtendedSample
 		void updateScanSettings()
 		{
             bool addOnEnabled = false;
-			foreach (string setting in Convert.settingToSymbologies.Keys)
+            bool isScanningAreaOverridden = false;
+
+            foreach (string setting in Convert.settingToSymbologies.Keys)
 			{
 				bool enabled = Settings.getBoolSetting(setting);
+
+                // DPM Mode 
+                if (Settings.isDpmMode(setting) && enabled)
+                {
+                    Rect restricted = new Rect(0.33f, 0.33f, 0.33f, 0.33f);
+                    _scanSettings.ActiveScanningAreaPortrait = restricted;
+                    _scanSettings.ActiveScanningAreaLandscape = restricted;
+
+                    isScanningAreaOverridden = true;
+
+                    // Enabling the direct_part_marking_mode extension comes at the cost of increased frame processing times.
+                    // It is recommended to restrict the scanning area to a smaller part of the image for best performance.
+                    _scanSettings.Symbologies[Symbology.DataMatrix].SetExtensionEnabled("direct_part_marking_mode", true);
+                    continue;
+                }
+
 				foreach (Symbology sym in Convert.settingToSymbologies[setting])
 				{
 					_scanSettings.EnableSymbology(sym, enabled);
 					if (Settings.hasInvertedSymbology(setting))
 					{
 						_scanSettings.Symbologies[sym].ColorInvertedEnabled = Settings.getBoolSetting(
-							Settings.getInvertedSymboloby(setting));
+							Settings.getInvertedSymbology(setting));
 					}
 
                     if (enabled && (sym == Symbology.TwoDigitAddOn 
@@ -254,7 +296,7 @@ namespace ExtendedSample
 				Convert.msiPlesseyChecksumToScanSetting[Settings.getStringSetting(Settings.MsiPlesseyChecksumString)];
 
 			_scanSettings.RestrictedAreaScanningEnabled = Settings.getBoolSetting(Settings.RestrictedAreaString);
-			if (_scanSettings.RestrictedAreaScanningEnabled)
+			if (_scanSettings.RestrictedAreaScanningEnabled && !isScanningAreaOverridden)
 			{
 				Double HotSpotHeight = Settings.getDoubleSetting(Settings.HotSpotHeightString);
 				Double HotSpotWidth = Settings.getDoubleSetting(Settings.HotSpotWidthString);

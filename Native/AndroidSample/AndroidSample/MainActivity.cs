@@ -1,16 +1,31 @@
-using System;
 using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
+using ScanditBarcodePicker.Android.Matrixscan;
+using Java.Lang;
+using ScanditBarcodePicker.Android.Recognition;
+using Android.Graphics;
+using Android.Views;
 
 namespace XamarinScanditSDKSampleAndroid
 {
     [Activity (Label = "XamarinScanditSDKSampleAndroid", MainLauncher = true)]
-    public class MainActivity : Activity
+    public class MainActivity : Activity, ViewBasedMatrixScanOverlay.IViewBasedMatrixScanOverlayListener
     {
+        public Point GetOffsetForCode(TrackedBarcode p0, long p1)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public View GetViewForCode(TrackedBarcode p0, long p1)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnCodeTouched(TrackedBarcode p0, long p1)
+        {
+            throw new System.NotImplementedException();
+        }
 
         protected override void OnCreate (Bundle bundle)
         {
