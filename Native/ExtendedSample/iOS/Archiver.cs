@@ -8,7 +8,7 @@ namespace ExtendedSample.iOS
     {
         public void ArchiveText(string filename, string text)
         {
-            NSKeyedArchiver.ArchiveRootObjectToFile(NSString.FromObject(text), GetFilePath(filename));
+            NSKeyedArchiver.ArchiveRootObjectToFile(NSObject.FromObject(text), GetFilePath(filename));
         }
 
         public string UnarchiveText(string filename)

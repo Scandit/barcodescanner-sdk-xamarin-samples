@@ -17,10 +17,15 @@ namespace ExtendedSample.Droid
         public string UnarchiveText(string filename)
         {
             var text = "";
-            using (var streamReader = new StreamReader(GetFilePath(filename)))
+            var filepath = GetFilePath(filename);
+            if (System.IO.File.Exists(filename))
             {
-                text = streamReader.ReadToEnd();
+                using (var streamReader = new StreamReader(GetFilePath(filename)))
+                {
+                    text = streamReader.ReadToEnd();
+                }
             }
+
             return text;
         }
 

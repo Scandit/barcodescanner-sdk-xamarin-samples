@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 namespace ExtendedSample
 {
-	public interface IScannerDelegate
+    public interface IScannerDelegate
 	{
 		Task DidScan(string symbology, string code);
 	}
@@ -17,19 +16,19 @@ namespace ExtendedSample
 
 		public ScannerPage()
 		{
-            this.Settings = new Settings();
+            Settings = new Settings();
 			InitializeComponent();
 		}
 
 		public ScannerPage(Settings settings)
         {
-			this.Settings = settings;
+            Settings = settings;
 			InitializeComponent();
             PickerView.Delegate = new ScannerDelegate(this);
             PickerView.Settings = Settings;
         }
 
-		public void Handle_Clicked(object sender, System.EventArgs e)
+		public void Handle_Clicked(object sender, EventArgs e)
 		{
 			HideResult();
             PickerView.StartScanning();
