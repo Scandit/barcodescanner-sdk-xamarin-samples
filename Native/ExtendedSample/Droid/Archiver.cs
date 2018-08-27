@@ -18,9 +18,9 @@ namespace ExtendedSample.Droid
         {
             var text = "";
             var filepath = GetFilePath(filename);
-            if (System.IO.File.Exists(filename))
+            if (File.Exists(filepath))
             {
-                using (var streamReader = new StreamReader(GetFilePath(filename)))
+                using (var streamReader = new StreamReader(filepath))
                 {
                     text = streamReader.ReadToEnd();
                 }
