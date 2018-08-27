@@ -35,9 +35,11 @@ namespace ExtendedSample.iOS
                 barcodePicker = new BarcodePicker(CreateScanSettings());
                 SetNativeControl(barcodePicker.View);
                 barcodePicker.StartScanning();
-                scanDelegate = new PickerScanDelegate();
-                scanDelegate.PickerView = pickerView;
-                scanDelegate.ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan;
+                scanDelegate = new PickerScanDelegate
+                {
+                    PickerView = pickerView,
+                    ContinuousAfterScan = pickerView.Settings.ContinuousAfterScan
+                };
                 barcodePicker.ScanDelegate = scanDelegate;
 
                 ApplyOverlaySettings();
