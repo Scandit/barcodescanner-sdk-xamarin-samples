@@ -36,8 +36,7 @@ namespace ExtendedSample.Droid
                 e.NewElement.PauseScanningRequested += OnPauseScanningRequested;
 
                 barcodePicker = new BarcodePicker(context, CreateScanSettings());
-                SetNativeControl(barcodePicker.OverlayView);
-                barcodePicker.StartScanning();
+                SetNativeControl(barcodePicker.OverlayView.RootView);
                 onScanListener = new PickerOnScanListener
                 {
                     PickerView = pickerView,
@@ -53,12 +52,6 @@ namespace ExtendedSample.Droid
                 e.OldElement.StartScanningRequested -= OnStartScanningRequested;
                 e.OldElement.PauseScanningRequested -= OnPauseScanningRequested;
             }
-        }
-
-        public override SizeRequest GetDesiredSize(int widthConstraint, int heightConstraint)
-        {
-            return new SizeRequest(new Size(widthConstraint, heightConstraint),
-                                   new Size(widthConstraint, heightConstraint));
         }
 
         private void OnStartScanningRequested(object sender, EventArgs e)
@@ -141,6 +134,9 @@ namespace ExtendedSample.Droid
         private void ApplyOverlaySettings()
         {
             var settings = pickerView.Settings;
+
+            var activity = (Android.App.Activity)Context;
+            activity.RequestedOrientation = settings.RotationWithDevice ? Android.Content.PM.ScreenOrientation.Sensor : Android.Content.PM.ScreenOrientation.Portrait;
 
             var overlayView = barcodePicker.OverlayView;
             overlayView.SetGuiStyle(GetGuiStyleValue(settings.GuiStyle));

@@ -34,7 +34,6 @@ namespace ExtendedSample.iOS
 
                 barcodePicker = new BarcodePicker(CreateScanSettings());
                 SetNativeControl(barcodePicker.View);
-                barcodePicker.StartScanning();
                 scanDelegate = new PickerScanDelegate
                 {
                     PickerView = pickerView,
@@ -159,7 +158,7 @@ namespace ExtendedSample.iOS
                                                      (float)settings.TorchTopMargin,
                                                      40,
                                                      40);
-            OverlayView.SetCameraSwitchVisibility((ScanditBarcodeScanner.iOS.CameraSwitchVisibility)settings.CameraButton);
+            OverlayView.SetCameraSwitchVisibility((CameraSwitchVisibility)settings.CameraButton);
         }
 
         public class PickerScanDelegate : ScanDelegate

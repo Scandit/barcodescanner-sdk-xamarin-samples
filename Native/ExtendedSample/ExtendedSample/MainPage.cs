@@ -1,5 +1,4 @@
 ﻿using Xamarin.Forms;
-using System.Xml.Serialization;
 
 namespace ExtendedSample
 {
