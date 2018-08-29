@@ -196,6 +196,10 @@ namespace ExtendedSample.Droid
                 {
                     if (!ContinuousAfterScan)
                     {
+                        // Call GC.Collect() before stopping the scanner as the garbage collector for some reason does not
+                        // collect objects without references asap but waits for a long time until finally collecting them.
+                        GC.Collect();
+
                         // Stop the scanner directly on the session.
                         session.PauseScanning();
                     }

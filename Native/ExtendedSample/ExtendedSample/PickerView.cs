@@ -12,7 +12,7 @@ namespace ExtendedSample
 
         public static string GetAppKey()
         {
-            return "--- ENTER YOUR SCANDIT APP KEY HERE ---";
+            return "--ENTER YOUR SCANDIT LICENSE KEY HERE--";
         }
 
 		public void StartScanning()
