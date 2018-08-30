@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="ExtendedSample.ScannerPage"
+    xmlns:local="clr-namespace:ExtendedSample;assembly=ExtendedSample">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <local:PickerView x:Name="PickerView"/>
+            <StackLayout 
+                x:Name="ResultView"
+                IsVisible="false"
+                AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="#BF000000">
+                <StackLayout
+                    VerticalOptions="LayoutOptions.CenterAndExpand"
+                    Padding="20"
+                    BackgroundColor="White">
+                    <Label HorizontalOptions="LayoutOptions.Center"
+                        Text="Scanned Code" 
+                        TextColor="Black" 
+                        FontAttributes="Bold"></Label>
+                    <Label x:Name="SymbologyLabel" 
+                        HorizontalOptions="LayoutOptions.Center" 
+                        Text="Symbology" TextColor="Black" 
+                        FontSize="Small"></Label>
+                    <Label x:Name="CodeLabel" 
+                        HorizontalOptions="LayoutOptions.Center" 
+                        Text="Code" 
+                        TextColor="Black" 
+                        FontSize="Small"></Label>
+                </StackLayout>
+                <Button Clicked="Handle_Clicked"
+                    HorizontalOptions="LayoutOptions.Center"
+                    Margin="20"
+                    Text="Tap to close" 
+                    TextColor="White"></Button>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
