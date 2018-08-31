@@ -129,7 +129,7 @@ namespace ExtendedSample.iOS
                 }
             }
 
-                if (settings.RestrictScanningArea && !isScanningAreaOverridden)
+            if (settings.RestrictScanningArea && !isScanningAreaOverridden)
             {
                 var y = settings.HotSpotY;
                 var width = settings.HotSpotWidth;
