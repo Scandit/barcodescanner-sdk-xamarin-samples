@@ -42,8 +42,17 @@ namespace ExtendedSample
             CodebarCell.On = settings.Codabar;
             QrCell.On = settings.Qr;
             QrInvertedCell.On = settings.QrInverted;
+
             DataMatrixCell.On = settings.DataMatrix;
+            DataMatrixCell.OnChanged += (object sender, ToggledEventArgs e) => {
+                DataMatrixInvertedCell.IsEnabled = DataMatrixCell.On;
+                DpmModeCell.IsEnabled = DataMatrixCell.On;
+            };
+            DataMatrixInvertedCell.IsEnabled = settings.DataMatrix;
             DataMatrixInvertedCell.On = settings.DataMatrixInverted;
+            DpmModeCell.IsEnabled = settings.DataMatrix;
+            DpmModeCell.On = settings.DpmMode;
+
             Pdf417Cell.On = settings.Pdf417;
             MicroPdf417Cell.On = settings.MicroPdf417;
             AztecCell.On = settings.Aztec;
@@ -93,6 +102,7 @@ namespace ExtendedSample
             settings.QrInverted = QrInvertedCell.On;
             settings.DataMatrix = DataMatrixCell.On;
             settings.DataMatrixInverted = DataMatrixInvertedCell.On;
+            settings.DpmMode = DpmModeCell.On;
             settings.Pdf417 = Pdf417Cell.On;
             settings.MicroPdf417 = MicroPdf417Cell.On;
             settings.Aztec = AztecCell.On;

@@ -105,13 +105,29 @@ namespace ExtendedSample.Droid
                 qrSettings.ColorInvertedEnabled = true;
             }
 
-            if (settings.DataMatrixInverted)
+            var isScanningAreaOverridden = false;
+            if (settings.DataMatrix)
             {
                 var datamatrixSettings = scanSettings.GetSymbologySettings(Barcode.SymbologyDataMatrix);
-                datamatrixSettings.ColorInvertedEnabled = true;
+
+                datamatrixSettings.ColorInvertedEnabled = settings.DataMatrixInverted;
+
+                if (settings.DpmMode)
+                {
+                    scanSettings.RestrictedAreaScanningEnabled = true;
+                    var scanninArea = new Android.Graphics.RectF(0.33f, 0.33f, 0.66f, 0.66f);
+                    scanSettings.SetActiveScanningArea(ScanSettings.OrientationPortrait, scanninArea);
+                    scanSettings.SetActiveScanningArea(ScanSettings.OrientationLandscape, scanninArea);
+
+                    isScanningAreaOverridden = true;
+
+                    // Enabling the direct_part_marking_mode extension comes at the cost of increased frame processing times.
+                    // It is recommended to restrict the scanning area to a smaller part of the image for best performance.
+                    datamatrixSettings.SetExtensionEnabled("direct_part_marking_mode", true);
+                }
             }
 
-            if (settings.RestrictScanningArea)
+            if (settings.RestrictScanningArea && !isScanningAreaOverridden)
             {
                 float y = (float)settings.HotSpotY;
                 float width = (float)settings.HotSpotWidth;
