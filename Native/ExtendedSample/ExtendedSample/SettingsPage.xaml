@@ -40,6 +40,7 @@
                 <SwitchCell x:Name="QrInvertedCell" Text="Color-Inverted QR Code" />
                 <SwitchCell x:Name="DataMatrixCell" Text="Data Matrix" />
                 <SwitchCell x:Name="DataMatrixInvertedCell" Text="Color-Inverted Data Matrix" />
+                <SwitchCell x:Name="DpmModeCell" Text="DPM Mode" />
                 <SwitchCell x:Name="Pdf417Cell" Text="PDF417" />
                 <SwitchCell x:Name="MicroPdf417Cell" Text="MicroPDF417" />
                 <SwitchCell x:Name="AztecCell" Text="Aztec Code" />
