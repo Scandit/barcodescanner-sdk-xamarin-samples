@@ -99,6 +99,7 @@
     <Compile Include="Scan\Buubles\NoBubble.cs" />
     <Compile Include="Scan\Buubles\MinimisedBubble.cs" />
     <Compile Include="Scan\Buubles\MaximisedBubble.cs" />
+    <Compile Include="Scan\Buubles\IndicatorViewModelFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
