@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
-using ScanditBarcodePicker.Android;
 using Android.Support.V7.App;
+using ScanditBarcodePicker.Android;
 
 namespace AndroidViewBasedMatrixScanSample
 {

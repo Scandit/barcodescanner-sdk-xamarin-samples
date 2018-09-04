@@ -93,6 +93,8 @@
     <Compile Include="Scan\CameraPermissionFragment.cs" />
     <Compile Include="Scan\ScanFragment.cs" />
     <Compile Include="Scan\ShelfManagementFragment.cs" />
+    <Compile Include="Scan\Buubles\BubbleData.cs" />
+    <Compile Include="Scan\Buubles\BaseBubble.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
