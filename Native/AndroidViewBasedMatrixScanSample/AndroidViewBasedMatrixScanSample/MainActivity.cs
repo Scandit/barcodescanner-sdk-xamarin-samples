@@ -2,7 +2,6 @@
 using Android.OS;
 using ScanditBarcodePicker.Android;
 using Android.Support.V7.App;
-using Android.Support.V4.App;
 
 namespace AndroidViewBasedMatrixScanSample
 {
@@ -31,7 +30,7 @@ namespace AndroidViewBasedMatrixScanSample
 
             var fragmentManager = SupportFragmentManager;
             fragmentManager.BeginTransaction()
-                           //.Add(Resource.Id.fragment_container, new ShelfManagementFragment())
+                           .Add(Resource.Id.fragment_container, new ShelfManagementFragment())
                            .Commit();
         }
     }
