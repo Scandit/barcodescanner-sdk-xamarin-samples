@@ -6,9 +6,9 @@ namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
 {
     public abstract class BaseBubble
     {
-        Context context;
-        int greenThreshold;
-        int yellowThreshold;
+        readonly Context context;
+        readonly int greenThreshold;
+        readonly int yellowThreshold;
 
         public int highlightColor;
 

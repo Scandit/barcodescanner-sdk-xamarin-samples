@@ -30,7 +30,7 @@ namespace AndroidViewBasedMatrixScanSample
 
             var fragmentManager = SupportFragmentManager;
             fragmentManager.BeginTransaction()
-                           .Add(Resource.Id.fragment_container, new ShelfManagementFragment())
+                           .Add(Resource.Id.fragment_container, new Scan.ShelfManagementFragment())
                            .Commit();
         }
     }

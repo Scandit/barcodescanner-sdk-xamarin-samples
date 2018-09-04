@@ -95,6 +95,10 @@
     <Compile Include="Scan\ShelfManagementFragment.cs" />
     <Compile Include="Scan\Buubles\BubbleData.cs" />
     <Compile Include="Scan\Buubles\BaseBubble.cs" />
+    <Compile Include="Scan\Buubles\IndicatorState.cs" />
+    <Compile Include="Scan\Buubles\NoBubble.cs" />
+    <Compile Include="Scan\Buubles\MinimisedBubble.cs" />
+    <Compile Include="Scan\Buubles\MaximisedBubble.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -118,6 +122,8 @@
     <AndroidResource Include="Resources\values\Colors.xml" />
     <AndroidResource Include="Resources\values\Dimens.xml" />
     <AndroidResource Include="Resources\values\Styles.xml" />
+    <AndroidResource Include="Resources\layout\BubbleMinimised.axml" />
+    <AndroidResource Include="Resources\layout\BubbleMaximised.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />
