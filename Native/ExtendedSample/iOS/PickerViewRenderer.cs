@@ -11,7 +11,7 @@ namespace ExtendedSample.iOS
 {
     public class PickerViewRenderer : ViewRenderer<PickerView, UIView>
     {
-        private BarcodePicker barcodePicker;
+        private RotationSettingAwareBarcodePicker barcodePicker;
         private PickerScanDelegate scanDelegate;
         private PickerView pickerView;
 
@@ -32,7 +32,7 @@ namespace ExtendedSample.iOS
                 e.NewElement.StartScanningRequested += OnStartScanningRequested;
                 e.NewElement.PauseScanningRequested += OnPauseScanningRequested;
 
-                barcodePicker = new BarcodePicker(CreateScanSettings());
+                barcodePicker = new RotationSettingAwareBarcodePicker(CreateScanSettings());
                 SetNativeControl(barcodePicker.View);
                 scanDelegate = new PickerScanDelegate
                 {
@@ -158,8 +158,7 @@ namespace ExtendedSample.iOS
         private void ApplyOverlaySettings()
         {
             var settings = pickerView.Settings;
-
-            barcodePicker.allowedInterfaceOrientations = settings.RotationWithDevice ? UIInterfaceOrientationMask.All : UIInterfaceOrientationMask.Portrait;
+            barcodePicker.ShouldFollowDeviceOrientation = settings.RotationWithDevice;
             var OverlayView = barcodePicker.OverlayView;
             OverlayView.GuiStyle = (ScanditBarcodeScanner.iOS.GuiStyle)settings.GuiStyle;
             OverlayView.SetViewfinderPortraitDimension((float)settings.ViewFinderPortraitWidth,
