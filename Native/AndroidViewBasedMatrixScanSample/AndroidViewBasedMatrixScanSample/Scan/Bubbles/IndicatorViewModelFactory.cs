@@ -60,10 +60,19 @@ namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
                 {
                     codeValue = Int32.Parse(data.Substring(data.Length - 2));
                 }
-                catch (NumberFormatException e)
+                catch (NumberFormatException)
                 {
                     codeValue = 0;
                 }
+                catch (ArgumentNullException)
+                {
+                    codeValue = 0;
+                }
+                catch (OverflowException)
+                {
+                    codeValue = 0;
+                }
+
 
                 stockValue = 11 + (codeValue); // Good: 11+
             }
@@ -83,17 +92,24 @@ namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
         string MockBubbleDataObjectDeliveryDate(string data)
         {
             Date date = new Date();
-            int codeValue;
+            long codeValue;
             try
             {
-                codeValue = Int32.Parse(data);
+                codeValue = Long.ParseLong(data);
             }
-            catch (FormatException)
+            catch (NumberFormatException)
             {
                 codeValue = 0;
             }
-
-            return printDateFormat.Format(AddDays(date, codeValue % 15));
+            catch (ArgumentNullException)
+            {
+                codeValue = 0;
+            }
+            catch (OverflowException)
+            {
+                codeValue = 0;
+            }
+            return printDateFormat.Format(AddDays(date, (int)(codeValue % 15)));
         }
 
         Date AddDays(Date date, int days)

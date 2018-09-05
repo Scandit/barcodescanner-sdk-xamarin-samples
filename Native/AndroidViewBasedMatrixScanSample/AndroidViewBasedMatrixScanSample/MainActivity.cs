@@ -12,12 +12,12 @@ namespace AndroidViewBasedMatrixScanSample
      * The sample demonstrates how the view-based Matrix Scan can be used to track multiple barcodes
      * simultaneously and how to apply multiple overlays over the detected barcodes.
      */
-    [Activity(Label = "AndroidViewBasedMatrixScanSample", MainLauncher = true, Icon = "@mipmap/ic_launcher")]
+    [Activity(Label = "AndroidViewBasedMatrixScanSample", MainLauncher = true, Theme = "@style/AppTheme", Icon = "@mipmap/ic_launcher")]
     public class MainActivity : AppCompatActivity
     {
         // Enter your Scandit SDK License key here.
         // Your Scandit SDK License key is available via your Scandit SDK web account.
-        private const string scanditSdkAppKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
+        const string scanditSdkAppKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

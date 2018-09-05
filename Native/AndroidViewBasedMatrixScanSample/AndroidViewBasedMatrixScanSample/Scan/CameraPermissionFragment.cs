@@ -32,7 +32,7 @@ namespace AndroidViewBasedMatrixScanSample.Scan
         {
             // Handle permissions for Marshmallow and onwards...
             if (Build.VERSION.SdkInt >= BuildVersionCodes.M
-                && Context.CheckSelfPermission(Manifest.Permission.Camera) == Permission.Granted)
+                && Context.CheckSelfPermission(Manifest.Permission.Camera) != Permission.Granted)
             {
                 if (!deniedCameraAccess)
                 {

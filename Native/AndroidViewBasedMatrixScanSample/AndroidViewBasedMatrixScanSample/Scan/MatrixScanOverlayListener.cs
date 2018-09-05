@@ -60,13 +60,13 @@ namespace AndroidViewBasedMatrixScanSample.Scan
 
         IndicatorState CalculateIndicatorState(IDictionary<Java.Lang.Long, TrackedBarcode> recognizedCodes)
         {
-            SortedList<int, int> list = new SortedList<int, int>();
+            List<int> list = new List<int>();
             foreach (var code in recognizedCodes.Values)
             {
                 Quadrilateral convertedLocation = ConvertQuadrilateral(code.Location);
-                var width = convertedLocation.TopRight.X - convertedLocation.TopLeft.X;
-                list.Add(width, width);
+                list.Add(convertedLocation.TopRight.X - convertedLocation.TopLeft.X);
             }
+            list.Sort();
 
             float indicatorSizeRatio = list[recognizedCodes.Count / 2] / screenWidth;
 
