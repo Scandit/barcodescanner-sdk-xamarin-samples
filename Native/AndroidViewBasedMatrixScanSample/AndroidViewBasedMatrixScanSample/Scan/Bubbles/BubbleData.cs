@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
+namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
 {
     public class BubbleData
     {

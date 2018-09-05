@@ -2,7 +2,7 @@
 using Android.Support.V4.Content;
 using Android.Views;
 
-namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
+namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
 {
     public abstract class BaseBubble
     {

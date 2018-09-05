@@ -5,7 +5,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidViewBasedMatrixScanSample.Utility;
 
-namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
+namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
 {
     public class MinimisedBubble : BaseBubble
     {

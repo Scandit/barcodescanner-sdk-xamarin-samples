@@ -1,4 +1,4 @@
-﻿namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
+﻿namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
 {
     public enum IndicatorState
     {

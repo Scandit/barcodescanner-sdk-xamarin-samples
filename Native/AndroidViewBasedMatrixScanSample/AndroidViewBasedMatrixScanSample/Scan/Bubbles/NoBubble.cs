@@ -1,7 +1,7 @@
 ﻿using Android.Content;
 using Android.Views;
 
-namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
+namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
 {
     public class NoBubble : BaseBubble
     {

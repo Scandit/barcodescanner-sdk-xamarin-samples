@@ -4,8 +4,10 @@ using Android.Content;
 using Java.Lang;
 using Java.Text;
 using Java.Util;
+using ScanditBarcodePicker.Android.Recognition;
 
-namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
+
+namespace AndroidViewBasedMatrixScanSample.Scan.Bubbles
 {
     public sealed class IndicatorViewModelFactory
     {
@@ -17,6 +19,20 @@ namespace AndroidViewBasedMatrixScanSample.Scan.Buubles
             this.context = context;
         }
 
+        public BaseBubble CreateBubble(IndicatorState indicatorState, TrackedBarcode barcode)
+        {
+            BubbleData barcodeData = MockBubbleDataObject(barcode.Data);
+
+            switch (indicatorState)
+            {
+                case IndicatorState.MINIMISED:
+                    return new MinimisedBubble(context, barcodeData);
+                case IndicatorState.MAXIMISED:
+                    return new MaximisedBubble(context, barcodeData);
+                default:
+                    return new NoBubble(context, barcodeData);
+            }
+        }
 
         private BubbleData MockBubbleDataObject(string data)
         {
