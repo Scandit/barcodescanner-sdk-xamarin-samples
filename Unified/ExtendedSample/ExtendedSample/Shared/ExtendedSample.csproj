@@ -61,14 +61,16 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
-    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.10.0.1\lib\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Scandit.BarcodePicker.Unified">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.10.0.1\lib\Scandit.BarcodePicker.Unified.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Settings">
       <HintPath>..\..\packages\Xam.Plugins.Settings.4.0.0.7\lib\netstandard1.0\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.9.0.1\lib\netstandard1.0\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Scandit.BarcodePicker.Unified">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.9.0.1\lib\netstandard1.0\Scandit.BarcodePicker.Unified.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
