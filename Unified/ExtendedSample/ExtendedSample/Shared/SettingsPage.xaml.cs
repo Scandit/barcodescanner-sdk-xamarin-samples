@@ -272,6 +272,7 @@ namespace ExtendedSample
                     continue;
                 }
 
+                if (Convert.settingToSymbologies[setting] == null) continue;
                 foreach (Symbology sym in Convert.settingToSymbologies[setting])
                 {
                     _scanSettings.EnableSymbology(sym, enabled);
