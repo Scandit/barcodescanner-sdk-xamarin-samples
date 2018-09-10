@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/freeze_button"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginBottom="@dimen/default_vertical_margin_small"
+        android:layout_marginLeft="@dimen/default_horizontal_margin"
+        android:layout_marginRight="@dimen/default_horizontal_margin"
+        android:layout_marginTop="@dimen/default_vertical_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:text="@string/sm_freeze"
+        android:theme="@style/normalButton"
+        android:stateListAnimator="@null" />
+
+    <TextView
+        android:id="@+id/detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lessTransparentBlack"
+        android:padding="@dimen/default_horizontal_margin"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+</RelativeLayout>
