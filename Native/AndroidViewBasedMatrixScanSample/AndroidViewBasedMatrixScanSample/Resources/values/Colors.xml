@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/black</color>
+    <color name="colorPrimaryDark">@color/almostWhite</color>
+    <color name="colorAccent">@color/scanditBlue</color>
+
+    <color name="scanditBlue">#FF39C1CC</color>
+    <color name="black">#FF000000</color>
+    <color name="transparentBlack">#BF000000</color>
+    <color name="lessTransparentBlack">#E0000000</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="almostWhite">#FFAAAAAA</color>
+    <color name="almostestWhite">#FFCCCCCC</color>
+
+    <color name="transparentRed">#99E44C4C</color>
+    <color name="transparentGreen">#9939CC61</color>
+    <color name="transparentYellow">#99FAD05C</color>
+    <color name="transparentWhite">#BFFFFFFF</color>
+
+</resources>

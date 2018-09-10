@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidViewBasedMatrixScanSample</string>
+    <string name="sm_freeze">Freeze</string>
+    <string name="sm_done">Done</string>
+    <string name="sm_stock">Stock</string>
+    <string name="sm_delivery">Delivery</string>
+    <string name="sm_online">Online</string>
+    <string name="sm_bubbletap_pick">Add to Pick List</string>
+    <string name="sm_bubbletap_reorder">Re-order</string>
+    <string name="sm_bubbletap_markdown">Reprint Label</string>
+    <string name="sm_bubbletap_product_info">Product information</string>
+</resources>

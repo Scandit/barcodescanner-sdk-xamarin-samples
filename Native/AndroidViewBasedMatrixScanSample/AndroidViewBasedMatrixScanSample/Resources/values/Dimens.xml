@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="default_horizontal_margin">16dp</dimen>
+    <dimen name="default_vertical_margin">16dp</dimen>
+    <dimen name="default_vertical_margin_small">8dp</dimen>
+
+    <dimen name="logo_width">109dp</dimen>
+    <dimen name="logo_height">11dp</dimen>
+
+</resources>
