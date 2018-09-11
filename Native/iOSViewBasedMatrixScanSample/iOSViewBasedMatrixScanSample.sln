@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iOSViewBasedMatrixScanSample", "iOSViewBasedMatrixScanSample\iOSViewBasedMatrixScanSample.csproj", "{2E0CC189-16E3-493B-9988-7B87879F8B96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iOSViewBasedMatrixScanSample", "iOSViewBasedMatrixScanSample\iOSViewBasedMatrixScanSample.csproj", "{71D41588-0066-4E4E-A48C-3915A2325077}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Debug|iPhone = Debug|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Release|iPhone.ActiveCfg = Release|iPhone
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Release|iPhone.Build.0 = Release|iPhone
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{2E0CC189-16E3-493B-9988-7B87879F8B96}.Debug|iPhone.Build.0 = Debug|iPhone
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Release|iPhone.ActiveCfg = Release|iPhone
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Release|iPhone.Build.0 = Release|iPhone
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{71D41588-0066-4E4E-A48C-3915A2325077}.Debug|iPhone.Build.0 = Debug|iPhone
 	EndGlobalSection
 EndGlobal

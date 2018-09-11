@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using UIKit;
+using ScanditBarcodeScanner.iOS;
 
 namespace iOSViewBasedMatrixScanSample
 {
@@ -18,43 +19,10 @@ namespace iOSViewBasedMatrixScanSample
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds)
-            {
-                RootViewController = new ViewController()
-            };
-            Window.MakeKeyAndVisible();
+            // Override point for customization after application launch.
+            // If not required for your application you can safely delete this method
+            License.SetAppKey("AUHZdocpFGN0PbR7rx3nMvkhqda+RY6QlAwjTJtxa6lkX/2IzSweNmdZapCzWNfXBF65QhRSqI6iOOARdlBJQjZcCZh6KGRD0CkDgJlggtS/1ZKclxyEzVC1b2vhauBUIrRMvtWjbRVm7v1lHfjV8nKQdRRYZzrCj3TxMBUcK8SHBUoSlTq+wW9RXbrn07S3tOsXmrG33WiuGTQGxrL6iznzF2er46MlpjPSclsxOCCd7DWQ9gd4Kuq70XAp7dLqW5ymRGyuszO0XZetOXZd0rpBGqIDw/tScik/KFTnkOF+alkixSAmOoeFyqvr48cdw+iHMLbj3myArgC5uELHnmcDAhNwu4xP6BHJQqTkN4b5GQWE6gMkJxKrdRpN/wqhOYUbftoA7VqJ1MpWyQWxzn6EQ15EAiKiAR1RIASXFXRx1ml/fc4WuhccC/IP69yBYsqkd2C/l77GadLxPuQVq3fTSHFa6RkXxij2+ZGAEgSVxVzHGgH/M6NdWVIu9Fy4o6Pv49CNnosMhHN1HqHIGhGLZsQXrusBSwGZnPmcfW0mgi4CY+hRyoczmG/PAIPdOSf3o4b5cjiivWxirsrnFIR8VEDMUOaNSIcpyQ1ccL/2lamYH/idiIcl4PWDPuCf+lKW0YX4czhzva4of4y0wtT8ceW+05tG293tWJPHcYeNjHX+opIv88R0O1/df8wGzkjLe4rhl8LO1MUksHIP5BRIE5bOkRLUqiJRemdE2GMESm/leQWtmdkOJ73iXL/E+HcS078MXdL5AQ==");
             return true;
-        }
-
-        public override void OnResignActivation(UIApplication application)
-        {
-            // Invoked when the application is about to move from active to inactive state.
-            // This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) 
-            // or when the user quits the application and it begins the transition to the background state.
-            // Games should use this method to pause the game.
-        }
-
-        public override void DidEnterBackground(UIApplication application)
-        {
-            // Use this method to release shared resources, save user data, invalidate timers and store the application state.
-            // If your application supports background exection this method is called instead of WillTerminate when the user quits.
-        }
-
-        public override void WillEnterForeground(UIApplication application)
-        {
-            // Called as part of the transiton from background to active state.
-            // Here you can undo many of the changes made on entering the background.
-        }
-
-        public override void OnActivated(UIApplication application)
-        {
-            // Restart any tasks that were paused (or not yet started) while the application was inactive. 
-            // If the application was previously in the background, optionally refresh the user interface.
-        }
-
-        public override void WillTerminate(UIApplication application)
-        {
-            // Called when the application is about to terminate. Save data, if needed. See also DidEnterBackground.
         }
     }
 }

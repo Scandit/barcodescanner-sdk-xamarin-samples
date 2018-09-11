@@ -1,139 +1,149 @@
 ﻿using System;
-using System.Collections.Generic;
-using CoreFoundation;
-using UIKit;
 using CoreGraphics;
-using Foundation;
+using UIKit;
 using ScanditBarcodeScanner.iOS;
+using Foundation;
+using CoreFoundation;
+using System.Diagnostics;
 
 namespace iOSViewBasedMatrixScanSample
 {
-    internal enum State
+    public partial class ViewController : UIViewController
     {
-        Stopped,
-        Tracking,
-        Frozen
-    }
+        UIView contatinerView;
+        UIButton freezeButton;
 
-    public class ViewController : UIViewController
-    {
+        BarcodePicker picker;
+        MatrixScanHandler matrixScanHandler;
+        SimpleMatrixScanOverlay simpleMatrixScanOverlay;
+        ViewBasedMatrixScanOverlay viewBasedMatrixScanOverlay;
 
-        private UIButton freezeButton;
-        private UIView containerView;
-
-        private BarcodePicker picker;
-        private MatrixScanHandler matrixScanHandler;
-        private ViewBasedMatrixScanOverlay viewbasedOverlay;
-
-
-        private State _state = State.Stopped;
-
-        private State State
-        {
-            get => _state;
-            set
-            {
-                _state = value;
-                switch (value)
-                {
-                    case State.Tracking:
-                        Reset();
-                        matrixScanHandler.Enabled = true;
-                        picker.StartScanning(true);
-                        break;
-                    case State.Frozen:
-                        matrixScanHandler.Enabled = false;
-                        picker.StopScanning();
-                        break;
-                    case State.Stopped:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
-                }
-            }
-        }
-
-        private void Reset()
-        {
-            matrixScanHandler.RemoveAllAugmentations();
-        }
+        protected ViewController(IntPtr handle) : base(handle) {}
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            contatinerView = new UIView(CGRect.Empty);
+            View.AddSubview(contatinerView);
             freezeButton = new UIButton(CGRect.Empty);
-            containerView = new UIView(CGRect.Empty);
-            View.AddSubview(containerView);
-            View.AddSubview(freezeButton);
-            SetupConstraints();
-            freezeButton.SetBackgroundImage(UIColorExtensions.Brand.GetImage(), UIControlState.Normal);
             freezeButton.SetTitle("Freeze", UIControlState.Normal);
+            freezeButton.SetBackgroundImage(UIImageExtensions.Brand.GetImage(), UIControlState.Normal);
             freezeButton.TouchUpInside += (sender, e) => 
             {
-                switch (State)
+                var scanning = picker.IsScanning();
+                if (scanning)
                 {
-                    case State.Frozen:
-                    case State.Stopped:
-                        State = State.Tracking;
-                        freezeButton.SetTitle("Freeze", UIControlState.Normal);
-                        break;
-                    case State.Tracking:
-                        State = State.Frozen;
-                        freezeButton.SetTitle("Done", UIControlState.Normal);
-                        break;
+                    matrixScanHandler.Enabled = false;
+                    picker.PauseScanning();
+                    freezeButton.SetTitle("Done", UIControlState.Normal);
+                }
+                else
+                {
+                    matrixScanHandler.RemoveAllAugmentations();
+                    matrixScanHandler.Enabled = true;
+                    picker.StartScanning();
+                    freezeButton.SetTitle("Freeze", UIControlState.Normal);
                 }
             };
+            View.AddSubview(freezeButton);
+
+            freezeButton.TranslatesAutoresizingMaskIntoConstraints = false;
+            contatinerView.TranslatesAutoresizingMaskIntoConstraints = false;
+            View.AddConstraints(new[]
+            {
+                contatinerView.LeadingAnchor.ConstraintEqualTo(View.LeadingAnchor),
+                contatinerView.TopAnchor.ConstraintEqualTo(View.TopAnchor),
+                contatinerView.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor),
+                contatinerView.BottomAnchor.ConstraintEqualTo(View.BottomAnchor),
+                freezeButton.LeadingAnchor.ConstraintEqualTo(View.LeadingAnchor, 20),
+                freezeButton.BottomAnchor.ConstraintEqualTo(View.BottomAnchor, -20),
+                freezeButton.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor, -20),
+                freezeButton.HeightAnchor.ConstraintEqualTo(60)
+            });
 
             var settings = ScanSettings.DefaultSettings();
             settings.SetSymbologyEnabled(Symbology.EAN13, true);
             settings.MatrixScanEnabled = true;
-            settings.MaxNumberOfCodesPerFrame = 15;
-            settings.HighDensityModeEnabled = true;
-            picker = new BarcodePicker(settings) {OverlayView = {GuiStyle = GuiStyle.None}};
+            picker = new BarcodePicker(settings);
+            picker.OverlayView.GuiStyle = GuiStyle.None;
+
             matrixScanHandler = new MatrixScanHandler(picker);
-            matrixScanHandler.ShouldReject += (handler, barcode) => false;
-            matrixScanHandler.DidProcess += (sender, args) =>
+            matrixScanHandler.ShouldReject += (matrixScanHandler, trackedBarcode) => false;
+
+            // This delegate method is called every time a new frame has been processed.
+            // In this case we use it to update the offset of the augmentation.
+            matrixScanHandler.DidProcess += (sender, e) => 
             {
                 DispatchQueue.MainQueue.DispatchAsync(() =>
                 {
-                    foreach (var keyValuePair in args.Frame.TrackedCodes)
+                    foreach (var item in e.Frame.TrackedCodes)
                     {
-                        var code = keyValuePair.Value as TrackedBarcode;
-                        var offset = GetYOffSet(code);
-                        viewbasedOverlay.SetOffset(offset, keyValuePair.Key as NSNumber);
+                        var offset = GetYOffSet(item.Value as TrackedBarcode);
+                        viewBasedMatrixScanOverlay.SetOffset(offset, item.Key as NSNumber);
                     }
                 });
             };
-            
-            viewbasedOverlay = new ViewBasedMatrixScanOverlay();
-            viewbasedOverlay.OffsetForOverlay += (overlay, barcode, identifier) => GetYOffSet(barcode);
-            viewbasedOverlay.ViewForOverlay += (overlay, barcode, identifier) =>
+
+            simpleMatrixScanOverlay = new SimpleMatrixScanOverlay()
+            {
+                UserTapEnabled = true
+            };
+
+            // This method is called every time a new barcode has been tracked.
+            // You can implement this method to customize the color of the highlight.
+            simpleMatrixScanOverlay.ColorForOverlay += (overlay, barcode, identifier) => Model.MockedColor(barcode.Data);
+
+            // This method is called when the user taps the highlight.
+            simpleMatrixScanOverlay.OverlayDidTap += (sender, e) => 
+            {
+                var model = Model.MockedModel(e.Barcode.Data);
+                var overlayViewController = new OverlayViewController
+                {
+                    Model = model,
+                    ModalTransitionStyle = UIModalTransitionStyle.CoverVertical,
+                    ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+                };
+                PresentViewController(overlayViewController, false, null);
+            };
+
+            // Add a SimpleMatrixScanOverlay in order to highlight the barcodes.
+            matrixScanHandler.AddOverlay(simpleMatrixScanOverlay);
+
+            viewBasedMatrixScanOverlay = new ViewBasedMatrixScanOverlay();
+
+            // This method is called every time a new barcode has been tracked.
+            // You can implement this method to return the offset that will be used to position the augmentation
+            // with respect to the center of the tracked barcode.
+            viewBasedMatrixScanOverlay.OffsetForOverlay += (overlay, barcode, identifier) => GetYOffSet(barcode);
+            viewBasedMatrixScanOverlay.ViewForOverlay += (overlay, barcode, identifier) =>
             {
                 if (barcode.Data == null) return new UIView(CGRect.Empty);
                 var view = new StockView(new CGRect(0, 0, StockView.StandardWidth, StockView.StandardHeight));
                 var model = Model.MockedModel(barcode.Data);
-                view.OnViewClicked += (sender, args) =>
+                view.AddGestureRecognizer(new UITapGestureRecognizer(() =>
                 {
-                    var overlayViewController = new OverlayViewController {Model = args.Model};
+                    var overlayViewController = new OverlayViewController 
+                    {
+                        Model = model,
+                        ModalTransitionStyle = UIModalTransitionStyle.CoverVertical,
+                        ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+                    };
                     PresentViewController(overlayViewController, false, null);
-                };
+                }));
                 view.Model = model;
 
                 return view;
             };
-            matrixScanHandler.AddOverlay(viewbasedOverlay);
-            
-            var simpleOverlay = new SimpleMatrixScanOverlay();
-            simpleOverlay.ColorForOverlay += (overlay, barcode, identifier) => Model.MockedColor(barcode.Data);
 
-            //TODO
+            // Add an ViewBasedMatrixScanOverlay in order to have custom UIView instances as augmentations.
+            matrixScanHandler.AddOverlay(viewBasedMatrixScanOverlay);
+
             AddChildViewController(picker);
-            picker.View.Frame = containerView.Bounds;
+            picker.View.Frame = contatinerView.Frame;
             picker.View.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
-            containerView.AddSubview(picker.View);
+            contatinerView.AddSubview(picker.View);
             picker.DidMoveToParentViewController(this);
-
-            State = State.Tracking;
+            picker.StartScanning();
         }
 
         private UIOffset GetYOffSet(TrackedBarcode code)
@@ -151,24 +161,25 @@ namespace iOSViewBasedMatrixScanSample
             var bottomLeft = picker.ConvertPoint(predictedLocation.bottomLeft);
             var topRight = picker.ConvertPoint(predictedLocation.topRight);
             var bottomRight = picker.ConvertPoint(predictedLocation.bottomRight);
-            return (float) Math.Max(bottomLeft.Y - topLeft.Y, bottomRight.Y - topRight.Y);
+            return (float)Math.Max(bottomLeft.Y - topLeft.Y, bottomRight.Y - topRight.Y);
         }
+    }
 
-        private void SetupConstraints()
+    static class UIImageExtensions
+    {
+        public static readonly UIColor Brand = new UIColor(57.0f / 255.0f, 193.0f / 255.0f, 204.0f / 255.0f, 1.0f);
+
+        public static UIImage GetImage(this UIColor color)
         {
-            freezeButton.TranslatesAutoresizingMaskIntoConstraints = false;
-            containerView.TranslatesAutoresizingMaskIntoConstraints = false;
-            View.AddConstraints(new[]
-            {
-                freezeButton.HeightAnchor.ConstraintEqualTo(60),
-                freezeButton.LeadingAnchor.ConstraintEqualTo(View.LeadingAnchor, 20),
-                freezeButton.BottomAnchor.ConstraintEqualTo(View.BottomAnchor, -20),
-                freezeButton.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor, -20),
-                containerView.LeadingAnchor.ConstraintEqualTo(View.LeadingAnchor),
-                containerView.TopAnchor.ConstraintEqualTo(View.TopAnchor),
-                containerView.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor),
-                containerView.BottomAnchor.ConstraintEqualTo(View.BottomAnchor)
-            });
+            var rect = new CGRect(0, 0, 1, 1);
+            UIGraphics.BeginImageContext(rect.Size);
+            var context = UIGraphics.GetCurrentContext();
+            if (context == null) return null;
+            context.SetFillColor(color.CGColor);
+            context.FillRect(rect);
+            var image = UIGraphics.GetImageFromCurrentImageContext();
+            UIGraphics.EndImageContext();
+            return image;
         }
     }
 }
