@@ -46,16 +46,16 @@ namespace iOSViewBasedMatrixScanSample
 
         private static nint MockedCount(string data)
         {
-            var suffix = data.Substring((int)(data.Length - SuffixLength));
+            var suffix = data.Substring(data.Length - SuffixLength);
             int.TryParse(suffix, out var result);
             return result <= SuffixLength
                 ? result % Modulo
-                : result <= Modulo ? 11 + int.Parse(data.Substring((int)(data.Length - SuffixLength))) : 6 + result % Modulo;
+                : result <= Modulo ? 11 + int.Parse(data.Substring(data.Length - SuffixLength)) : 6 + result % Modulo;
         }
 
         public static UIColor MockedColor(string data)
         {
-            var suffix = data.Substring((int)(data.Length - SuffixLength));
+            var suffix = data.Substring(data.Length - SuffixLength);
             int.TryParse(suffix, out var result);
             return result <= SuffixLength ? redStockTransparent : result <= Modulo ? greenStockTransparent : yellowStockTransparent;
         }
