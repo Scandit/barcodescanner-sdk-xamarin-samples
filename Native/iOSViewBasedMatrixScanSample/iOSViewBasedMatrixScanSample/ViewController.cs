@@ -115,6 +115,9 @@ namespace iOSViewBasedMatrixScanSample
             // You can implement this method to return the offset that will be used to position the augmentation
             // with respect to the center of the tracked barcode.
             viewBasedMatrixScanOverlay.OffsetForOverlay += (overlay, barcode, identifier) => GetYOffSet(barcode);
+
+            // This delegate method is called every time a new barcode has been tracked.
+            // You can implement this method to return the view that will be used as the augmentation.
             viewBasedMatrixScanOverlay.ViewForOverlay += (overlay, barcode, identifier) =>
             {
                 if (barcode.Data == null) return new UIView(CGRect.Empty);
@@ -135,7 +138,7 @@ namespace iOSViewBasedMatrixScanSample
                 return view;
             };
 
-            // Add an ViewBasedMatrixScanOverlay in order to have custom UIView instances as augmentations.
+            // Add a ViewBasedMatrixScanOverlay in order to have custom UIView instances as augmentations.
             matrixScanHandler.AddOverlay(viewBasedMatrixScanOverlay);
 
             AddChildViewController(picker);

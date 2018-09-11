@@ -13,11 +13,16 @@ namespace iOSViewBasedMatrixScanSample
         private static readonly Random random = new Random();
         
         private static readonly UIColor greenStock = new UIColor(red: 57.0f/255.0f, green: 204.0f/255.0f, blue: 97.0f/255.0f, alpha: 1.0f);
-        private static UIColor greenStockTransparent = greenStock.ColorWithAlpha(0.6f);
+        private static readonly UIColor greenStockTransparent = greenStock.ColorWithAlpha(0.6f);
         private static readonly UIColor yellowStock = new UIColor(red: 250.0f/255.0f, green: 208.0f/255.0f, blue: 92.0f/255.0f, alpha: 1.0f);
-        private static UIColor yellowStockTransparent = yellowStock.ColorWithAlpha(0.6f);
+        private static readonly UIColor yellowStockTransparent = yellowStock.ColorWithAlpha(0.6f);
         private static readonly UIColor redStock = new UIColor(red: 228.0f/255.0f, green: 76.0f/255.0f, blue: 76.0f/255.0f, alpha: 1.0f);
-        private static UIColor redStockTransparent = redStock.ColorWithAlpha(0.6f);
+
+        private static readonly int SuffixLength = 2;
+        private static readonly nint Modulo = 5;
+
+
+        private static readonly UIColor redStockTransparent = redStock.ColorWithAlpha(0.6f);
 
         private Model(UIColor color, nint stockCount, string deliveryDate, string code)
         {
@@ -41,37 +46,18 @@ namespace iOSViewBasedMatrixScanSample
 
         private static nint MockedCount(string data)
         {
-            var suffix = data.Substring(data.Length - 2);
+            var suffix = data.Substring((int)(data.Length - SuffixLength));
             int.TryParse(suffix, out var result);
-            if (result <= 2)
-            {
-                return result % 5;
-            }
-            else if (result <= 5)
-            {
-                return 11 + (int.Parse(data.Substring(data.Length - 3)));
-            }
-            else
-            {
-                return 6 + result % 5;
-            }
+            return result <= SuffixLength
+                ? result % Modulo
+                : result <= Modulo ? 11 + int.Parse(data.Substring((int)(data.Length - SuffixLength))) : 6 + result % Modulo;
         }
 
         public static UIColor MockedColor(string data)
         {
-            var suffix = data.Substring(data.Length - 2);
+            var suffix = data.Substring((int)(data.Length - SuffixLength));
             int.TryParse(suffix, out var result);
-            if (result <= 2)
-            {
-                return redStockTransparent;
-            } else if (result <= 5)
-            {
-                return greenStockTransparent;
-            }
-            else
-            {
-                return yellowStockTransparent;
-            }
+            return result <= SuffixLength ? redStockTransparent : result <= Modulo ? greenStockTransparent : yellowStockTransparent;
         }
     }
 }
