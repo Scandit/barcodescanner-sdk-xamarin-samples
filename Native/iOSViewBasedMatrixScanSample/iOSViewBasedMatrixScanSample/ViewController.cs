@@ -64,6 +64,8 @@ namespace iOSViewBasedMatrixScanSample
             var settings = ScanSettings.DefaultSettings();
             settings.SetSymbologyEnabled(Symbology.EAN13, true);
             settings.MatrixScanEnabled = true;
+            settings.MaxNumberOfCodesPerFrame = 15;
+            settings.HighDensityModeEnabled = true;
             picker = new BarcodePicker(settings);
             picker.OverlayView.GuiStyle = GuiStyle.None;
 
