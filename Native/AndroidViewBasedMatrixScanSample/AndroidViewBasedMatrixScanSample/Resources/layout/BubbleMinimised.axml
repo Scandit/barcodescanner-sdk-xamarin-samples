@@ -24,10 +24,9 @@
         android:textSize="18sp"/>
 
     <FrameLayout
+        android:id="@+id/triangle"
         android:layout_width="15dp"
         android:layout_height="8dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/bg_triangle"
-        android:backgroundTint="@color/transparentBlack"/>
+        android:layout_gravity="center_horizontal"/>
     
 </LinearLayout>
