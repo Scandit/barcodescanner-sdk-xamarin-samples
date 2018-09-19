@@ -21,6 +21,8 @@ namespace AndroidViewBasedMatrixScanSample
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            AppCompatDelegate.CompatVectorFromResourcesEnabled = true;
+
             base.OnCreate(savedInstanceState);
 
             // Set the app key before instantiating the picker.
