@@ -33,6 +33,7 @@
             android:textColor="@color/transparentWhite"
             android:textStyle="bold"
             android:textSize="22sp"
+            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
         <TextView
@@ -66,6 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginLeft="7dp"
             android:layout_marginStart="7dp"
             android:textColor="@color/transparentWhite"
             android:gravity="center_vertical|start"
@@ -79,6 +81,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginEnd="7dp"
+            android:layout_marginRight="7dp"
             android:textColor="@color/transparentWhite"
             android:textStyle="bold"
             android:gravity="center_vertical|end"
@@ -90,7 +93,6 @@
         android:id="@+id/triangle"
         android:layout_width="15dp"
         android:layout_height="8dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/bg_triangle"/>
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
