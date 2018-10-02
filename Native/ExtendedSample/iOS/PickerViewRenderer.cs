@@ -82,6 +82,7 @@ namespace ExtendedSample.iOS
             scanSettings.SetSymbologyEnabled(Symbology.FiveDigitAddOn, settings.FiveDigitAddOn);
             scanSettings.SetSymbologyEnabled(Symbology.Code11, settings.Code11);
             scanSettings.SetSymbologyEnabled(Symbology.Code25, settings.Code25);
+            scanSettings.SetSymbologyEnabled(Symbology.Code32, settings.Code32);
             scanSettings.SetSymbologyEnabled(Symbology.Code39, settings.Code39);
             scanSettings.SetSymbologyEnabled(Symbology.Code93, settings.Code93);
             scanSettings.SetSymbologyEnabled(Symbology.Code128, settings.Code128);

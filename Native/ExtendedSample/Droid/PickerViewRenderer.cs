@@ -79,6 +79,7 @@ namespace ExtendedSample.Droid
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyFiveDigitAddOn, settings.FiveDigitAddOn);
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyCode11, settings.Code11);
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyCode25, settings.Code25);
+            scanSettings.SetSymbologyEnabled(Barcode.SymbologyCode32, settings.Code32);
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyCode39, settings.Code39);
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyCode93, settings.Code93);
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyCode128, settings.Code128);
