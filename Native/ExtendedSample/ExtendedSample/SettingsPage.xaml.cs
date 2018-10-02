@@ -31,6 +31,7 @@ namespace ExtendedSample
             FiveDigitAddOnCell.On = settings.FiveDigitAddOn;
             Code11Cell.On = settings.Code11;
             Code25Cell.On = settings.Code25;
+            Code32Cell.On = settings.Code32;
             Code39Cell.On = settings.Code39;
             Code93Cell.On = settings.Code93;
             Code128Cell.On = settings.Code128;
@@ -89,6 +90,7 @@ namespace ExtendedSample
             settings.FiveDigitAddOn = FiveDigitAddOnCell.On;
             settings.Code11 = Code11Cell.On;
             settings.Code25 = Code25Cell.On;
+            settings.Code32 = Code32Cell.On;
             settings.Code39 = Code39Cell.On;
             settings.Code93 = Code93Cell.On;
             settings.Code128 = Code128Cell.On;

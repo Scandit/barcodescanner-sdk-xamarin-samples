@@ -31,6 +31,7 @@ namespace ExtendedSample
         public bool FiveDigitAddOn { get; set; }
         public bool Code11 { get; set; }
         public bool Code25 { get; set; }
+        public bool Code32 { get; set; }
         public bool Code39 { get; set; }
         public bool Code93 { get; set; }
         public bool Code128 { get; set; }
@@ -96,6 +97,7 @@ namespace ExtendedSample
             FiveDigitAddOn = false;
             Code11 = false;
             Code25 = false;
+            Code32 = false;
             Code39 = false;
             Code93 = false;
             Code128 = false;

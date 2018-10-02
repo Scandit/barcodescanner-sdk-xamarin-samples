@@ -27,6 +27,7 @@
                 <SwitchCell x:Name="FiveDigitAddOnCell" Text="Five-Digit-Add-On" />
                 <SwitchCell x:Name="Code11Cell" Text="Code 11" />
                 <SwitchCell x:Name="Code25Cell" Text="Code 25" />
+                <SwitchCell x:Name="Code32Cell" Text="Code 32" />
                 <SwitchCell x:Name="Code39Cell" Text="Code 39" />
                 <SwitchCell x:Name="Code93Cell" Text="Code 93" />
                 <SwitchCell x:Name="Code128Cell" Text="Code 128" />
