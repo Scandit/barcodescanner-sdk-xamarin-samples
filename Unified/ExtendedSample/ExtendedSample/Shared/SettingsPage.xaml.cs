@@ -251,7 +251,7 @@ namespace ExtendedSample
         void updateScanSettings()
         {
             bool addOnEnabled = false;
-            bool isScanningAreaOverridden = false;
+            bool isScanningAreaOverriddenByDpmMode = false;
 
             foreach (string setting in Convert.settingToSymbologies.Keys)
             {
@@ -264,7 +264,7 @@ namespace ExtendedSample
                     _scanSettings.ActiveScanningAreaPortrait = restricted;
                     _scanSettings.ActiveScanningAreaLandscape = restricted;
 
-                    isScanningAreaOverridden = true;
+                    isScanningAreaOverriddenByDpmMode = true;
 
                     // Enabling the direct_part_marking_mode extension comes at the cost of increased frame processing times.
                     // It is recommended to restrict the scanning area to a smaller part of the image for best performance.
@@ -298,9 +298,8 @@ namespace ExtendedSample
             _scanSettings.Symbologies[Symbology.MsiPlessey].Checksums =
                 Convert.msiPlesseyChecksumToScanSetting[Settings.getStringSetting(Settings.MsiPlesseyChecksumString)];
 
-            _scanSettings.RestrictedAreaScanningEnabled = isScanningAreaOverridden || Settings.getBoolSetting(Settings.RestrictedAreaString);
-
-            if (Settings.getBoolSetting(Settings.RestrictedAreaString) && !isScanningAreaOverridden)
+            _scanSettings.RestrictedAreaScanningEnabled = isScanningAreaOverriddenByDpmMode || Settings.getBoolSetting(Settings.RestrictedAreaString);
+            if (Settings.getBoolSetting(Settings.RestrictedAreaString) && !isScanningAreaOverriddenByDpmMode)
             {
                 Double HotSpotHeight = Settings.getDoubleSetting(Settings.HotSpotHeightString);
                 Double HotSpotWidth = Settings.getDoubleSetting(Settings.HotSpotWidthString);
