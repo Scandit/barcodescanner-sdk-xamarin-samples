@@ -298,8 +298,9 @@ namespace ExtendedSample
             _scanSettings.Symbologies[Symbology.MsiPlessey].Checksums =
                 Convert.msiPlesseyChecksumToScanSetting[Settings.getStringSetting(Settings.MsiPlesseyChecksumString)];
 
-            _scanSettings.RestrictedAreaScanningEnabled = Settings.getBoolSetting(Settings.RestrictedAreaString);
-            if (_scanSettings.RestrictedAreaScanningEnabled && !isScanningAreaOverridden)
+            _scanSettings.RestrictedAreaScanningEnabled = isScanningAreaOverridden || Settings.getBoolSetting(Settings.RestrictedAreaString);
+
+            if (Settings.getBoolSetting(Settings.RestrictedAreaString) && !isScanningAreaOverridden)
             {
                 Double HotSpotHeight = Settings.getDoubleSetting(Settings.HotSpotHeightString);
                 Double HotSpotWidth = Settings.getDoubleSetting(Settings.HotSpotWidthString);
