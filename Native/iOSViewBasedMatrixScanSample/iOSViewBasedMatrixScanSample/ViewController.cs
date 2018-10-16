@@ -86,31 +86,6 @@ namespace iOSViewBasedMatrixScanSample
                 });
             };
 
-            simpleMatrixScanOverlay = new SimpleMatrixScanOverlay()
-            {
-                UserTapEnabled = true
-            };
-
-            // This method is called every time a new barcode has been tracked.
-            // You can implement this method to customize the color of the highlight.
-            simpleMatrixScanOverlay.ColorForOverlay += (overlay, barcode, identifier) => Model.MockedColor(barcode.Data);
-
-            // This method is called when the user taps the highlight.
-            simpleMatrixScanOverlay.OverlayDidTap += (sender, e) => 
-            {
-                var model = Model.MockedModel(e.Barcode.Data);
-                var overlayViewController = new OverlayViewController
-                {
-                    Model = model,
-                    ModalTransitionStyle = UIModalTransitionStyle.CoverVertical,
-                    ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-                };
-                PresentViewController(overlayViewController, false, null);
-            };
-
-            // Add a SimpleMatrixScanOverlay in order to highlight the barcodes.
-            matrixScanHandler.AddOverlay(simpleMatrixScanOverlay);
-
             viewBasedMatrixScanOverlay = new ViewBasedMatrixScanOverlay();
 
             // This method is called every time a new barcode has been tracked.
@@ -127,7 +102,7 @@ namespace iOSViewBasedMatrixScanSample
                 var model = Model.MockedModel(barcode.Data);
                 view.AddGestureRecognizer(new UITapGestureRecognizer(() =>
                 {
-                    var overlayViewController = new OverlayViewController 
+                    var overlayViewController = new OverlayViewController
                     {
                         Model = model,
                         ModalTransitionStyle = UIModalTransitionStyle.CoverVertical,
@@ -142,6 +117,15 @@ namespace iOSViewBasedMatrixScanSample
 
             // Add a ViewBasedMatrixScanOverlay in order to have custom UIView instances as augmentations.
             matrixScanHandler.AddOverlay(viewBasedMatrixScanOverlay);
+
+            simpleMatrixScanOverlay = new SimpleMatrixScanOverlay();
+
+            // This method is called every time a new barcode has been tracked.
+            // You can implement this method to customize the color of the highlight.
+            simpleMatrixScanOverlay.ColorForOverlay += (overlay, barcode, identifier) => Model.MockedColor(barcode.Data);
+
+            // Add a SimpleMatrixScanOverlay in order to highlight the barcodes.
+            matrixScanHandler.AddOverlay(simpleMatrixScanOverlay);
 
             AddChildViewController(picker);
             picker.View.Frame = contatinerView.Frame;
