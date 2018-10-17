@@ -98,19 +98,31 @@ namespace AndroidViewBasedMatrixScanSample.Scan
 
         public int GetColorForCode(TrackedBarcode barcode, long trackingId)
         {
+            if (!bubbles.ContainsKey(trackingId))
+            {
+                return 0;
+            }
             return bubbles[trackingId].highlightColor;
         }
 
         public Point GetOffsetForCode(TrackedBarcode barcode, long trackingId)
         {
+            if (!bubbles.ContainsKey(trackingId))
+            {
+                return null;
+            }
             BaseBubble indicator = bubbles[trackingId];
-
             return new Point(-UiUtils.PxFromDp(context, indicator.GetWidth()) / 2,
                     -UiUtils.PxFromDp(context, indicator.GetHeight()));
         }
 
         public View GetViewForCode(TrackedBarcode barcode, long trackingId)
         {
+            if (!bubbles.ContainsKey(trackingId))
+            {
+                return null;
+            }
+
             LayoutInflater inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
             return bubbles[trackingId].GetView(context, inflater);
         }
@@ -137,8 +149,13 @@ namespace AndroidViewBasedMatrixScanSample.Scan
                             (arg1, arg2) => bubble);
 
                         viewBasedMatrixScanOverlay.SetOffsetForCode(GetOffsetForCode(it.Value, it.Key.LongValue()), it.Key.LongValue());
-                        viewBasedMatrixScanOverlay.Post(
-                            () => viewBasedMatrixScanOverlay.SetViewForCode(GetViewForCode(it.Value, it.Key.LongValue()), it.Key.LongValue()));
+                        viewBasedMatrixScanOverlay.Post(() =>
+                            {
+                                if (bubbles.ContainsKey(it.Key.LongValue()))
+                                {
+                                    viewBasedMatrixScanOverlay.SetViewForCode(GetViewForCode(it.Value, it.Key.LongValue()), it.Key.LongValue());
+                                }
+                            });
                     }
                 }
             }
