@@ -99,6 +99,7 @@ namespace ExtendedSample.Droid
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyKix, settings.Kix);
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyDotcode, settings.Kix);
             scanSettings.SetSymbologyEnabled(Barcode.SymbologyMicroQr, settings.MicroQR);
+            scanSettings.SetSymbologyEnabled(Barcode.SymbologyLapa4sc, settings.Lapa4sc);
 
             if (settings.QrInverted)
             {
