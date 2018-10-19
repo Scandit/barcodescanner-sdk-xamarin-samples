@@ -55,6 +55,7 @@ namespace ExtendedSample
             { "Sym_Kix", new Symbology[] { Symbology.Kix } },
             { "Sym_DotCode", new Symbology[] { Symbology.DotCode } },
             { "Sym_MicroQR", new Symbology[] { Symbology.MicroQr } },
+            { "Sym_Lapa4sc", new Symbology[] { Symbology.LAPA4SC } }
         };
 
         // Associates the key (string) for permanent storage with the text displayed in the GUI
@@ -89,6 +90,7 @@ namespace ExtendedSample
             { "Sym_Kix", "KIX" },
             { "Sym_DotCode", "DotCode" },
             { "Sym_MicroQR", "MicroQr" },
+            { "Sym_Lapa4sc", "Lapa4sc" }
         };
 
         // Associates an index with the storage key (string)
