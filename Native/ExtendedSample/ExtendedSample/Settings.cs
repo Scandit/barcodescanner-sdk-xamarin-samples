@@ -54,6 +54,7 @@ namespace ExtendedSample
         public bool Kix { get; set; }
         public bool DotCode { get; set; }
         public bool MicroQR { get; set; }
+        public bool Lapa4sc { get; set; }
 
         // Scanning Area
         public bool RestrictScanningArea { get; set; }
@@ -119,6 +120,8 @@ namespace ExtendedSample
             Rm4scc = false;
             Kix = false;
             DotCode = false;
+            MicroQR = false;
+            Lapa4sc = false;
             RestrictScanningArea = false;
             HotSpotHeight = 0.25F;
             HotSpotWidth = 1.0F;

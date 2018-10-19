@@ -102,6 +102,7 @@ namespace ExtendedSample.iOS
             scanSettings.SetSymbologyEnabled(Symbology.KIX, settings.Kix);
             scanSettings.SetSymbologyEnabled(Symbology.DotCode, settings.Kix);
             scanSettings.SetSymbologyEnabled(Symbology.MicroQr, settings.MicroQR);
+            scanSettings.SetSymbologyEnabled(Symbology.LAPA4SC, settings.Lapa4sc);
 
             if (settings.QrInverted)
             {
