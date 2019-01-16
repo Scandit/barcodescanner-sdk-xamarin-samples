@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Scandit.BarcodePicker.Unified": "5.10.0.10",
     "Xamarin.Forms": "2.3.4.270"
   },
   "frameworks": {

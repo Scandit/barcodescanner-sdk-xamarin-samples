@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
     <ReleaseVersion>5.11.0.1</ReleaseVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -51,14 +50,6 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Scandit.BarcodePicker.Unified, Version=5.11.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.11.0.1\lib\MonoAndroid10\Scandit.BarcodePicker.Unified.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ScanditSDK, Version=5.11.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.11.0.1\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -101,6 +92,15 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.4.270\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="ScanditSDK">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Xamarin.5.10.0.10\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Scandit.BarcodePicker.Unified.Abstractions">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.10.0.10\lib\MonoAndroid10\Scandit.BarcodePicker.Unified.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Scandit.BarcodePicker.Unified">
+      <HintPath>..\..\packages\Scandit.BarcodePicker.Unified.5.10.0.10\lib\MonoAndroid10\Scandit.BarcodePicker.Unified.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
