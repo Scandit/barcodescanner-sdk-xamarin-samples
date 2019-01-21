@@ -22,8 +22,7 @@ namespace SimpleSample
 {
     public partial class App : Application
     {
-        private static string appKey = "AejrGtaBQvQqNMrEAkQLzw02rYwJABlEwhAFM5tEi7HjXXqr1VLWogBGjaj0OGhsZw77bxs9VY3iYa+CeUWVRUQBtbCuZYmSzx4AbygoXfUfXxVFwgNYz3MdcGz3/FPfa9b2z9iqAw02ZaAto+lUaDf/UK/QSIEgajjMtL8voTHUw13MzmkQx9Xa4gt2614/8spveyOYVdOXH+fxZKv5Z98Y7IRKobw4duJmL8Hj+BBfV/Z8xQJNcSzQN/W0Zj3kteAvj6dx+DRp9BUOApRf6XH3TOHket72S4TrY/aChxXd0K/NVbDBAr4jXWUmBbpu80p5Nx9c17i8F9bwu5hDAWX3PIE7W0+FC0fDZH+Ud1KoFip2n0QuEG/Bq8CqCbrPV37uhyEQTYC9AgLPp8Hxaq6ru3lcRA6LadEyeVpc5rKpvHln7RoIiEEBzyy8Yng92YT3kRuK0zZQG7ySau4PxH7YViyEItKemx48CpWifKanf5pouM8k+YEAsG6qlG6Hkehi0WJ9iCFF9TK8KR/Uq1vqaxD+mDDCsqkL8vqy8ObyU6AzFngwxbPyG52P/Yr6wHQdbT3r+kbJOOensGROufGt6cpaC0RQHluhZnU9UVnRs2qSlbQLPTtWvPaXQvZGzvzgnPR1do50rNv2lYzpNWXz6RjAodmc0Zxpq8/31KueqQfvsdPhjFNZXCEM/narojxPipa36xsLRfCIQ0uRFRlfurjLTUTyfApHEkCa4cDwHVt1wRR8Q5AMLUB6SfJHiSGWFLOPaTDUPWzUY9gLSYvXb8T8YJpwryc=";
-        //private static string appKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
+        private static string appKey = "-- ENTER YOUR SCANDIT LICENSE KEY HERE --";
 
         public App()
         {
