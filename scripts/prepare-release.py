@@ -130,6 +130,7 @@ def update_windows_csproj_files(version, nuget_beta_suffix):
             "Scandit.BarcodePicker.Unified.Abstractions"])
         replace_guarded_pattern(file, r"""(<Reference Include="(?:{}),.*Version=){}()""".format(refs,VERSION_REGEX), version)
         replace_guarded_pattern(file, r"""(<HintPath>.*Scandit\.BarcodePicker\.(?:Xamarin|Unified)\.)({})({})()""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
+        replace_guarded_pattern(file, r"""(<PackageReference Include="Scandit\.BarcodePicker\.Unified" Version=")({})({})(" ?/>)""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
         replace_guarded_pattern(file, r"""(<ReleaseVersion>){}(<\/ReleaseVersion>)""".format(VERSION_REGEX), version)
 
 def update_sln(version):
