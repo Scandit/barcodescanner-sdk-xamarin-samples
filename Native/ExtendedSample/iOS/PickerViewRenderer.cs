@@ -78,6 +78,8 @@ namespace ExtendedSample.iOS
             // Symbologies
             scanSettings.SetSymbologyEnabled(Symbology.EAN13, settings.Ean13Upc12);
             scanSettings.SetSymbologyEnabled(Symbology.UPC12, settings.Ean13Upc12);
+            scanSettings.SetSymbologyEnabled(Symbology.EAN8, settings.Ean8);
+            scanSettings.SetSymbologyEnabled(Symbology.UPCE, settings.Upce);
             scanSettings.SetSymbologyEnabled(Symbology.TwoDigitAddOn, settings.TwoDigitAddOn);
             scanSettings.SetSymbologyEnabled(Symbology.FiveDigitAddOn, settings.FiveDigitAddOn);
             scanSettings.SetSymbologyEnabled(Symbology.Code11, settings.Code11);
