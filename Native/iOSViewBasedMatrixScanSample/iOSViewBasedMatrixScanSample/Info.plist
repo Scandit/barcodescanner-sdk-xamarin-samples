@@ -35,7 +35,7 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSCameraUsageDescription</key>
-	<string>for spying</string>
+	<string>For Barcode Scanning.</string>
 	<key>CFBundleName</key>
 	<string>iOSViewBasedMatrixScanSample</string>
 </dict>
