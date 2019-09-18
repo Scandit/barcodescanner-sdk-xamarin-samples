@@ -10,6 +10,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Shared\**" />
+    <Compile Remove="UWP\**" />
+    <Compile Remove="Windows\**" />
+    <Compile Remove="WinPhone\**" />
+    <EmbeddedResource Remove="Shared\**" />
+    <EmbeddedResource Remove="UWP\**" />
+    <EmbeddedResource Remove="Windows\**" />
+    <EmbeddedResource Remove="WinPhone\**" />
+    <None Remove="Shared\**" />
+    <None Remove="UWP\**" />
+    <None Remove="Windows\**" />
+    <None Remove="WinPhone\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1009999" />
     <PackageReference Include="Scandit.BarcodePicker.Unified" Version="5.13.0.1" />
   </ItemGroup>
