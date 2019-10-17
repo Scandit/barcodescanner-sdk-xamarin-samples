@@ -14,11 +14,34 @@ namespace ExtendedSample.iOS
         private RotationSettingAwareBarcodePicker barcodePicker;
         private PickerScanDelegate scanDelegate;
         private PickerView pickerView;
+        private bool detachedFromWindow;
 
         public PickerViewRenderer()
         {
             var appKey = PickerView.GetAppKey();
             License.SetAppKey(appKey);
+        }
+
+        public override void WillMoveToWindow(UIWindow window)
+        {
+            base.WillMoveToWindow(window);
+
+            if (window == null) // Disappear
+            {
+                this.detachedFromWindow = true;
+                this.pickerView.PauseScanning();
+            }
+        }
+        
+        public override void MovedToWindow()
+        {
+            base.MovedToWindow();
+
+            if (this.detachedFromWindow)
+            {
+                this.pickerView.StartScanning();
+                this.detachedFromWindow = false;
+            }
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<PickerView> e)

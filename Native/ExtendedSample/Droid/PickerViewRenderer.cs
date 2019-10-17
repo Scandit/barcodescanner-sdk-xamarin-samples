@@ -16,12 +16,32 @@ namespace ExtendedSample.Droid
         private PickerOnScanListener onScanListener;
         private PickerView pickerView;
         private Context context;
+        private bool detachedFromWindow;
 
         public PickerViewRenderer(Context context) : base(context)
         {
             this.context = context;
 
             ScanditLicense.AppKey = PickerView.GetAppKey();
+        }
+
+        protected override void OnAttachedToWindow()
+        {
+            base.OnAttachedToWindow();
+
+            if (this.detachedFromWindow)
+            {
+                this.pickerView.StartScanning();
+                this.detachedFromWindow = false;
+            }
+        }
+
+        protected override void OnDetachedFromWindow()
+        {
+            base.OnDetachedFromWindow();
+
+            this.detachedFromWindow = true;
+            this.pickerView.PauseScanning();
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<PickerView> e)
