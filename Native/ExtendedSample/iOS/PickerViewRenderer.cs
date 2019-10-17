@@ -14,14 +14,13 @@ namespace ExtendedSample.iOS
         private RotationSettingAwareBarcodePicker barcodePicker;
         private PickerScanDelegate scanDelegate;
         private PickerView pickerView;
-        private bool detachedFromWindow;
 
         public PickerViewRenderer()
         {
             var appKey = PickerView.GetAppKey();
             License.SetAppKey(appKey);
         }
-    
+
         protected override void OnElementChanged(ElementChangedEventArgs<PickerView> e)
         {
             base.OnElementChanged(e);

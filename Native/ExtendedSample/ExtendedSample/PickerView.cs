@@ -7,7 +7,7 @@ namespace ExtendedSample
     {
 		public event EventHandler StartScanningRequested;
 		public event EventHandler PauseScanningRequested;
-        public event EventHandler StopScanningRequested;
+		public event EventHandler StopScanningRequested;
 
 		public IScannerDelegate Delegate { get; set; }
 		public Settings Settings { get; set; }
