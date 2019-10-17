@@ -54,6 +54,7 @@ namespace ExtendedSample.Droid
 
                 e.NewElement.StartScanningRequested += OnStartScanningRequested;
                 e.NewElement.PauseScanningRequested += OnPauseScanningRequested;
+                e.NewElement.StopScanningRequested += OnStopScanningRequested;
 
                 barcodePicker = new BarcodePicker(context, CreateScanSettings());
                 SetNativeControl(barcodePicker.OverlayView.RootView);
@@ -71,6 +72,7 @@ namespace ExtendedSample.Droid
             {
                 e.OldElement.StartScanningRequested -= OnStartScanningRequested;
                 e.OldElement.PauseScanningRequested -= OnPauseScanningRequested;
+                e.OldElement.StopScanningRequested -= OnStopScanningRequested;
             }
         }
 
@@ -85,6 +87,11 @@ namespace ExtendedSample.Droid
         private void OnPauseScanningRequested(object sender, EventArgs e)
         {
             barcodePicker.PauseScanning();
+        }
+
+        private void OnStopScanningRequested(object sender, EventArgs e)
+        {
+            barcodePicker.StopScanning();
         }
 
         private ScanSettings CreateScanSettings()

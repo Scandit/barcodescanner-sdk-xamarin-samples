@@ -21,29 +21,7 @@ namespace ExtendedSample.iOS
             var appKey = PickerView.GetAppKey();
             License.SetAppKey(appKey);
         }
-
-        public override void WillMoveToWindow(UIWindow window)
-        {
-            base.WillMoveToWindow(window);
-
-            if (window == null) // Disappear
-            {
-                this.detachedFromWindow = true;
-                this.pickerView.PauseScanning();
-            }
-        }
-        
-        public override void MovedToWindow()
-        {
-            base.MovedToWindow();
-
-            if (this.detachedFromWindow)
-            {
-                this.pickerView.StartScanning();
-                this.detachedFromWindow = false;
-            }
-        }
-
+    
         protected override void OnElementChanged(ElementChangedEventArgs<PickerView> e)
         {
             base.OnElementChanged(e);
@@ -54,6 +32,7 @@ namespace ExtendedSample.iOS
 
                 e.NewElement.StartScanningRequested += OnStartScanningRequested;
                 e.NewElement.PauseScanningRequested += OnPauseScanningRequested;
+                e.NewElement.StopScanningRequested += OnStopScanningRequested;
 
                 barcodePicker = new RotationSettingAwareBarcodePicker(CreateScanSettings());
                 SetNativeControl(barcodePicker.View);
@@ -71,6 +50,7 @@ namespace ExtendedSample.iOS
             {
                 e.OldElement.StartScanningRequested -= OnStartScanningRequested;
                 e.OldElement.PauseScanningRequested -= OnPauseScanningRequested;
+                e.OldElement.StopScanningRequested -= OnStopScanningRequested;
             }
         }
 
@@ -91,6 +71,11 @@ namespace ExtendedSample.iOS
         private void OnPauseScanningRequested(object sender, EventArgs e)
         {
             barcodePicker.PauseScanning();
+        }
+
+        private void OnStopScanningRequested(object sender, EventArgs e)
+        {
+            barcodePicker.StopScanning();
         }
 
         private ScanSettings CreateScanSettings()
