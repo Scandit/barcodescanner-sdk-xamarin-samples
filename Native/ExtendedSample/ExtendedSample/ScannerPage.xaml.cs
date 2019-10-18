@@ -55,6 +55,11 @@ namespace ExtendedSample
         {
             PickerView.PauseScanning();
         }
+
+        public void StopScanning()
+        {
+            PickerView.StopScanning();
+        }
     }
 
     public class ScannerDelegate : IScannerDelegate
