@@ -19,6 +19,12 @@ namespace ExtendedSample
             Children.Add(settingsPage);
         }
 
+        public void StopScanning() => scannerPage.StopScanning();
+
+        public void StartScanning() => scannerPage.ResumeScanning();
+
+        public void PauseScanning() => scannerPage.PauseScanning();
+
         protected override void OnCurrentPageChanged()
         {
             base.OnCurrentPageChanged();
