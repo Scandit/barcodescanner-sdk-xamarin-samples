@@ -31,6 +31,7 @@ namespace ExtendedSample.iOS
 
                 e.NewElement.StartScanningRequested += OnStartScanningRequested;
                 e.NewElement.PauseScanningRequested += OnPauseScanningRequested;
+                e.NewElement.StopScanningRequested += OnStopScanningRequested;
 
                 barcodePicker = new RotationSettingAwareBarcodePicker(CreateScanSettings());
                 SetNativeControl(barcodePicker.View);
@@ -48,6 +49,7 @@ namespace ExtendedSample.iOS
             {
                 e.OldElement.StartScanningRequested -= OnStartScanningRequested;
                 e.OldElement.PauseScanningRequested -= OnPauseScanningRequested;
+                e.OldElement.StopScanningRequested -= OnStopScanningRequested;
             }
         }
 
@@ -68,6 +70,11 @@ namespace ExtendedSample.iOS
         private void OnPauseScanningRequested(object sender, EventArgs e)
         {
             barcodePicker.PauseScanning();
+        }
+
+        private void OnStopScanningRequested(object sender, EventArgs e)
+        {
+            barcodePicker.StopScanning();
         }
 
         private ScanSettings CreateScanSettings()
