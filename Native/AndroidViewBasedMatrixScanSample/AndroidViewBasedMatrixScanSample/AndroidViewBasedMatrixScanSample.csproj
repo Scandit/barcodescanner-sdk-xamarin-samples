@@ -81,7 +81,7 @@
       <HintPath>..\packages\Xamarin.Android.Support.v4.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
     <Reference Include="ScanditSDK">
-      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.14.0.1\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
+      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.14.0.2-beta1\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
