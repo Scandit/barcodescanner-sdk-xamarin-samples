@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1009999" />
-    <PackageReference Include="Scandit.BarcodePicker.Unified" Version="5.14.3.10" />
+    <PackageReference Include="Scandit.BarcodePicker.Unified" Version="5.14.4.10" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
