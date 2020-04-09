@@ -9,6 +9,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © Scandit 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("5.15.0.2")]
-[assembly: AssemblyFileVersion("5.15.0.2")]
+[assembly: AssemblyVersion("5.15.0.3")]
+[assembly: AssemblyFileVersion("5.15.0.3")]
 [assembly: ComVisible(false)]
