@@ -81,7 +81,7 @@
       <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
     </Reference>
     <Reference Include="ScanditSDK">
-      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.15.0.10\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
+      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.15.1.10\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
