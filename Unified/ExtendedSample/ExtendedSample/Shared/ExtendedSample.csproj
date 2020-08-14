@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <ReleaseVersion>5.16.1.10</ReleaseVersion>
+        <ReleaseVersion>5.16.2.10</ReleaseVersion>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Scandit.BarcodePicker.Unified" Version="5.16.1.10" />
+      <PackageReference Include="Scandit.BarcodePicker.Unified" Version="5.16.2.10" />
       <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
       <PackageReference Include="Xam.Plugins.Settings" Version="4.1.0-beta" />
     </ItemGroup>

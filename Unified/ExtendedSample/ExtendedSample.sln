@@ -60,6 +60,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 5.16.1.10
+		version = 5.16.2.10
 	EndGlobalSection
 EndGlobal
