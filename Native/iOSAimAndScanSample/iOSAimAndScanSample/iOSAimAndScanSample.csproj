@@ -84,7 +84,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="ScanditSDK">
-      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.17.0.1\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
+      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.17.0.2-beta1\lib\Xamarin.iOS\ScanditSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
