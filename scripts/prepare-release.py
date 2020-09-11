@@ -5,6 +5,7 @@
 import os
 import sys
 import re
+import fnmatch
 
 ### START COMMON
 
@@ -40,24 +41,21 @@ def replace_guarded_pattern(file_name, pattern_string, replacement):
 
 def find(path, regex):
     ret = []
-    def walker(ignore, dirname, filenames):
-        for filename in filenames:
-            file = os.path.join(dirname, filename)
-            if re.search(regex, file):
-                ret.append(file)
-    os.path.walk(path, walker, [])
+    for base, _, files in os.walk(path):
+        matching_files = fnmatch.filter(files, regex)
+        ret.extend(os.path.join(base, f) for f in matching_files)
     return ret
 
 def usage():
-    print 'please specify a valid version, e.g. 4.3.0, or 4.3.0BETA2, or 4.3.0SNAPSHOT'
-    print 'usage:'
-    print '   %s <version>' % os.path.basename(__file__)
+    print('please specify a valid version, e.g. 4.3.0, or 4.3.0BETA2, or 4.3.0SNAPSHOT')
+    print('usage:')
+    print('   %s <version>' % os.path.basename(__file__))
     sys.exit(-1)
 
 # TODO: when we dont want to build versions before 5.1 we can remove 3 here
 if len(sys.argv) != 2 and len(sys.argv) != 3:
     usage()
-	
+
 if not (re.match(VALID_VERSION_REGEX,sys.argv[1])):
 	usage()
 
@@ -99,25 +97,27 @@ print("""computed versions
 ### END COMMON
 
 def update_assembly_info(version):
-    for file in find(".", "AssemblyInfo.cs$"):
+    for file in find(".", "AssemblyInfo.cs"):
         replace_guarded_pattern(file, r"""(AssemblyVersion\("){}("\))""".format(VERSION_REGEX), version)
         replace_guarded_pattern(file, r"""(AssemblyFileVersion\("){}("\))""".format(VERSION_REGEX), version)
-        
+
 def update_package_config_versions(version, nuget_beta_suffix):
-    for file in find(".", "\.config$"):
+    for file in find(".", "*.config"):
         replace_guarded_pattern(file, r"""(<package id="Scandit\.[^"]*" version=")({})({})(")""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
-        
+
 def update_project_json_versions(version, nuget_beta_suffix):
-    for file in find(".", "\.json$"):
+    for file in find(".", "*.json"):
         replace_guarded_pattern(file, r"""("Scandit\.(?:BarcodePicker(?:\.Unified)?|Recognition)\"\s*:\s*")({})({})(")""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
         replace_guarded_pattern(file, r"""("Scandit\.(?:BarcodePicker(?:\.Unified)?|Recognition)/)({})({})(")""".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
 
 def update_nuget_targets(version, nuget_beta_suffix):
-    for file in find(".", "\.nuget\.targets"):
+    for file in find(".", "*.nuget"):
+        replace_guarded_pattern(file, r"(Scandit\.(?:BarcodePicker|Recognition)\\)({})({})(\\)".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
+    for file in find(".", "*.targets"):
         replace_guarded_pattern(file, r"(Scandit\.(?:BarcodePicker|Recognition)\\)({})({})(\\)".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
 
 def update_windows_csproj_files(version, nuget_beta_suffix):
-    for file in find(".", r"\.csproj$"):
+    for file in find(".", "*.csproj"):
         replace_guarded_pattern(file, r"(Scandit\.(?:BarcodePicker|Recognition)\.)({})({})()".format(VERSION_REGEX, NUGET_BETA_SUFFIX_REGEX), version + nuget_beta_suffix)
         refs = "|".join([
             "ScanditSDK",
@@ -134,9 +134,9 @@ def update_windows_csproj_files(version, nuget_beta_suffix):
         replace_guarded_pattern(file, r"""(<ReleaseVersion>){}(<\/ReleaseVersion>)""".format(VERSION_REGEX), version)
 
 def update_sln(version):
-    for file in find(".", r"\.sln$"):
+    for file in find(".", "*.sln"):
         replace_guarded_pattern(file, "( *version *= *){}()".format(VERSION_REGEX), version)
-        
+
 ### START REPLACING
 
 update_assembly_info(version_nuget)
