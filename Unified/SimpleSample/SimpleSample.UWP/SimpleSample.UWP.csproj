@@ -143,7 +143,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Scandit.BarcodePicker.Unified" Version="5.17.0.10" />
+    <PackageReference Include="Scandit.BarcodePicker.Unified" Version="5.17.1.10" />
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5" />
   </ItemGroup>
