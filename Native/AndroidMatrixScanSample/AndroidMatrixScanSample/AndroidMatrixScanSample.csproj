@@ -44,7 +44,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="ScanditSDK">
-      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.19.0.2-beta1\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
+      <HintPath>..\packages\Scandit.BarcodePicker.Xamarin.5.19.0.3-beta2\lib\MonoAndroid10\ScanditSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
